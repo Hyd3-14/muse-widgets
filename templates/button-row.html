@@ -1,0 +1,13 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
+    .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
+    .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
+  </style>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;">
+    <button type="button" class="mw-tpl-btn">First action</button>
+    <button type="button" class="mw-tpl-btn">Second action</button>
+  </div>
+  <div style="margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;">Static example: when buttons carry state, wire them to the state bridge (see docs/state-bridge.md).</div>
+</div>

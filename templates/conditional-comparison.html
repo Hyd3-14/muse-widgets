@@ -1,0 +1,65 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-cc-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-cc-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-cc-btn[aria-selected="true"] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+  </style>
+  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-weight:700;">Which plan fits?</span>
+      <span role="tablist" aria-label="Usage" id="mw-cc-list" style="display:flex;gap:6px;"></span>
+    </div>
+    <div id="mw-cc-body" style="margin-top:12px;"></div>
+    <div style="color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;">Switching the condition only moves the recommendation mark and its reason. The numbers in the table never change.</div>
+  </div>
+  <script>
+  (function () {
+    var CONDITIONS = [
+      { id: 'light', label: 'Light use', pick: 'basic', reason: 'Light use stays well inside the Basic limits.' },
+      { id: 'daily', label: 'Daily use', pick: 'standard', reason: 'Daily use needs the Standard headroom.' },
+      { id: 'heavy', label: 'Heavy use', pick: 'pro', reason: 'Heavy use regularly exceeds Standard, so Pro is cheaper overall.' }
+    ];
+    var PLANS = [
+      { id: 'basic', name: 'Basic', price: '$0', limit: '10 tasks / day' },
+      { id: 'standard', name: 'Standard', price: '$20', limit: '200 tasks / day' },
+      { id: 'pro', name: 'Pro', price: '$100', limit: 'Unlimited' }
+    ];
+    var DEFAULTS = { condition: 'daily' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById('mw-cc-list');
+      list.innerHTML = '';
+      CONDITIONS.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'mw-cc-btn';
+        b.textContent = c.label;
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(state.condition === c.id));
+        b.addEventListener('click', function () {
+          state = { condition: c.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var cond = CONDITIONS.filter(function (c) { return c.id === state.condition; })[0];
+      var rows = PLANS.map(function (p) {
+        var picked = cond && p.id === cond.pick;
+        return '<tr style="border-top:1px solid var(--hatch-widget-border);">'
+          + '<td style="padding:8px 6px;font-weight:' + (picked ? '700' : '400') + ';">' + p.name
+          + (picked ? ' <span style="display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);">Recommended</span>' : '')
+          + '</td><td style="padding:8px 6px;">' + p.price + '</td><td style="padding:8px 6px;color:var(--hatch-widget-muted);">' + p.limit + '</td></tr>';
+      }).join('');
+      document.getElementById('mw-cc-body').innerHTML =
+        '<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+        + '<tr style="color:var(--hatch-widget-muted);text-align:left;"><th style="padding:0 6px;">Plan</th><th style="padding:0 6px;">Price</th><th style="padding:0 6px;">Limit</th></tr>'
+        + rows + '</table>'
+        + '<div style="margin-top:10px;font-size:13px;">' + (cond ? cond.reason : '') + '</div>';
+    }
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

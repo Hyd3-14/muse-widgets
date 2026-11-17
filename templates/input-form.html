@@ -1,0 +1,41 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-fm-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
+    .mw-fm-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+    .mw-fm-btn { appearance:none;border:1px solid var(--hatch-widget-accent);background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer; }
+    .mw-fm-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+  </style>
+  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+    <div style="font-weight:700;margin-bottom:10px;">Quick survey</div>
+    <label style="display:block;font-size:13px;margin-bottom:10px;">Name
+      <input id="mw-fm-name" class="mw-fm-input" type="text" autocomplete="off" style="margin-top:4px;">
+    </label>
+    <label style="display:block;font-size:13px;margin-bottom:12px;">Preferred date
+      <input id="mw-fm-date" class="mw-fm-input" type="date" style="margin-top:4px;">
+    </label>
+    <button type="button" class="mw-fm-btn" id="mw-fm-submit">Save answers</button>
+    <div id="mw-fm-status" style="margin-top:8px;font-size:13px;color:var(--hatch-widget-muted);"></div>
+    <div style="color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;">Never collect passwords, payment details, or government IDs in a widget. Submission here only records state; the agent reads it back and acts with the user's approval.</div>
+  </div>
+  <script>
+  (function () {
+    var DEFAULTS = { fields: { name: '', date: '' }, submitted: false };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : JSON.parse(JSON.stringify(DEFAULTS));
+    var nameEl = document.getElementById('mw-fm-name');
+    var dateEl = document.getElementById('mw-fm-date');
+    function render() {
+      nameEl.value = state.fields.name || '';
+      dateEl.value = state.fields.date || '';
+      document.getElementById('mw-fm-status').textContent = state.submitted ? 'Saved. The agent can read these answers now.' : '';
+    }
+    document.getElementById('mw-fm-submit').addEventListener('click', function () {
+      state = { fields: { name: nameEl.value, date: dateEl.value }, submitted: true };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

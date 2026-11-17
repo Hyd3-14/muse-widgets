@@ -1,0 +1,64 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-ch-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-ch-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-ch-btn[aria-selected="true"] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+  </style>
+  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-weight:700;">Household budget, last six months</span>
+      <span role="tablist" aria-label="Metric" id="mw-ch-list" style="display:flex;gap:6px;"></span>
+    </div>
+    <div id="mw-ch-chart" style="margin-top:12px;"></div>
+    <div style="color:var(--hatch-widget-muted);font-size:12px;margin-top:6px;">Unit: dollars per month. Period: Jun – Nov. Data is embedded in the fragment, separate from the drawing code.</div>
+  </div>
+  <script>
+  (function () {
+    var DATA = {
+      labels: ['Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+      series: {
+        spending: [820, 760, 910, 845, 790, 865],
+        income: [1200, 1200, 1250, 1250, 1300, 1300]
+      }
+    };
+    var METRICS = [
+      { id: 'spending', label: 'Spending' },
+      { id: 'income', label: 'Income' }
+    ];
+    var DEFAULTS = { metric: 'spending' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById('mw-ch-list');
+      list.innerHTML = '';
+      METRICS.forEach(function (m) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'mw-ch-btn';
+        b.textContent = m.label;
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(state.metric === m.id));
+        b.addEventListener('click', function () {
+          state = { metric: m.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var values = DATA.series[state.metric];
+      var max = Math.max.apply(null, values);
+      var bars = values.map(function (v, i) {
+        var h = Math.round((v / max) * 72);
+        return '<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;">'
+          + '<span style="font-size:11px;color:var(--hatch-widget-muted);">$' + v + '</span>'
+          + '<div style="width:100%;max-width:36px;height:' + h + 'px;background:var(--hatch-widget-accent);border-radius:4px 4px 0 0;"></div>'
+          + '<span style="font-size:11px;color:var(--hatch-widget-muted);">' + DATA.labels[i] + '</span></div>';
+      }).join('');
+      document.getElementById('mw-ch-chart').innerHTML =
+        '<div style="display:flex;align-items:flex-end;gap:8px;">' + bars + '</div>';
+    }
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

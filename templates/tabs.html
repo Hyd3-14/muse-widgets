@@ -1,0 +1,45 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-tab-btn { appearance:none;border:none;border-bottom:2px solid transparent;background:none;color:var(--hatch-widget-muted);padding:8px 10px;font:inherit;cursor:pointer; }
+    .mw-tab-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-tab-btn[aria-selected="true"] { color:var(--hatch-widget-text);border-bottom-color:var(--hatch-widget-accent);font-weight:700; }
+  </style>
+  <div role="tablist" aria-label="Sections" id="mw-tab-list" style="display:flex;gap:4px;border-bottom:1px solid var(--hatch-widget-border);"></div>
+  <div id="mw-tab-panel" style="padding-top:12px;line-height:1.55;"></div>
+  <script>
+  (function () {
+    // All tab content ships in the fragment up front; switching tabs never
+    // asks the model or the network for more.
+    var TABS = [
+      { id: 'overview', label: 'Overview', body: 'The summary a reader needs first.' },
+      { id: 'details', label: 'Details', body: 'Supporting facts, in the order a reader looks for them.' },
+      { id: 'notes', label: 'Notes', body: 'Caveats and anything still unconfirmed.' }
+    ];
+    var DEFAULTS = { tab: 'overview' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var list = document.getElementById('mw-tab-list');
+    function render() {
+      list.innerHTML = '';
+      TABS.forEach(function (tab) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'mw-tab-btn';
+        b.textContent = tab.label;
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(state.tab === tab.id));
+        b.addEventListener('click', function () {
+          state = { tab: tab.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var current = TABS.filter(function (t) { return t.id === state.tab; })[0] || TABS[0];
+      document.getElementById('mw-tab-panel').textContent = current.body;
+    }
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

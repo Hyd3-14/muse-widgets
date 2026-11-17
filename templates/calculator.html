@@ -1,0 +1,60 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-ca-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
+    .mw-ca-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+  </style>
+  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+    <div style="font-weight:700;margin-bottom:4px;">Trip cost per person</div>
+    <div style="color:var(--hatch-widget-muted);font-size:13px;margin-bottom:12px;">Premises: hotel is shared by the whole group; transport is per person.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+      <label style="font-size:13px;">People
+        <input id="mw-ca-people" class="mw-ca-input" type="number" min="1" max="20" step="1" style="margin-top:4px;">
+      </label>
+      <label style="font-size:13px;">Hotel total ($)
+        <input id="mw-ca-hotel" class="mw-ca-input" type="number" min="0" step="10" style="margin-top:4px;">
+      </label>
+      <label style="font-size:13px;">Transport per person ($)
+        <input id="mw-ca-transport" class="mw-ca-input" type="number" min="0" step="5" style="margin-top:4px;">
+      </label>
+      <label style="font-size:13px;">Food per person ($)
+        <input id="mw-ca-food" class="mw-ca-input" type="number" min="0" step="5" style="margin-top:4px;">
+      </label>
+    </div>
+    <div style="margin-top:14px;border-top:1px solid var(--hatch-widget-border);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="color:var(--hatch-widget-muted);">Per person</span>
+      <span id="mw-ca-result" style="font-size:24px;font-weight:700;">$0</span>
+    </div>
+    <div style="color:var(--hatch-widget-muted);font-size:12px;">Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.</div>
+  </div>
+  <script>
+  (function () {
+    var DEFAULTS = { people: 2, hotel: 300, transport: 80, food: 120 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var els = {
+      people: document.getElementById('mw-ca-people'),
+      hotel: document.getElementById('mw-ca-hotel'),
+      transport: document.getElementById('mw-ca-transport'),
+      food: document.getElementById('mw-ca-food')
+    };
+    function render() {
+      Object.keys(els).forEach(function (k) { els[k].value = state[k]; });
+      var people = Math.max(1, Number(state.people) || 1);
+      var per = Math.round((Number(state.hotel) || 0) / people
+        + (Number(state.transport) || 0) + (Number(state.food) || 0));
+      document.getElementById('mw-ca-result').textContent = '$' + per.toLocaleString();
+    }
+    Object.keys(els).forEach(function (k) {
+      els[k].addEventListener('input', function () {
+        var next = Object.assign({}, state);
+        next[k] = Number(els[k].value);
+        state = next;
+        if (bridge) bridge.setState(state);
+        render();
+      });
+    });
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

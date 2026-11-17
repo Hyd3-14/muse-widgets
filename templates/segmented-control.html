@@ -1,0 +1,45 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <style>
+    .mw-seg-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
+    .mw-seg-btn:hover { background:var(--hatch-widget-surface-muted); }
+    .mw-seg-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-seg-btn[aria-selected="true"] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    @media (prefers-reduced-motion: reduce) { .mw-seg-btn { transition:none; } }
+  </style>
+  <div role="tablist" aria-label="Plan" id="mw-seg-list" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+  <div id="mw-seg-detail" style="margin-top:10px;color:var(--hatch-widget-muted);font-size:13px;"></div>
+  <script>
+  (function () {
+    var OPTIONS = [
+      { id: 'basic', label: 'Basic', detail: 'For trying things out.' },
+      { id: 'standard', label: 'Standard', detail: 'For everyday use.' },
+      { id: 'pro', label: 'Pro', detail: 'For heavy, regular use.' }
+    ];
+    var DEFAULTS = { selected: 'standard' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var list = document.getElementById('mw-seg-list');
+    function render() {
+      list.innerHTML = '';
+      OPTIONS.forEach(function (opt) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'mw-seg-btn';
+        b.textContent = opt.label;
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(state.selected === opt.id));
+        b.addEventListener('click', function () {
+          state = { selected: opt.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var current = OPTIONS.filter(function (o) { return o.id === state.selected; })[0];
+      document.getElementById('mw-seg-detail').textContent = current ? current.detail : '';
+    }
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

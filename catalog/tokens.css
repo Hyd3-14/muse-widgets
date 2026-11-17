@@ -1,0 +1,112 @@
+/* Design tokens for Muse chat widgets.
+ *
+ * Muse supplies the --hatch-widget-* variables in both light and dark
+ * themes. The fallbacks after each comma only apply when a fragment is
+ * rendered outside Muse (for example in the demo page), so templates
+ * stay readable everywhere.
+ *
+ * Semantic roles (do not swap them):
+ *   --hatch-widget-bg            outer background, may be transparent
+ *   --hatch-widget-surface       card and control backgrounds
+ *   --hatch-widget-surface-muted lower-emphasis backgrounds
+ *   --hatch-widget-text          primary text and icons
+ *   --hatch-widget-muted         secondary text and icons
+ *   --hatch-widget-border        borders and dividers
+ *   --hatch-widget-accent        accent text, icons, borders, indicators
+ *   --hatch-widget-on-accent     foreground on a filled accent surface
+ *   --hatch-widget-focus         focus rings
+ *   --hatch-widget-shadow        box shadows
+ */
+
+.mw-root {
+  box-sizing: border-box;
+  padding: 16px;
+  color: var(--hatch-widget-text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.mw-root *,
+.mw-root *::before,
+.mw-root *::after {
+  box-sizing: inherit;
+}
+
+.mw-card {
+  background: var(--hatch-widget-surface);
+  border: 1px solid var(--hatch-widget-border);
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.mw-title {
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 0 8px;
+}
+
+.mw-muted {
+  color: var(--hatch-widget-muted);
+}
+
+.mw-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--hatch-widget-accent);
+  color: var(--hatch-widget-on-accent);
+}
+
+.mw-chip {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid var(--hatch-widget-border);
+  background: var(--hatch-widget-surface-muted);
+  color: var(--hatch-widget-text);
+}
+
+.mw-btn {
+  appearance: none;
+  border: 1px solid var(--hatch-widget-border);
+  background: var(--hatch-widget-surface);
+  color: var(--hatch-widget-text);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font: inherit;
+  cursor: pointer;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.mw-btn:hover {
+  background: var(--hatch-widget-surface-muted);
+}
+
+.mw-btn:active {
+  transform: translateY(1px);
+}
+
+.mw-btn:focus-visible {
+  outline: 2px solid var(--hatch-widget-focus);
+  outline-offset: 2px;
+}
+
+.mw-btn[aria-selected="true"],
+.mw-btn[aria-pressed="true"] {
+  background: var(--hatch-widget-accent);
+  border-color: var(--hatch-widget-accent);
+  color: var(--hatch-widget-on-accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mw-btn {
+    transition: none;
+  }
+  .mw-btn:active {
+    transform: none;
+  }
+}

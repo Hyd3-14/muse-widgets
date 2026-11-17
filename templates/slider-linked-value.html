@@ -1,0 +1,32 @@
+<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+    <label for="mw-sl-input" style="font-weight:700;display:block;margin-bottom:8px;">People</label>
+    <input id="mw-sl-input" type="range" min="1" max="10" step="1" style="width:100%;accent-color:var(--hatch-widget-accent);">
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;">
+      <span style="color:var(--hatch-widget-muted);"><span id="mw-sl-count">4</span> people × $25</span>
+      <span id="mw-sl-total" style="font-size:22px;font-weight:700;">$100</span>
+    </div>
+    <div style="color:var(--hatch-widget-muted);font-size:12px;margin-top:4px;">The total is derived at render time and is never stored in state.</div>
+  </div>
+  <script>
+  (function () {
+    var UNIT = 25;
+    var DEFAULTS = { value: 4 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var input = document.getElementById('mw-sl-input');
+    function render() {
+      input.value = state.value;
+      document.getElementById('mw-sl-count').textContent = state.value;
+      document.getElementById('mw-sl-total').textContent = '$' + (state.value * UNIT).toLocaleString();
+    }
+    input.addEventListener('input', function () {
+      state = { value: Number(input.value) };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>

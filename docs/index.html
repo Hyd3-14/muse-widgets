@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>muse-widgets — interactive chat widgets for Muse</title>
+<style>
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 24px 16px 64px; line-height: 1.6; }
+  main { max-width: 44rem; margin: 0 auto; }
+  h1 { font-size: 24px; margin: 0 0 4px; }
+  h2 { font-size: 17px; margin: 40px 0 4px; }
+  p.lead { color: #666; margin: 0 0 8px; }
+  p.note { color: #666; font-size: 13px; margin: 4px 0 8px; }
+  iframe { width: 100%; border: 1px solid #ccc; border-radius: 12px; background: transparent; }
+  code { font-family: ui-monospace, monospace; font-size: 0.92em; }
+</style>
+</head>
+<body>
+<main>
+  <h1>muse-widgets demo</h1>
+  <p class="lead">Every component in the catalog, live. The interactive ones run against an in-memory stand-in for the Muse state bridge, so state resets when this page reloads. Inside Muse, the same fragments persist their state with the conversation.</p>
+  <p class="note">Unofficial project. See the <a href="https://github.com/Hyd3-14/muse-widgets">repository</a> for the catalog, the agent skill, and the validator.</p>
+  <h2>badge</h2>
+  <p class="note"><code>templates/badge.html</code></p>
+  <iframe title="badge" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);&quot;&gt;Recommended&lt;/span&gt;
+  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);margin-left:6px;&quot;&gt;Optional&lt;/span&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;A filled badge carries the one status that matters. Pair color with words, never color alone.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>button-row</h2>
+  <p class="note"><code>templates/button-row.html</code></p>
+  <iframe title="button-row" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
+    .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
+    .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
+  &lt;/style&gt;
+  &lt;div style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;
+    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot;&gt;First action&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot;&gt;Second action&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Static example: when buttons carry state, wire them to the state bridge (see docs/state-bridge.md).&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>calculator</h2>
+  <p class="note"><code>templates/calculator.html</code></p>
+  <iframe title="calculator" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-ca-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
+    .mw-ca-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+  &lt;/style&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Trip cost per person&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;margin-bottom:12px;&quot;&gt;Premises: hotel is shared by the whole group; transport is per person.&lt;/div&gt;
+    &lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr;gap:10px;&quot;&gt;
+      &lt;label style=&quot;font-size:13px;&quot;&gt;People
+        &lt;input id=&quot;mw-ca-people&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; step=&quot;1&quot; style=&quot;margin-top:4px;&quot;&gt;
+      &lt;/label&gt;
+      &lt;label style=&quot;font-size:13px;&quot;&gt;Hotel total ($)
+        &lt;input id=&quot;mw-ca-hotel&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;10&quot; style=&quot;margin-top:4px;&quot;&gt;
+      &lt;/label&gt;
+      &lt;label style=&quot;font-size:13px;&quot;&gt;Transport per person ($)
+        &lt;input id=&quot;mw-ca-transport&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;5&quot; style=&quot;margin-top:4px;&quot;&gt;
+      &lt;/label&gt;
+      &lt;label style=&quot;font-size:13px;&quot;&gt;Food per person ($)
+        &lt;input id=&quot;mw-ca-food&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;5&quot; style=&quot;margin-top:4px;&quot;&gt;
+      &lt;/label&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;margin-top:14px;border-top:1px solid var(--hatch-widget-border);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;&quot;&gt;
+      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;Per person&lt;/span&gt;
+      &lt;span id=&quot;mw-ca-result&quot; style=&quot;font-size:24px;font-weight:700;&quot;&gt;$0&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;&quot;&gt;Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var DEFAULTS = { people: 2, hotel: 300, transport: 80, food: 120 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var els = {
+      people: document.getElementById(&#x27;mw-ca-people&#x27;),
+      hotel: document.getElementById(&#x27;mw-ca-hotel&#x27;),
+      transport: document.getElementById(&#x27;mw-ca-transport&#x27;),
+      food: document.getElementById(&#x27;mw-ca-food&#x27;)
+    };
+    function render() {
+      Object.keys(els).forEach(function (k) { els[k].value = state[k]; });
+      var people = Math.max(1, Number(state.people) || 1);
+      var per = Math.round((Number(state.hotel) || 0) / people
+        + (Number(state.transport) || 0) + (Number(state.food) || 0));
+      document.getElementById(&#x27;mw-ca-result&#x27;).textContent = &#x27;$&#x27; + per.toLocaleString();
+    }
+    Object.keys(els).forEach(function (k) {
+      els[k].addEventListener(&#x27;input&#x27;, function () {
+        var next = Object.assign({}, state);
+        next[k] = Number(els[k].value);
+        state = next;
+        if (bridge) bridge.setState(state);
+        render();
+      });
+    });
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>card</h2>
+  <p class="note"><code>templates/card.html</code></p>
+  <iframe title="card" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);&quot;&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;font-size:15px;font-weight:700;margin:0 0 6px;&quot;&gt;Card title&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;line-height:1.55;&quot;&gt;
+      One short paragraph that states the point of this card. Keep it to what the reader needs to decide or understand.
+    &lt;/div&gt;
+    &lt;div style=&quot;margin-top:12px;font-size:13px;&quot;&gt;
+      &lt;span style=&quot;font-weight:700;&quot;&gt;Key value&lt;/span&gt;
+      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt; — supporting detail&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>chip-row</h2>
+  <p class="note"><code>templates/chip-row.html</code></p>
+  <iframe title="chip-row" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label one&lt;/span&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label two&lt;/span&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label three&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Chips summarize attributes at a glance. They are not buttons; use segmented control for choices.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>comparison-grid</h2>
+  <p class="note"><code>templates/comparison-grid.html</code></p>
+  <iframe title="comparison-grid" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;&quot;&gt;
+    &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;&quot;&gt;
+      &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option A&lt;/div&gt;
+      &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$120&lt;/div&gt;
+      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;background:var(--hatch-widget-surface);border:2px solid var(--hatch-widget-accent);border-radius:8px;padding:12px;&quot;&gt;
+      &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option B &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);vertical-align:2px;&quot;&gt;Recommended&lt;/span&gt;&lt;/div&gt;
+      &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$150&lt;/div&gt;
+      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;&quot;&gt;
+      &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option C&lt;/div&gt;
+      &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$210&lt;/div&gt;
+      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>conditional-comparison</h2>
+  <p class="note"><code>templates/conditional-comparison.html</code></p>
+  <iframe title="conditional-comparison" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-cc-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-cc-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-cc-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+  &lt;/style&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;&quot;&gt;
+      &lt;span style=&quot;font-weight:700;&quot;&gt;Which plan fits?&lt;/span&gt;
+      &lt;span role=&quot;tablist&quot; aria-label=&quot;Usage&quot; id=&quot;mw-cc-list&quot; style=&quot;display:flex;gap:6px;&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;mw-cc-body&quot; style=&quot;margin-top:12px;&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Switching the condition only moves the recommendation mark and its reason. The numbers in the table never change.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var CONDITIONS = [
+      { id: &#x27;light&#x27;, label: &#x27;Light use&#x27;, pick: &#x27;basic&#x27;, reason: &#x27;Light use stays well inside the Basic limits.&#x27; },
+      { id: &#x27;daily&#x27;, label: &#x27;Daily use&#x27;, pick: &#x27;standard&#x27;, reason: &#x27;Daily use needs the Standard headroom.&#x27; },
+      { id: &#x27;heavy&#x27;, label: &#x27;Heavy use&#x27;, pick: &#x27;pro&#x27;, reason: &#x27;Heavy use regularly exceeds Standard, so Pro is cheaper overall.&#x27; }
+    ];
+    var PLANS = [
+      { id: &#x27;basic&#x27;, name: &#x27;Basic&#x27;, price: &#x27;$0&#x27;, limit: &#x27;10 tasks / day&#x27; },
+      { id: &#x27;standard&#x27;, name: &#x27;Standard&#x27;, price: &#x27;$20&#x27;, limit: &#x27;200 tasks / day&#x27; },
+      { id: &#x27;pro&#x27;, name: &#x27;Pro&#x27;, price: &#x27;$100&#x27;, limit: &#x27;Unlimited&#x27; }
+    ];
+    var DEFAULTS = { condition: &#x27;daily&#x27; };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById(&#x27;mw-cc-list&#x27;);
+      list.innerHTML = &#x27;&#x27;;
+      CONDITIONS.forEach(function (c) {
+        var b = document.createElement(&#x27;button&#x27;);
+        b.type = &#x27;button&#x27;;
+        b.className = &#x27;mw-cc-btn&#x27;;
+        b.textContent = c.label;
+        b.setAttribute(&#x27;role&#x27;, &#x27;tab&#x27;);
+        b.setAttribute(&#x27;aria-selected&#x27;, String(state.condition === c.id));
+        b.addEventListener(&#x27;click&#x27;, function () {
+          state = { condition: c.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var cond = CONDITIONS.filter(function (c) { return c.id === state.condition; })[0];
+      var rows = PLANS.map(function (p) {
+        var picked = cond &amp;&amp; p.id === cond.pick;
+        return &#x27;&lt;tr style=&quot;border-top:1px solid var(--hatch-widget-border);&quot;&gt;&#x27;
+          + &#x27;&lt;td style=&quot;padding:8px 6px;font-weight:&#x27; + (picked ? &#x27;700&#x27; : &#x27;400&#x27;) + &#x27;;&quot;&gt;&#x27; + p.name
+          + (picked ? &#x27; &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);&quot;&gt;Recommended&lt;/span&gt;&#x27; : &#x27;&#x27;)
+          + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;&quot;&gt;&#x27; + p.price + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;color:var(--hatch-widget-muted);&quot;&gt;&#x27; + p.limit + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+      }).join(&#x27;&#x27;);
+      document.getElementById(&#x27;mw-cc-body&#x27;).innerHTML =
+        &#x27;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:13px;&quot;&gt;&#x27;
+        + &#x27;&lt;tr style=&quot;color:var(--hatch-widget-muted);text-align:left;&quot;&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Plan&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Price&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Limit&lt;/th&gt;&lt;/tr&gt;&#x27;
+        + rows + &#x27;&lt;/table&gt;&#x27;
+        + &#x27;&lt;div style=&quot;margin-top:10px;font-size:13px;&quot;&gt;&#x27; + (cond ? cond.reason : &#x27;&#x27;) + &#x27;&lt;/div&gt;&#x27;;
+    }
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>editable-checklist</h2>
+  <p class="note"><code>templates/editable-checklist.html</code></p>
+  <iframe title="editable-checklist" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;display:flex;justify-content:space-between;align-items:baseline;&quot;&gt;
+      &lt;span style=&quot;font-weight:700;&quot;&gt;Checklist&lt;/span&gt;
+      &lt;span id=&quot;mw-cl-count&quot; style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;mw-cl-list&quot; style=&quot;margin-top:8px;display:flex;flex-direction:column;&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Checked items persist in widget state, so the agent can read back what is left.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    // Item definitions live in DATA; only the checked ids live in state.
+    var ITEMS = [
+      { id: &#x27;passport&#x27;, label: &#x27;Check passport validity&#x27; },
+      { id: &#x27;booking&#x27;, label: &#x27;Save the booking confirmation&#x27; },
+      { id: &#x27;insurance&#x27;, label: &#x27;Arrange travel insurance&#x27; },
+      { id: &#x27;notify&#x27;, label: &#x27;Tell the hotel about late arrival&#x27; }
+    ];
+    var DEFAULTS = { checked: [] };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById(&#x27;mw-cl-list&#x27;);
+      list.innerHTML = &#x27;&#x27;;
+      ITEMS.forEach(function (item) {
+        var done = state.checked.indexOf(item.id) !== -1;
+        var row = document.createElement(&#x27;label&#x27;);
+        row.style.cssText = &#x27;display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--hatch-widget-border);cursor:pointer;&#x27;;
+        var box = document.createElement(&#x27;input&#x27;);
+        box.type = &#x27;checkbox&#x27;;
+        box.checked = done;
+        box.style.accentColor = &#x27;var(--hatch-widget-accent)&#x27;;
+        box.addEventListener(&#x27;change&#x27;, function () {
+          var next = state.checked.filter(function (id) { return id !== item.id; });
+          if (box.checked) next.push(item.id);
+          state = { checked: next };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        var text = document.createElement(&#x27;span&#x27;);
+        text.textContent = item.label;
+        if (done) { text.style.textDecoration = &#x27;line-through&#x27;; text.style.color = &#x27;var(--hatch-widget-muted)&#x27;; }
+        row.appendChild(box);
+        row.appendChild(text);
+        list.appendChild(row);
+      });
+      document.getElementById(&#x27;mw-cl-count&#x27;).textContent = state.checked.length + &#x27; of &#x27; + ITEMS.length + &#x27; done&#x27;;
+    }
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>input-form</h2>
+  <p class="note"><code>templates/input-form.html</code></p>
+  <iframe title="input-form" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-fm-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
+    .mw-fm-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+    .mw-fm-btn { appearance:none;border:1px solid var(--hatch-widget-accent);background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer; }
+    .mw-fm-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+  &lt;/style&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;font-weight:700;margin-bottom:10px;&quot;&gt;Quick survey&lt;/div&gt;
+    &lt;label style=&quot;display:block;font-size:13px;margin-bottom:10px;&quot;&gt;Name
+      &lt;input id=&quot;mw-fm-name&quot; class=&quot;mw-fm-input&quot; type=&quot;text&quot; autocomplete=&quot;off&quot; style=&quot;margin-top:4px;&quot;&gt;
+    &lt;/label&gt;
+    &lt;label style=&quot;display:block;font-size:13px;margin-bottom:12px;&quot;&gt;Preferred date
+      &lt;input id=&quot;mw-fm-date&quot; class=&quot;mw-fm-input&quot; type=&quot;date&quot; style=&quot;margin-top:4px;&quot;&gt;
+    &lt;/label&gt;
+    &lt;button type=&quot;button&quot; class=&quot;mw-fm-btn&quot; id=&quot;mw-fm-submit&quot;&gt;Save answers&lt;/button&gt;
+    &lt;div id=&quot;mw-fm-status&quot; style=&quot;margin-top:8px;font-size:13px;color:var(--hatch-widget-muted);&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Never collect passwords, payment details, or government IDs in a widget. Submission here only records state; the agent reads it back and acts with the user&#x27;s approval.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var DEFAULTS = { fields: { name: &#x27;&#x27;, date: &#x27;&#x27; }, submitted: false };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : JSON.parse(JSON.stringify(DEFAULTS));
+    var nameEl = document.getElementById(&#x27;mw-fm-name&#x27;);
+    var dateEl = document.getElementById(&#x27;mw-fm-date&#x27;);
+    function render() {
+      nameEl.value = state.fields.name || &#x27;&#x27;;
+      dateEl.value = state.fields.date || &#x27;&#x27;;
+      document.getElementById(&#x27;mw-fm-status&#x27;).textContent = state.submitted ? &#x27;Saved. The agent can read these answers now.&#x27; : &#x27;&#x27;;
+    }
+    document.getElementById(&#x27;mw-fm-submit&#x27;).addEventListener(&#x27;click&#x27;, function () {
+      state = { fields: { name: nameEl.value, date: dateEl.value }, submitted: true };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>interactive-chart</h2>
+  <p class="note"><code>templates/interactive-chart.html</code></p>
+  <iframe title="interactive-chart" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-ch-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-ch-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-ch-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+  &lt;/style&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;&quot;&gt;
+      &lt;span style=&quot;font-weight:700;&quot;&gt;Monthly totals&lt;/span&gt;
+      &lt;span role=&quot;tablist&quot; aria-label=&quot;Metric&quot; id=&quot;mw-ch-list&quot; style=&quot;display:flex;gap:6px;&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div id=&quot;mw-ch-chart&quot; style=&quot;margin-top:12px;&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:6px;&quot;&gt;Unit: dollars per month. Period: Jun – Nov. Data is embedded in the fragment, separate from the drawing code.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var DATA = {
+      labels: [&#x27;Jun&#x27;, &#x27;Jul&#x27;, &#x27;Aug&#x27;, &#x27;Sep&#x27;, &#x27;Oct&#x27;, &#x27;Nov&#x27;],
+      series: {
+        spending: [820, 760, 910, 845, 790, 865],
+        income: [1200, 1200, 1250, 1250, 1300, 1300]
+      }
+    };
+    var METRICS = [
+      { id: &#x27;spending&#x27;, label: &#x27;Spending&#x27; },
+      { id: &#x27;income&#x27;, label: &#x27;Income&#x27; }
+    ];
+    var DEFAULTS = { metric: &#x27;spending&#x27; };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById(&#x27;mw-ch-list&#x27;);
+      list.innerHTML = &#x27;&#x27;;
+      METRICS.forEach(function (m) {
+        var b = document.createElement(&#x27;button&#x27;);
+        b.type = &#x27;button&#x27;;
+        b.className = &#x27;mw-ch-btn&#x27;;
+        b.textContent = m.label;
+        b.setAttribute(&#x27;role&#x27;, &#x27;tab&#x27;);
+        b.setAttribute(&#x27;aria-selected&#x27;, String(state.metric === m.id));
+        b.addEventListener(&#x27;click&#x27;, function () {
+          state = { metric: m.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var values = DATA.series[state.metric];
+      var max = Math.max.apply(null, values);
+      var bars = values.map(function (v, i) {
+        var h = Math.round((v / max) * 72);
+        return &#x27;&lt;div style=&quot;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;&quot;&gt;&#x27;
+          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--hatch-widget-muted);&quot;&gt;$&#x27; + v + &#x27;&lt;/span&gt;&#x27;
+          + &#x27;&lt;div style=&quot;width:100%;max-width:36px;height:&#x27; + h + &#x27;px;background:var(--hatch-widget-accent);border-radius:4px 4px 0 0;&quot;&gt;&lt;/div&gt;&#x27;
+          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--hatch-widget-muted);&quot;&gt;&#x27; + DATA.labels[i] + &#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+      }).join(&#x27;&#x27;);
+      document.getElementById(&#x27;mw-ch-chart&#x27;).innerHTML =
+        &#x27;&lt;div style=&quot;display:flex;align-items:flex-end;gap:8px;&quot;&gt;&#x27; + bars + &#x27;&lt;/div&gt;&#x27;;
+    }
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>progress-bar</h2>
+  <p class="note"><code>templates/progress-bar.html</code></p>
+  <iframe title="progress-bar" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;&quot;&gt;
+    &lt;span style=&quot;font-weight:700;&quot;&gt;Progress&lt;/span&gt;
+    &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;3 of 5 done&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;display:flex;gap:4px;&quot; role=&quot;img&quot; aria-label=&quot;3 of 5 done&quot;&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Segmented bars read faster than percentages. Always pair the bar with the counts in words.&lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>segmented-control</h2>
+  <p class="note"><code>templates/segmented-control.html</code></p>
+  <iframe title="segmented-control" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-seg-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
+    .mw-seg-btn:hover { background:var(--hatch-widget-surface-muted); }
+    .mw-seg-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-seg-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    @media (prefers-reduced-motion: reduce) { .mw-seg-btn { transition:none; } }
+  &lt;/style&gt;
+  &lt;div role=&quot;tablist&quot; aria-label=&quot;Plan&quot; id=&quot;mw-seg-list&quot; style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;mw-seg-detail&quot; style=&quot;margin-top:10px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var OPTIONS = [
+      { id: &#x27;basic&#x27;, label: &#x27;Basic&#x27;, detail: &#x27;For trying things out.&#x27; },
+      { id: &#x27;standard&#x27;, label: &#x27;Standard&#x27;, detail: &#x27;For everyday use.&#x27; },
+      { id: &#x27;pro&#x27;, label: &#x27;Pro&#x27;, detail: &#x27;For heavy, regular use.&#x27; }
+    ];
+    var DEFAULTS = { selected: &#x27;standard&#x27; };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var list = document.getElementById(&#x27;mw-seg-list&#x27;);
+    function render() {
+      list.innerHTML = &#x27;&#x27;;
+      OPTIONS.forEach(function (opt) {
+        var b = document.createElement(&#x27;button&#x27;);
+        b.type = &#x27;button&#x27;;
+        b.className = &#x27;mw-seg-btn&#x27;;
+        b.textContent = opt.label;
+        b.setAttribute(&#x27;role&#x27;, &#x27;tab&#x27;);
+        b.setAttribute(&#x27;aria-selected&#x27;, String(state.selected === opt.id));
+        b.addEventListener(&#x27;click&#x27;, function () {
+          state = { selected: opt.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var current = OPTIONS.filter(function (o) { return o.id === state.selected; })[0];
+      document.getElementById(&#x27;mw-seg-detail&#x27;).textContent = current ? current.detail : &#x27;&#x27;;
+    }
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>slider-linked-value</h2>
+  <p class="note"><code>templates/slider-linked-value.html</code></p>
+  <iframe title="slider-linked-value" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;label for=&quot;mw-sl-input&quot; style=&quot;font-weight:700;display:block;margin-bottom:8px;&quot;&gt;People&lt;/label&gt;
+    &lt;input id=&quot;mw-sl-input&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;10&quot; step=&quot;1&quot; style=&quot;width:100%;accent-color:var(--hatch-widget-accent);&quot;&gt;
+    &lt;div style=&quot;display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;&quot;&gt;
+      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;&lt;span id=&quot;mw-sl-count&quot;&gt;4&lt;/span&gt; people × $25&lt;/span&gt;
+      &lt;span id=&quot;mw-sl-total&quot; style=&quot;font-size:22px;font-weight:700;&quot;&gt;$100&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:4px;&quot;&gt;The total is derived at render time and is never stored in state.&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var UNIT = 25;
+    var DEFAULTS = { value: 4 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var input = document.getElementById(&#x27;mw-sl-input&#x27;);
+    function render() {
+      input.value = state.value;
+      document.getElementById(&#x27;mw-sl-count&#x27;).textContent = state.value;
+      document.getElementById(&#x27;mw-sl-total&#x27;).textContent = &#x27;$&#x27; + (state.value * UNIT).toLocaleString();
+    }
+    input.addEventListener(&#x27;input&#x27;, function () {
+      state = { value: Number(input.value) };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>tabs</h2>
+  <p class="note"><code>templates/tabs.html</code></p>
+  <iframe title="tabs" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;style&gt;
+    .mw-tab-btn { appearance:none;border:none;border-bottom:2px solid transparent;background:none;color:var(--hatch-widget-muted);padding:8px 10px;font:inherit;cursor:pointer; }
+    .mw-tab-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-tab-btn[aria-selected=&quot;true&quot;] { color:var(--hatch-widget-text);border-bottom-color:var(--hatch-widget-accent);font-weight:700; }
+  &lt;/style&gt;
+  &lt;div role=&quot;tablist&quot; aria-label=&quot;Sections&quot; id=&quot;mw-tab-list&quot; style=&quot;display:flex;gap:4px;border-bottom:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;mw-tab-panel&quot; style=&quot;padding-top:12px;line-height:1.55;&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    // All tab content ships in the fragment up front; switching tabs never
+    // asks the model or the network for more.
+    var TABS = [
+      { id: &#x27;overview&#x27;, label: &#x27;Overview&#x27;, body: &#x27;The summary a reader needs first.&#x27; },
+      { id: &#x27;details&#x27;, label: &#x27;Details&#x27;, body: &#x27;Supporting facts, in the order a reader looks for them.&#x27; },
+      { id: &#x27;notes&#x27;, label: &#x27;Notes&#x27;, body: &#x27;Caveats and anything still unconfirmed.&#x27; }
+    ];
+    var DEFAULTS = { tab: &#x27;overview&#x27; };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var list = document.getElementById(&#x27;mw-tab-list&#x27;);
+    function render() {
+      list.innerHTML = &#x27;&#x27;;
+      TABS.forEach(function (tab) {
+        var b = document.createElement(&#x27;button&#x27;);
+        b.type = &#x27;button&#x27;;
+        b.className = &#x27;mw-tab-btn&#x27;;
+        b.textContent = tab.label;
+        b.setAttribute(&#x27;role&#x27;, &#x27;tab&#x27;);
+        b.setAttribute(&#x27;aria-selected&#x27;, String(state.tab === tab.id));
+        b.addEventListener(&#x27;click&#x27;, function () {
+          state = { tab: tab.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var current = TABS.filter(function (t) { return t.id === state.tab; })[0] || TABS[0];
+      document.getElementById(&#x27;mw-tab-panel&#x27;).textContent = current.body;
+    }
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+  <h2>timeline</h2>
+  <p class="note"><code>templates/timeline.html</code></p>
+  <iframe title="timeline" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+  &lt;div style=&quot;display:flex;flex-direction:column;gap:0;&quot;&gt;
+    &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
+      &lt;div style=&quot;display:flex;flex-direction:column;align-items:center;&quot;&gt;
+        &lt;span style=&quot;width:10px;height:10px;border-radius:50%;background:var(--hatch-widget-accent);flex:none;margin-top:4px;&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;width:2px;flex:1;background:var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div style=&quot;padding-bottom:16px;&quot;&gt;
+        &lt;div style=&quot;font-weight:700;&quot;&gt;Step one &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;09:00&lt;/span&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened, in one line.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
+      &lt;div style=&quot;display:flex;flex-direction:column;align-items:center;&quot;&gt;
+        &lt;span style=&quot;width:10px;height:10px;border-radius:50%;border:2px solid var(--hatch-widget-border);flex:none;margin-top:4px;&quot;&gt;&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div&gt;
+        &lt;div style=&quot;font-weight:700;&quot;&gt;Step two &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;10:30&lt;/span&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened next, in one line.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+
+</main>
+</body>
+</html>
