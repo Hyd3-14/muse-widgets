@@ -22,7 +22,7 @@ Muse はチャットの中で、スライダーやチェックリストや計算
 | 部品カタログ | `catalog/` | 15部品の仕様と状態の形、デザイントークン（`tokens.css`） |
 | 雛形 | `templates/` | 部品ごとに1ファイル、そのまま使える HTML 断片 |
 | 完成例 | `examples/` | 雛形から作った完成品 |
-| 検査ツール | `tools/validate-widget.py` | 断片が契約に合うか検査する（Python 標準ライブラリのみ） |
+| 検査ツール | `tools/validate-widget.py and tools/layout_check.py` | 断片が契約に合うか検査する（Python 標準ライブラリのみ） |
 | 状態ブリッジの文書 | `docs/state-bridge.md` | `window.hatchWidget` の状態、テーマ、対話の仕組み |
 | デモ | `docs/index.html` | `tools/build-demo.py` が雛形から生成する |
 

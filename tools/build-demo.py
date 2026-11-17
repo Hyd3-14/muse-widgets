@@ -22,7 +22,11 @@ Run after changing any template:
 from __future__ import annotations
 
 import html
+import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _harness import THEME, SHIM  # noqa: E402,F401  (single source in _harness.py)
 
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -43,69 +47,6 @@ DESCRIPTIONS = {
     "tabs": "Up to four sections, all content shipped in the fragment.",
     "timeline": "Ordered steps or events with times.",
 }
-
-SHIM = """
-<script>
-  window.hatchWidget = (function () {
-    var state = null;
-    return {
-      getState: function (defaults) {
-        if (state === null) state = JSON.parse(JSON.stringify(defaults));
-        return state;
-      },
-      setState: function (next) {
-        state = next;
-        window.dispatchEvent(new CustomEvent('hatch-widget-state', { detail: { state: state } }));
-      }
-    };
-  })();
-</script>
-"""
-
-THEME = """
-<style>
-  :root {
-    color-scheme: light dark;
-    --hatch-widget-bg: transparent;
-    --hatch-widget-surface: #ffffff;
-    --hatch-widget-surface-muted: #eef1f5;
-    --hatch-widget-text: #1c2430;
-    --hatch-widget-muted: #5b6572;
-    --hatch-widget-border: #d3d9e1;
-    --hatch-widget-accent: #0017c1;
-    --hatch-widget-on-accent: #ffffff;
-    --hatch-widget-focus: #0017c1;
-    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --hatch-widget-surface: #1f2530;
-      --hatch-widget-surface-muted: #272f3d;
-      --hatch-widget-text: #f2f4f7;
-      --hatch-widget-muted: #a7b0be;
-      --hatch-widget-border: #3a4356;
-      --hatch-widget-accent: #7ea2ff;
-      --hatch-widget-on-accent: #0a0f1e;
-      --hatch-widget-focus: #7ea2ff;
-      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
-    }
-  }
-  body { margin: 0; }
-</style>
-"""
-
-HEIGHT_REPORTER = """
-<script>
-  (function () {
-    function report() {
-      var h = document.documentElement.scrollHeight;
-      parent.postMessage({ mwHeight: h }, '*');
-    }
-    window.addEventListener('load', report);
-    new ResizeObserver(report).observe(document.body);
-  })();
-</script>
-"""
 
 PAGE = """<!DOCTYPE html>
 <html lang="en">
@@ -153,11 +94,23 @@ __SECTIONS__
 """
 
 
+HEIGHT_REPORTER = """
+<script>
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, '*');
+    }
+    window.addEventListener('load', report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+</script>
+"""
+
+
 def frame_doc(template: Path) -> str:
-    fragment = template.read_text(encoding="utf-8")
-    return ("<!DOCTYPE html><html><head><meta charset='utf-8'>"
-            + THEME + SHIM + "</head><body>" + fragment
-            + HEIGHT_REPORTER + "</body></html>")
+    from _harness import frame_doc as _frame_doc
+    return _frame_doc(template.read_text(encoding="utf-8"), HEIGHT_REPORTER)
 
 
 def section(template: Path) -> str:
