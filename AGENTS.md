@@ -1,12 +1,9 @@
 # AGENTS
 
-このリポジトリは Hyd3 repository の共通base templateです。生成先repoの目的に合わせて、不要な雛形は削除してください。
+This repository publishes a component catalog, ready-to-use templates, an agent skill, and a validator for interactive chat widgets in Muse (Meta's personal AI agent).
 
-- 特別な指定がない限り、Issue、PR、commit本文、docsは日本語で書く。
-- 秘密情報、個人情報、認証情報、session、履歴、cacheなどのruntime stateをcommitしない。
-- 無関係な変更を混ぜず、所有者不明の既存変更を上書き・削除・stageしない。
-- GitHub Actionsは各jobに必要最小限の`permissions`と`timeout-minutes`を明示し、外部Actionはfull SHA、checkoutでは`persist-credentials: false`を使う。
-- GitHub contextの値をshellへ渡すときはstep-level `env:`を介し、shell内では環境変数をquoteする。静的なAction inputは`with:`に置く。
-- repo固有のbuild、test、release手順は生成先repoのdocsへ追加する。
-- PR作成時は、変更内容と関連Issueを確認して`review:*` labelを1つ付ける。迷う場合は上位の分類にし、変更ファイルの種類だけで`review: routine`へ下げない。基準は[`docs/operations/repo-baseline.md`の「レビュー要求label」](docs/operations/repo-baseline.md#レビュー要求label)を参照する。
-- 変更時は`./scripts/validate-template`、`python3 -m unittest discover -s scripts/tests`、`./scripts/docs-toc --check`、`git diff --check`を実行する。
+- Canonical language for public documents and the skill is English. `README.ja.md` is the Japanese companion.
+- Widget templates are single self-contained HTML fragments. They must use the `--hatch-widget-*` theme variables, must not use `localStorage` or `<form>`, and keep state only through the `window.hatchWidget` bridge.
+- Every template and example must pass `tools/validate-widget.py` before it is committed.
+- This repository was generated from Hyd3-14/repo-template with Copier. Baseline files are updated with `copier update`; do not edit `.copier-answers.yml` by hand.
+- Pull requests follow the repository PR template and carry exactly one `review:` label.
