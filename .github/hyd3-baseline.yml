@@ -1,0 +1,14 @@
+version: 2
+profile: base
+template_role: common-base
+branch_naming: "<type>/<issue-number>-<short-summary>"
+issue_title_prefix: none
+default_language: ja
+labels_source: .github/labels.yml
+pr_template: .github/PULL_REQUEST_TEMPLATE/default.md
+actions_static_checks: .github/workflows/github-actions-static-checks.yml
+actions_policy:
+  external_action_ref: full-40-character-sha
+  checkout_persist_credentials: false
+  job_permissions: explicit
+  job_timeout_minutes: required

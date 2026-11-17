@@ -1,0 +1,115 @@
+- name: "type: feature"
+  color: "0E8A16"
+  description: "新機能または機能追加"
+
+- name: "type: bug"
+  color: "D73A4A"
+  description: "不具合修正"
+
+- name: "type: chore"
+  color: "C5DEF5"
+  description: "保守、設定、運用改善"
+
+- name: "type: documentation"
+  color: "0075CA"
+  description: "ドキュメント変更"
+
+- name: "type: test"
+  color: "1D76DB"
+  description: "テスト、検証、再現手順の追加"
+
+- name: "type: security"
+  color: "B60205"
+  description: "セキュリティ対応"
+
+- name: "priority: P0"
+  color: "B60205"
+  description: "最優先で対応する"
+
+- name: "priority: P1"
+  color: "D93F0B"
+  description: "優先して対応する"
+
+- name: "priority: P2"
+  color: "FBCA04"
+  description: "通常の優先度で対応する"
+
+- name: "area: app"
+  color: "1D76DB"
+  description: "アプリケーションの挙動やUI"
+
+- name: "area: database"
+  color: "5319E7"
+  description: "データベース、schema、migration"
+
+- name: "area: dependency"
+  color: "FBCA04"
+  description: "依存関係、外部パッケージ"
+
+- name: "area: devex"
+  color: "A371F7"
+  description: "開発者体験、CLI、ローカル環境"
+
+- name: "area: ci"
+  color: "5319E7"
+  description: "CI、GitHub Actions、検証基盤"
+
+- name: "area: deployment"
+  color: "0E8A16"
+  description: "デプロイ、ホスティング、リリース"
+
+- name: "status: needs-discussion"
+  color: "D93F0B"
+  description: "オーナーやメンバーとの相談、意思決定が必要"
+
+- name: "status: ready"
+  color: "0E8A16"
+  description: "前提が揃っており着手可能"
+
+- name: "status: in-progress"
+  color: "1D76DB"
+  description: "現在作業中"
+
+- name: "status: blocked"
+  color: "D73A4A"
+  description: "外部要因、依存関係、権限等により進行不能"
+
+- name: "status: in-review"
+  color: "7057FF"
+  description: "対応PRがOpenでレビュー、CI、merge待ち"
+
+- name: "status: on-hold"
+  color: "BFDADC"
+  description: "blockerではないが意図的に延期または保留"
+
+- name: "review: routine"
+  color: "C2E0C6"
+  description: "通常のCI・レビュー手順で進められ、個別の人間判断を必須としない"
+
+- name: "review: human"
+  color: "F29513"
+  description: "merge前に人間による内容確認が必要"
+
+- name: "review: decision"
+  color: "B60205"
+  description: "人間の意思決定が確定するまでmergeしない"
+
+- name: "review: formal-verification"
+  color: "5319E7"
+  description: "形式検証で担保でき、人間のmerge前確認を必須としない"
+
+- name: "agent: ready"
+  color: "0E8A16"
+  description: "Agentの処理待ち"
+
+- name: "agent: running"
+  color: "FBCA04"
+  description: "Agentが処理中"
+
+- name: "agent: blocked"
+  color: "B60205"
+  description: "人間の判断待ちでAgentが停止中"
+
+- name: "agent: done"
+  color: "5319E7"
+  description: "Agentの処理が完了した"

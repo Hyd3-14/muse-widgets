@@ -1,0 +1,36 @@
+name: 機能追加・改善
+description: 新しい機能やrepoの改善を提案する
+labels:
+  - "type: feature"
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: 背景
+      description: 解決したい課題を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 提案
+      description: 最小の有効な解決策を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: 観測可能な完了条件を書いてください。
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: 補足
+      description: 対象外、制約、関連Issueなど。
+    validations:
+      required: false

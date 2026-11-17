@@ -1,0 +1,270 @@
+#!/usr/bin/env python3
+""".github/labels.yml と GitHub labels の差分を確認・同期する。"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import subprocess
+import sys
+from pathlib import Path
+from urllib.parse import quote
+
+
+def run_gh(args: list[str]) -> str:
+    completed = subprocess.run(
+        ["gh", *args],
+        check=True,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
+    return completed.stdout
+
+
+def parse_labels(path: Path) -> list[dict[str, str]]:
+    labels: list[dict[str, str]] = []
+    current: dict[str, str] | None = None
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("- "):
+            if current:
+                labels.append(current)
+            current = {}
+            line = line[2:].strip()
+            if line:
+                key, value = parse_pair(line, path)
+                current[key] = value
+            continue
+        if current is None:
+            raise SystemExit(f"{path}: expected '- name: ...' before '{line}'")
+        key, value = parse_pair(line, path)
+        current[key] = value
+
+    if current:
+        labels.append(current)
+
+    names: set[str] = set()
+    for label in labels:
+        missing = {"name", "color", "description"} - label.keys()
+        if missing:
+            raise SystemExit(f"{path}: label entry missing {sorted(missing)}: {label}")
+        if label["name"] in names:
+            raise SystemExit(f"{path}: duplicate label name: {label['name']}")
+        names.add(label["name"])
+        label["color"] = label["color"].lstrip("#")
+    return labels
+
+
+def parse_pair(line: str, path: Path) -> tuple[str, str]:
+    if ":" not in line:
+        raise SystemExit(f"{path}: invalid label line: {line}")
+    key, value = line.split(":", 1)
+    value = value.strip()
+    if (value.startswith("'") and value.endswith("'")) or (
+        value.startswith('"') and value.endswith('"')
+    ):
+        value = value[1:-1]
+    return key.strip(), value
+
+
+def existing_labels(repo: str) -> dict[str, dict[str, str]]:
+    output = run_gh(["api", f"repos/{repo}/labels", "--paginate"])
+    labels = json.loads(output or "[]")
+    return {item["name"]: item for item in labels}
+
+
+def validate_renames(
+    renames: dict[str, str],
+    current: dict[str, dict[str, str]],
+    desired_names: set[str],
+) -> None:
+    errors: list[str] = []
+    for old_name, new_name in renames.items():
+        if old_name == new_name:
+            errors.append(f"rename source and target are identical: {old_name}")
+        if old_name in desired_names:
+            errors.append(f"rename source is already declared: {old_name}")
+        if new_name not in desired_names:
+            errors.append(f"rename target is not declared in labels.yml: {new_name}")
+        if old_name in current and new_name in current:
+            errors.append(
+                f"rename target already exists on GitHub: {old_name} -> {new_name}"
+            )
+    if errors:
+        raise SystemExit("invalid rename mapping:\n- " + "\n- ".join(errors))
+
+
+def sync(
+    repo: str,
+    labels: list[dict[str, str]],
+    apply: bool,
+    prune: bool,
+    renames: dict[str, str],
+) -> None:
+    current = existing_labels(repo)
+    desired_names = {label["name"] for label in labels}
+    validate_renames(renames, current, desired_names)
+    desired = {label["name"]: label for label in labels}
+
+    for old_name, new_name in renames.items():
+        existing = current.get(old_name)
+        if existing is None:
+            print(f"RENAME-SKIP {old_name} -> {new_name} (source is not on GitHub)")
+            continue
+
+        target = desired[new_name]
+        print(
+            f"RENAME {old_name} -> {new_name} "
+            f"#{target['color']} - {target['description']}"
+        )
+        if apply:
+            run_gh(
+                [
+                    "api",
+                    "--method",
+                    "PATCH",
+                    f"repos/{repo}/labels/{quote(old_name, safe='')}",
+                    "-f",
+                    f"new_name={new_name}",
+                    "-f",
+                    f"color={target['color']}",
+                    "-f",
+                    f"description={target['description']}",
+                ]
+            )
+        renamed = dict(existing)
+        renamed.update(
+            name=new_name,
+            color=target["color"],
+            description=target["description"],
+        )
+        current.pop(old_name)
+        current[new_name] = renamed
+
+    for label in labels:
+        name = label["name"]
+        existing = current.get(name)
+        if existing is None:
+            print(f"CREATE {name} #{label['color']} - {label['description']}")
+            if apply:
+                run_gh(
+                    [
+                        "api",
+                        "--method",
+                        "POST",
+                        f"repos/{repo}/labels",
+                        "-f",
+                        f"name={name}",
+                        "-f",
+                        f"color={label['color']}",
+                        "-f",
+                        f"description={label['description']}",
+                    ]
+                )
+            continue
+
+        needs_update = (
+            existing.get("color", "").lower() != label["color"].lower()
+            or existing.get("description", "") != label["description"]
+        )
+        if needs_update:
+            print(f"UPDATE {name} #{label['color']} - {label['description']}")
+            if apply:
+                run_gh(
+                    [
+                        "api",
+                        "--method",
+                        "PATCH",
+                        f"repos/{repo}/labels/{quote(name, safe='')}",
+                        "-f",
+                        f"new_name={name}",
+                        "-f",
+                        f"color={label['color']}",
+                        "-f",
+                        f"description={label['description']}",
+                    ]
+                )
+        else:
+            print(f"OK {name}")
+
+    stale_names = sorted(set(current) - desired_names)
+    for name in stale_names:
+        action = "DELETE" if prune else "STALE"
+        print(f"{action} {name}")
+        if apply and prune:
+            run_gh(
+                [
+                    "api",
+                    "--method",
+                    "DELETE",
+                    f"repos/{repo}/labels/{quote(name, safe='')}",
+                ]
+            )
+
+    if stale_names and apply and not prune:
+        print("stale labels were not deleted: pass --prune only after migration review")
+
+
+def parse_renames(values: list[str]) -> dict[str, str]:
+    renames: dict[str, str] = {}
+    targets: set[str] = set()
+    for value in values:
+        if "=" not in value:
+            raise SystemExit(f"invalid --rename value (expected OLD=NEW): {value}")
+        old_name, new_name = (part.strip() for part in value.split("=", 1))
+        if not old_name or not new_name:
+            raise SystemExit(f"invalid --rename value (expected OLD=NEW): {value}")
+        if old_name in renames:
+            raise SystemExit(f"duplicate --rename source: {old_name}")
+        if new_name in targets:
+            raise SystemExit(f"duplicate --rename target: {new_name}")
+        renames[old_name] = new_name
+        targets.add(new_name)
+    return renames
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--repo", required=True, help="GitHub repository as OWNER/REPO")
+    parser.add_argument("--file", default=".github/labels.yml")
+    parser.add_argument("--apply", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument(
+        "--prune",
+        action="store_true",
+        help="宣言にないGitHub labelsを削除候補として扱う",
+    )
+    parser.add_argument(
+        "--rename",
+        action="append",
+        default=[],
+        metavar="OLD=NEW",
+        help="既存labelを付与先を保ったまま改称するmapping。複数指定可",
+    )
+    args = parser.parse_args()
+
+    if args.apply and args.dry_run:
+        parser.error("--apply and --dry-run are mutually exclusive")
+    if args.prune and not args.apply:
+        print("dry-run: --prune will delete stale labels only when combined with --apply")
+
+    labels = parse_labels(Path(args.file))
+    renames = parse_renames(args.rename)
+    sync(
+        args.repo,
+        labels,
+        apply=args.apply,
+        prune=args.prune,
+        renames=renames,
+    )
+    if not args.apply:
+        print("dry-run: pass --apply to mutate GitHub labels")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
