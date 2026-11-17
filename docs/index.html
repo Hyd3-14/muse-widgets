@@ -157,18 +157,40 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tpl-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-tpl-root, .mw-tpl-root *, .mw-tpl-root *::before, .mw-tpl-root *::after { box-sizing: border-box; }
     .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
     .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
     .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
     @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
   &lt;/style&gt;
   &lt;div style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;
-    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot;&gt;First action&lt;/button&gt;
-    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot;&gt;Second action&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot; data-action=&quot;first&quot;&gt;First action&lt;/button&gt;
+    &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot; data-action=&quot;second&quot;&gt;Second action&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Static example: when buttons carry state, wire them to the state bridge (see docs/state-bridge.md).&lt;/div&gt;
+  &lt;div id=&quot;mw-tpl-status&quot; style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Buttons record the last action in widget state, so the agent can read back what was tapped.&lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var DEFAULTS = { lastAction: &#x27;&#x27; };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      document.getElementById(&#x27;mw-tpl-status&#x27;).textContent = state.lastAction
+        ? &#x27;Last action: &#x27; + state.lastAction
+        : &#x27;Buttons record the last action in widget state, so the agent can read back what was tapped.&#x27;;
+    }
+    document.querySelectorAll(&#x27;.mw-tpl-btn&#x27;).forEach(function (b) {
+      b.addEventListener(&#x27;click&#x27;, function () {
+        state = { lastAction: b.getAttribute(&#x27;data-action&#x27;) };
+        if (bridge) bridge.setState(state);
+        render();
+      });
+    });
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -233,8 +255,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ca-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-ca-root, .mw-ca-root *, .mw-ca-root *::before, .mw-ca-root *::after { box-sizing: border-box; }
     .mw-ca-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
     .mw-ca-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
   &lt;/style&gt;
@@ -584,8 +607,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-cc-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-cc-root, .mw-cc-root *, .mw-cc-root *::before, .mw-cc-root *::after { box-sizing: border-box; }
     .mw-cc-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
     .mw-cc-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
     .mw-cc-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
@@ -828,8 +852,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-fm-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-fm-root, .mw-fm-root *, .mw-fm-root *::before, .mw-fm-root *::after { box-sizing: border-box; }
     .mw-fm-input { width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
     .mw-fm-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
     .mw-fm-btn { appearance:none;border:1px solid var(--hatch-widget-accent);background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer; }
@@ -932,8 +957,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ch-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-ch-root, .mw-ch-root *, .mw-ch-root *::before, .mw-ch-root *::after { box-sizing: border-box; }
     .mw-ch-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
     .mw-ch-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
     .mw-ch-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
@@ -1136,8 +1162,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-seg-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-seg-root, .mw-seg-root *, .mw-seg-root *::before, .mw-seg-root *::after { box-sizing: border-box; }
     .mw-seg-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
     .mw-seg-btn:hover { background:var(--hatch-widget-surface-muted); }
     .mw-seg-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
@@ -1247,7 +1274,7 @@
 &lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
     &lt;label for=&quot;mw-sl-input&quot; style=&quot;font-weight:700;display:block;margin-bottom:8px;&quot;&gt;People&lt;/label&gt;
-    &lt;input id=&quot;mw-sl-input&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;10&quot; step=&quot;1&quot; style=&quot;width:100%;accent-color:var(--hatch-widget-accent);&quot;&gt;
+    &lt;input id=&quot;mw-sl-input&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;10&quot; step=&quot;1&quot; style=&quot;box-sizing:border-box;width:100%;accent-color:var(--hatch-widget-accent);&quot;&gt;
     &lt;div style=&quot;display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;&quot;&gt;
       &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;&lt;span id=&quot;mw-sl-count&quot;&gt;4&lt;/span&gt; people × $25&lt;/span&gt;
       &lt;span id=&quot;mw-sl-total&quot; style=&quot;font-size:22px;font-weight:700;&quot;&gt;$100&lt;/span&gt;
@@ -1339,8 +1366,9 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tab-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .mw-tab-root, .mw-tab-root *, .mw-tab-root *::before, .mw-tab-root *::after { box-sizing: border-box; }
     .mw-tab-btn { appearance:none;border:none;border-bottom:2px solid transparent;background:none;color:var(--hatch-widget-muted);padding:8px 10px;font:inherit;cursor:pointer; }
     .mw-tab-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
     .mw-tab-btn[aria-selected=&quot;true&quot;] { color:var(--hatch-widget-text);border-bottom-color:var(--hatch-widget-accent);font-weight:700; }
@@ -1448,22 +1476,22 @@
   })();
 &lt;/script&gt;
 &lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
-  &lt;div style=&quot;display:flex;flex-direction:column;gap:0;&quot;&gt;
+  &lt;div style=&quot;display:flex;flex-direction:column;&quot;&gt;
     &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
-      &lt;div style=&quot;display:flex;flex-direction:column;align-items:center;&quot;&gt;
-        &lt;span style=&quot;width:10px;height:10px;border-radius:50%;background:var(--hatch-widget-accent);flex:none;margin-top:4px;&quot;&gt;&lt;/span&gt;
+      &lt;div style=&quot;width:12px;flex:none;display:flex;flex-direction:column;align-items:center;&quot;&gt;
+        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--hatch-widget-accent);border:2px solid var(--hatch-widget-accent);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
         &lt;span style=&quot;width:2px;flex:1;background:var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div style=&quot;padding-bottom:16px;&quot;&gt;
+      &lt;div style=&quot;padding-bottom:16px;min-width:0;&quot;&gt;
         &lt;div style=&quot;font-weight:700;&quot;&gt;Step one &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;09:00&lt;/span&gt;&lt;/div&gt;
         &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened, in one line.&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
-      &lt;div style=&quot;display:flex;flex-direction:column;align-items:center;&quot;&gt;
-        &lt;span style=&quot;width:10px;height:10px;border-radius:50%;border:2px solid var(--hatch-widget-border);flex:none;margin-top:4px;&quot;&gt;&lt;/span&gt;
+      &lt;div style=&quot;width:12px;flex:none;display:flex;flex-direction:column;align-items:center;&quot;&gt;
+        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:transparent;border:2px solid var(--hatch-widget-border);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
       &lt;/div&gt;
-      &lt;div&gt;
+      &lt;div style=&quot;min-width:0;&quot;&gt;
         &lt;div style=&quot;font-weight:700;&quot;&gt;Step two &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;10:30&lt;/span&gt;&lt;/div&gt;
         &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened next, in one line.&lt;/div&gt;
       &lt;/div&gt;

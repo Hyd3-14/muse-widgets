@@ -36,6 +36,39 @@ ERROR_PATTERNS: list[tuple[str, str]] = [
 ]
 
 INTERACTIVE_RE = re.compile(r"<(input|button|select|textarea)[\s>]|onclick|addEventListener")
+RULE_RE = re.compile(r"([^{}]+)\{([^{}]*)\}")
+INLINE_STYLE_RE = re.compile(r"""style\s*=\s*"([^"]*)"|style\s*=\s*'([^']*)'""", re.IGNORECASE)
+
+
+def overflow_risks(text: str) -> list[str]:
+    """width:100% plus padding/border without border-box overflows the parent.
+
+    A file is safe when every such rule carries its own
+    `box-sizing: border-box`, or when a universal rule (a selector list
+    containing `*`) sets border-box for all descendants.
+    """
+    style_blocks = re.findall(r"<style[^>]*>(.*?)</style>", text, flags=re.IGNORECASE | re.DOTALL)
+    rules: list[tuple[str, str]] = []
+    for block in style_blocks:
+        rules.extend(RULE_RE.findall(block))
+    universal = any(
+        "*" in selector and "box-sizing" in body and "border-box" in body
+        for selector, body in rules
+    )
+    risks: list[str] = []
+    candidates = [body for _, body in rules]
+    candidates += [a or b for a, b in INLINE_STYLE_RE.findall(text)]
+    for body in candidates:
+        if not re.search(r"width\s*:\s*100%", body):
+            continue
+        if not re.search(r"padding|border", body):
+            continue
+        if "box-sizing" in body and "border-box" in body:
+            continue
+        if universal:
+            continue
+        risks.append(body.strip()[:60])
+    return risks
 HARDCODED_BG_RE = re.compile(r"background(?:-color)?\s*:\s*#[0-9a-fA-F]{3,8}\b")
 
 
@@ -51,6 +84,9 @@ def validate(path: Path) -> tuple[list[str], list[str]]:
         if re.search(pattern, text, flags=re.IGNORECASE):
             errors.append(message)
 
+    for risk in overflow_risks(text):
+        errors.append(f"overflow risk: width:100% with padding/border but no "
+                      f"box-sizing: border-box ({risk}...)")
     if INTERACTIVE_RE.search(text) and "hatchWidget" not in text:
         warnings.append("interactive elements found but window.hatchWidget is never used; "
                         "state will not persist")

@@ -1,13 +1,35 @@
-<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="mw-tpl-root" style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
   <style>
+    .mw-tpl-root, .mw-tpl-root *, .mw-tpl-root *::before, .mw-tpl-root *::after { box-sizing: border-box; }
     .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
     .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
     .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
     @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
   </style>
   <div style="display:flex;flex-wrap:wrap;gap:8px;">
-    <button type="button" class="mw-tpl-btn">First action</button>
-    <button type="button" class="mw-tpl-btn">Second action</button>
+    <button type="button" class="mw-tpl-btn" data-action="first">First action</button>
+    <button type="button" class="mw-tpl-btn" data-action="second">Second action</button>
   </div>
-  <div style="margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;">Static example: when buttons carry state, wire them to the state bridge (see docs/state-bridge.md).</div>
+  <div id="mw-tpl-status" style="margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;">Buttons record the last action in widget state, so the agent can read back what was tapped.</div>
+  <script>
+  (function () {
+    var DEFAULTS = { lastAction: '' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      document.getElementById('mw-tpl-status').textContent = state.lastAction
+        ? 'Last action: ' + state.lastAction
+        : 'Buttons record the last action in widget state, so the agent can read back what was tapped.';
+    }
+    document.querySelectorAll('.mw-tpl-btn').forEach(function (b) {
+      b.addEventListener('click', function () {
+        state = { lastAction: b.getAttribute('data-action') };
+        if (bridge) bridge.setState(state);
+        render();
+      });
+    });
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
 </div>
