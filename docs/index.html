@@ -6,13 +6,15 @@
 <title>muse-widgets — interactive chat widgets for Muse</title>
 <style>
   :root { color-scheme: light dark; }
-  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 24px 16px 64px; line-height: 1.6; }
-  main { max-width: 44rem; margin: 0 auto; }
-  h1 { font-size: 24px; margin: 0 0 4px; }
-  h2 { font-size: 17px; margin: 40px 0 4px; }
-  p.lead { color: #666; margin: 0 0 8px; }
-  p.note { color: #666; font-size: 13px; margin: 4px 0 8px; }
-  iframe { width: 100%; border: 1px solid #ccc; border-radius: 12px; background: transparent; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 32px 16px 72px; line-height: 1.6; }
+  main { max-width: 46rem; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  h2 { font-size: 17px; margin: 0 0 2px; }
+  p.lead { opacity: 0.75; margin: 0 0 10px; }
+  p.note { opacity: 0.65; font-size: 13px; margin: 2px 0 10px; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 18px 0 6px; }
+  section { border-top: 1px solid rgba(128, 128, 128, 0.35); padding: 26px 0 6px; margin-top: 26px; }
+  iframe { width: 100%; border: 1px solid rgba(128, 128, 128, 0.45); border-radius: 12px; background: transparent; display: block; }
   code { font-family: ui-monospace, monospace; font-size: 0.92em; }
 </style>
 </head>
@@ -21,9 +23,57 @@
   <h1>muse-widgets demo</h1>
   <p class="lead">Every component in the catalog, live. The interactive ones run against an in-memory stand-in for the Muse state bridge, so state resets when this page reloads. Inside Muse, the same fragments persist their state with the conversation.</p>
   <p class="note">Unofficial project. See the <a href="https://github.com/Hyd3-14/muse-widgets">repository</a> for the catalog, the agent skill, and the validator.</p>
-  <h2>badge</h2>
-  <p class="note"><code>templates/badge.html</code></p>
-  <iframe title="badge" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+  <nav>
+    <a href="#badge">badge</a>
+    <a href="#button-row">button-row</a>
+    <a href="#calculator">calculator</a>
+    <a href="#card">card</a>
+    <a href="#chip-row">chip-row</a>
+    <a href="#comparison-grid">comparison-grid</a>
+    <a href="#conditional-comparison">conditional-comparison</a>
+    <a href="#editable-checklist">editable-checklist</a>
+    <a href="#input-form">input-form</a>
+    <a href="#interactive-chart">interactive-chart</a>
+    <a href="#progress-bar">progress-bar</a>
+    <a href="#segmented-control">segmented-control</a>
+    <a href="#slider-linked-value">slider-linked-value</a>
+    <a href="#tabs">tabs</a>
+    <a href="#timeline">timeline</a>
+  </nav>
+  <section id="badge">
+    <h2>badge</h2>
+    <p class="note">A single status word that matters, filled or outlined. <code>templates/badge.html</code></p>
+    <iframe title="badge" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -44,11 +94,54 @@
   &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);margin-left:6px;&quot;&gt;Optional&lt;/span&gt;
   &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;A filled badge carries the one status that matters. Pair color with words, never color alone.&lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>button-row</h2>
-  <p class="note"><code>templates/button-row.html</code></p>
-  <iframe title="button-row" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="button-row">
+    <h2>button-row</h2>
+    <p class="note">Shared button styling and interaction states. <code>templates/button-row.html</code></p>
+    <iframe title="button-row" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -77,11 +170,54 @@
   &lt;/div&gt;
   &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Static example: when buttons carry state, wire them to the state bridge (see docs/state-bridge.md).&lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>calculator</h2>
-  <p class="note"><code>templates/calculator.html</code></p>
-  <iframe title="calculator" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="calculator">
+    <h2>calculator</h2>
+    <p class="note">Several inputs, premises up front, one hero result. <code>templates/calculator.html</code></p>
+    <iframe title="calculator" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -157,11 +293,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>card</h2>
-  <p class="note"><code>templates/card.html</code></p>
-  <iframe title="card" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="card">
+    <h2>card</h2>
+    <p class="note">One self-contained point: a summary, a result, a notice. <code>templates/card.html</code></p>
+    <iframe title="card" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -189,11 +368,54 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>chip-row</h2>
-  <p class="note"><code>templates/chip-row.html</code></p>
-  <iframe title="chip-row" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="chip-row">
+    <h2>chip-row</h2>
+    <p class="note">Attributes at a glance. Not for choices. <code>templates/chip-row.html</code></p>
+    <iframe title="chip-row" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -217,11 +439,54 @@
   &lt;/div&gt;
   &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Chips summarize attributes at a glance. They are not buttons; use segmented control for choices.&lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>comparison-grid</h2>
-  <p class="note"><code>templates/comparison-grid.html</code></p>
-  <iframe title="comparison-grid" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="comparison-grid">
+    <h2>comparison-grid</h2>
+    <p class="note">Two to four options side by side. <code>templates/comparison-grid.html</code></p>
+    <iframe title="comparison-grid" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -256,11 +521,54 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>conditional-comparison</h2>
-  <p class="note"><code>templates/conditional-comparison.html</code></p>
-  <iframe title="conditional-comparison" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="conditional-comparison">
+    <h2>conditional-comparison</h2>
+    <p class="note">A fixed table whose recommendation follows the reader&#x27;s condition. <code>templates/conditional-comparison.html</code></p>
+    <iframe title="conditional-comparison" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -341,11 +649,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>editable-checklist</h2>
-  <p class="note"><code>templates/editable-checklist.html</code></p>
-  <iframe title="editable-checklist" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="editable-checklist">
+    <h2>editable-checklist</h2>
+    <p class="note">Items the reader ticks off; state the agent can read back. <code>templates/editable-checklist.html</code></p>
+    <iframe title="editable-checklist" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -414,11 +765,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>input-form</h2>
-  <p class="note"><code>templates/input-form.html</code></p>
-  <iframe title="input-form" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="input-form">
+    <h2>input-form</h2>
+    <p class="note">Up to five short fields, recorded as widget state. <code>templates/input-form.html</code></p>
+    <iframe title="input-form" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -475,11 +869,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>interactive-chart</h2>
-  <p class="note"><code>templates/interactive-chart.html</code></p>
-  <iframe title="interactive-chart" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="interactive-chart">
+    <h2>interactive-chart</h2>
+    <p class="note">One chart, switchable metric, data embedded. <code>templates/interactive-chart.html</code></p>
+    <iframe title="interactive-chart" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -559,11 +996,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>progress-bar</h2>
-  <p class="note"><code>templates/progress-bar.html</code></p>
-  <iframe title="progress-bar" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="progress-bar">
+    <h2>progress-bar</h2>
+    <p class="note">Segmented progress, always with counts in words. <code>templates/progress-bar.html</code></p>
+    <iframe title="progress-bar" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -593,11 +1073,54 @@
   &lt;/div&gt;
   &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Segmented bars read faster than percentages. Always pair the bar with the counts in words.&lt;/div&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>segmented-control</h2>
-  <p class="note"><code>templates/segmented-control.html</code></p>
-  <iframe title="segmented-control" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="segmented-control">
+    <h2>segmented-control</h2>
+    <p class="note">Two to five discrete options with explanations. <code>templates/segmented-control.html</code></p>
+    <iframe title="segmented-control" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -658,11 +1181,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>slider-linked-value</h2>
-  <p class="note"><code>templates/slider-linked-value.html</code></p>
-  <iframe title="slider-linked-value" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="slider-linked-value">
+    <h2>slider-linked-value</h2>
+    <p class="note">Sweep one quantity while a derived total follows. <code>templates/slider-linked-value.html</code></p>
+    <iframe title="slider-linked-value" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -710,11 +1276,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>tabs</h2>
-  <p class="note"><code>templates/tabs.html</code></p>
-  <iframe title="tabs" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="tabs">
+    <h2>tabs</h2>
+    <p class="note">Up to four sections, all content shipped in the fragment. <code>templates/tabs.html</code></p>
+    <iframe title="tabs" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -775,11 +1384,54 @@
   })();
   &lt;/script&gt;
 &lt;/div&gt;
-&lt;/body&gt;&lt;/html&gt;"></iframe>
 
-  <h2>timeline</h2>
-  <p class="note"><code>templates/timeline.html</code></p>
-  <iframe title="timeline" height="340" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;&lt;style&gt;:root{color-scheme:light dark}body{margin:0}&lt;/style&gt;
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="timeline">
+    <h2>timeline</h2>
+    <p class="note">Ordered steps or events with times. <code>templates/timeline.html</code></p>
+    <iframe title="timeline" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
 &lt;script&gt;
   window.hatchWidget = (function () {
     var state = null;
@@ -818,8 +1470,31 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
+
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
 &lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
 
 </main>
+<script>
+  window.addEventListener('message', function (e) {
+    if (!e.data || typeof e.data.mwHeight !== 'number') return;
+    var frames = document.querySelectorAll('iframe');
+    for (var i = 0; i < frames.length; i++) {
+      if (frames[i].contentWindow === e.source) {
+        frames[i].style.height = e.data.mwHeight + 'px';
+      }
+    }
+  });
+</script>
 </body>
 </html>

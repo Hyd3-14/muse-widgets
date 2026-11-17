@@ -114,17 +114,17 @@ PAGE = """<!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>muse-widgets — interactive chat widgets for Muse</title>
 <style>
-  :root {{ color-scheme: light dark; }}
-  body {{ font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 32px 16px 72px; line-height: 1.6; }}
-  main {{ max-width: 46rem; margin: 0 auto; }}
-  h1 {{ font-size: 26px; margin: 0 0 6px; }}
-  h2 {{ font-size: 17px; margin: 0 0 2px; }}
-  p.lead {{ opacity: 0.75; margin: 0 0 10px; }}
-  p.note {{ opacity: 0.65; font-size: 13px; margin: 2px 0 10px; }}
-  nav {{ display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 18px 0 6px; }}
-  section {{ border-top: 1px solid rgba(128, 128, 128, 0.35); padding: 26px 0 6px; margin-top: 26px; }}
-  iframe {{ width: 100%; border: 1px solid rgba(128, 128, 128, 0.45); border-radius: 12px; background: transparent; display: block; }}
-  code {{ font-family: ui-monospace, monospace; font-size: 0.92em; }}
+  :root { color-scheme: light dark; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; padding: 32px 16px 72px; line-height: 1.6; }
+  main { max-width: 46rem; margin: 0 auto; }
+  h1 { font-size: 26px; margin: 0 0 6px; }
+  h2 { font-size: 17px; margin: 0 0 2px; }
+  p.lead { opacity: 0.75; margin: 0 0 10px; }
+  p.note { opacity: 0.65; font-size: 13px; margin: 2px 0 10px; }
+  nav { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; margin: 18px 0 6px; }
+  section { border-top: 1px solid rgba(128, 128, 128, 0.35); padding: 26px 0 6px; margin-top: 26px; }
+  iframe { width: 100%; border: 1px solid rgba(128, 128, 128, 0.45); border-radius: 12px; background: transparent; display: block; }
+  code { font-family: ui-monospace, monospace; font-size: 0.92em; }
 </style>
 </head>
 <body>
@@ -133,9 +133,9 @@ PAGE = """<!DOCTYPE html>
   <p class="lead">Every component in the catalog, live. The interactive ones run against an in-memory stand-in for the Muse state bridge, so state resets when this page reloads. Inside Muse, the same fragments persist their state with the conversation.</p>
   <p class="note">Unofficial project. See the <a href="https://github.com/Hyd3-14/muse-widgets">repository</a> for the catalog, the agent skill, and the validator.</p>
   <nav>
-{nav}
+__NAV__
   </nav>
-{sections}
+__SECTIONS__
 </main>
 <script>
   window.addEventListener('message', function (e) {
@@ -180,7 +180,7 @@ def main() -> None:
         f'    <a href="#{html.escape(t.stem)}">{html.escape(t.stem)}</a>'
         for t in templates
     )
-    out = PAGE.format(nav=nav, sections="\n".join(section(t) for t in templates))
+    out = PAGE.replace("__NAV__", nav).replace("__SECTIONS__", "\n".join(section(t) for t in templates))
     target = ROOT / "docs" / "index.html"
     target.write_text(out, encoding="utf-8")
     print(f"wrote {target} with {len(templates)} components")
