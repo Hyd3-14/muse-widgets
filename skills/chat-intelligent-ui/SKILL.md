@@ -52,8 +52,11 @@ light question: a one-line factual answer stays text no matter what.
    never color alone.
 4. Embed data in the fragment, separate from the drawing code. State the
    unit, period, and source of every number.
-5. Run `tools/validate-widget.py` on the fragment and fix every error
-   before sending it.
+5. Write the fragment to a file, run `tools/validate-widget.py` on it,
+   and fix every error before sending it. Hard-coded colors and a
+   neutral surface without a `--hatch-widget-border` border are errors,
+   not warnings: they are how a card becomes invisible in the dark
+   theme.
 
 ## After the widget
 
