@@ -1,0 +1,27 @@
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px;">
+    <span style="font-weight:700;font-size:15px;">グラフのタイトル</span>
+    <span style="color:var(--pal-muted);font-size:12px;">単位: 全体に占める割合（%、2026年）</span>
+  </div>
+  <div style="color:var(--pal-muted);font-size:13px;margin-bottom:16px;">棒が運ぶメッセージを1行で。</div>
+  <div style="display:flex;flex-direction:column;gap:12px;">
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span style="font-weight:700;">カテゴリA</span><span>48%</span></div>
+      <div style="background:var(--pal-inner);border-radius:4px;height:12px;"><div style="width:48%;height:12px;border-radius:4px;background:var(--pal-fold);"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>カテゴリB</span><span>31%</span></div>
+      <div style="background:var(--pal-inner);border-radius:4px;height:12px;"><div style="width:31%;height:12px;border-radius:4px;background:var(--pal-fold);"></div></div>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px;"><span>カテゴリC</span><span>21%</span></div>
+      <div style="background:var(--pal-inner);border-radius:4px;height:12px;"><div style="width:21%;height:12px;border-radius:4px;background:var(--pal-fold);"></div></div>
+    </div>
+  </div>
+  <div style="margin-top:16px;color:var(--pal-muted);font-size:12px;">棒の幅は、トラック全体に対する値そのものの割合。出どころはここに書く。</div>
+</div>

@@ -2,7 +2,7 @@
 
 [Muse](https://muse.ai) のチャット内ウィジェットのための、部品カタログ、HTML雛形、判断を担うエージェント Skill、契約の検査ツールをまとめたリポジトリです。
 
-**デモ: [hyd3-14.github.io/muse-widgets](https://hyd3-14.github.io/muse-widgets/)** — 全15部品をブラウザでそのまま触れます。
+**デモ: [hyd3-14.github.io/muse-widgets](https://hyd3-14.github.io/muse-widgets/)** — 全17部品をブラウザでそのまま触れます。
 
 English: [README.md](README.md)
 
@@ -19,7 +19,8 @@ Muse はチャットの中で、スライダーやチェックリストや計算
 | 部分 | パス | 役割 |
 | --- | --- | --- |
 | エージェント Skill | `skills/chat-intelligent-ui/` | ウィジェットを出すかどうか、どの部品を使うか、作るときの規則を判断する |
-| 部品カタログ | `catalog/` | 15部品の仕様と状態の形、デザイントークン（`tokens.css`） |
+| エージェント Skill | `skills/figure-first/` | 説明・報告・比較を図から作る型。言いたいことごとに図1つ、文章は図ごとに要点1行だけ（骨格） |
+| 部品カタログ | `catalog/` | 17部品の仕様と状態の形、デザイントークン（`tokens.css`） |
 | 雛形 | `templates/` | 部品ごとに1ファイル、そのまま使える HTML 断片 |
 | 完成例 | `examples/` | 雛形から作った完成品 |
 | 検査ツール | `tools/validate-widget.py and tools/layout_check.py` | 断片が契約に合うか検査する（Python 標準ライブラリのみ） |

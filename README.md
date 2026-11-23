@@ -2,7 +2,7 @@
 
 Interactive chat widgets for [Muse](https://muse.ai) — a component catalog, ready-to-use HTML templates, an agent skill that decides when a widget beats plain text, and a validator for the widget contract.
 
-**Demo: [hyd3-14.github.io/muse-widgets](https://hyd3-14.github.io/muse-widgets/)** — all 15 components, live in your browser.
+**Demo: [hyd3-14.github.io/muse-widgets](https://hyd3-14.github.io/muse-widgets/)** — all 17 components, live in your browser.
 
 日本語版: [README.ja.md](README.ja.md)
 
@@ -19,7 +19,8 @@ But there is no public catalog for them. Agents improvise the markup every time,
 | Part | Path | What it does |
 | --- | --- | --- |
 | Agent skill | `skills/chat-intelligent-ui/` | Decides when an answer should include a widget, which component fits, and the rules for building it |
-| Component catalog | `catalog/` | The 16 components with their state shapes, the design tokens (`tokens.css`), and the themes (`themes.md` + `themes/`) |
+| Agent skill | `skills/figure-first/` | Builds explanations, reports, and comparisons figure-first: one figure per point, one line of text per figure (skeleton) |
+| Component catalog | `catalog/` | The 17 components with their state shapes, the design tokens (`tokens.css`), and the themes (`themes.md` + `themes/`) |
 | Templates | `templates/` | One self-contained HTML fragment per component, ready to fill in |
 | Examples | `examples/` | Finished pieces built from the templates |
 | Validator | `tools/validate-widget.py and tools/layout_check.py` | Checks fragments against the widget contract (Python standard library only) |
@@ -30,7 +31,7 @@ But there is no public catalog for them. Agents improvise the markup every time,
 
 Static: card, badge, chip row, timeline, progress bar, comparison grid, button row.
 
-Interactive (state in the bridge, never in browser storage): slider + derived value, segmented control, tabs, interactive chart, editable checklist, input form, calculator, conditional comparison.
+Interactive (state in the bridge, never in browser storage): slider + derived value, segmented control, tabs, interactive chart, editable checklist, input form, calculator, conditional comparison, before/after slider.
 
 Details and state shapes: [catalog/components.md](catalog/components.md).
 
@@ -42,7 +43,7 @@ Build a widget from a template:
 2. Copy its file from `templates/` and replace the sample content. Keep data embedded in the fragment, separate from the drawing code, and state the unit and period of every number.
 3. Check it: `python3 tools/validate-widget.py your-widget.html`
 
-Use the skill: copy `skills/chat-intelligent-ui/` into your agent's skills directory. It teaches the agent the firing rules (fire on a matching signal, stay text for light questions), the component choice table, and the build checklist.
+Use the skills: copy a skill folder into your agent's skills directory. `chat-intelligent-ui` teaches the agent the firing rules for interactive widgets (fire on a matching signal, stay text for light questions), the component choice table, and the build checklist. `figure-first` teaches the figure-first rules for explanations and reports: pick a figure shape per point, keep text to one line per figure, and pass the standalone test (the figure still reads with the surrounding text deleted) before sending.
 
 Validate the whole repository: `python3 tools/validate-widget.py` (defaults to `templates/` and `examples/`).
 

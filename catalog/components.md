@@ -1,6 +1,6 @@
 # Component catalog
 
-Sixteen components: eight static, eight interactive. Every entry lists the
+Seventeen components: eight static, nine interactive. Every entry lists the
 template file, what it is for, and — for interactive components — the exact
 state shape it keeps in the `window.hatchWidget` bridge.
 
@@ -56,6 +56,7 @@ event. See [docs/state-bridge.md](../docs/state-bridge.md).
 | Input form | `templates/input-form.html` | `{ fields: {...}, submitted: boolean }` | Up to five short fields; never secrets, payment details, or IDs |
 | Calculator | `templates/calculator.html` | `{ <input>: number, ... }` | Several inputs, premises stated up front, one hero result, rounding rule stated |
 | Conditional comparison | `templates/conditional-comparison.html` | `{ condition: string }` | A table whose numbers stay fixed while the recommendation moves with the reader's condition |
+| Before/After slider | `templates/before-after-slider.html` | `{ pos: number }` | Two forms of the same material stacked; dragging reveals the figure form over the prose form (or any two states of the same content) |
 
 ## Adding a component
 
