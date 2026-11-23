@@ -1,0 +1,79 @@
+name: Dependabot Triage
+
+on: # zizmor: ignore[dangerous-triggers] Required for Dependabot metadata and label updates; this workflow never checks out PR code.
+  pull_request_target:
+    branches:
+      - main
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+
+jobs:
+  triage:
+    name: Label Dependabot update type
+    if: >
+      github.event.pull_request.user.login == 'dependabot[bot]' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+    outputs:
+      update_type: ${{ steps.metadata.outputs.update-type }}
+    steps:
+      - name: Fetch Dependabot metadata
+        id: metadata
+        uses: dependabot/fetch-metadata@25dd0e34f4fe68f24cc83900b1fe3fe149efef98 # v3.1.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Label major updates for human review
+        if: steps.metadata.outputs.update-type == 'version-update:semver-major'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        shell: bash
+        run: |
+          gh pr edit "$PR_URL" --add-label "area: dependency"
+
+      - name: Label minor updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-minor'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        shell: bash
+        run: |
+          gh pr edit "$PR_URL" --add-label "area: dependency"
+
+      - name: Label patch updates
+        if: steps.metadata.outputs.update-type == 'version-update:semver-patch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+        shell: bash
+        run: |
+          gh pr edit "$PR_URL" --add-label "area: dependency"
+
+  mark-auto-merge-eligibility:
+    name: Dependabot auto-merge eligibility
+    needs: triage
+    if: >
+      needs.triage.result == 'success' &&
+      contains(fromJSON('["version-update:semver-minor", "version-update:semver-patch"]'), needs.triage.outputs.update_type)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - name: Record eligible update check
+        shell: bash
+        run: echo "Dependabot minor or patch update is eligible for guarded auto-merge."
