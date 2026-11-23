@@ -49,7 +49,11 @@ light question: a one-line factual answer stays text no matter what.
    `hatch-widget-state` event. No `localStorage`, no `<form>`.
 3. Style only with the `--hatch-widget-*` variables, 16px outer padding,
    8px radius, spacing in multiples of 4. Status is words plus color,
-   never color alone.
+   never color alone. The folded card is the exception: square corners,
+   no border, and its own `--pal-*` palette variables (default
+   `pal-soft`) instead of the theme surface and border, because nested
+   theme surfaces outlined by the theme border blend together in the
+   dark theme.
 4. Embed data in the fragment, separate from the drawing code. State the
    unit, period, and source of every number.
 5. Write the fragment to a file, run `tools/validate-widget.py` on it,

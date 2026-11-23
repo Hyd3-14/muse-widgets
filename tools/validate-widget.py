@@ -18,7 +18,10 @@ The contract (see docs/state-bridge.md):
     theme is invisible in the other: a near-black border on a dark
     surface was the failure that prompted this rule. The only allowed
     literals are the Okabe-Ito category colors (plus their paired ink),
-    which have no theme variable and are defined as light/dark pairs.
+    which have no theme variable and are defined as light/dark pairs,
+    and the folded-card palette colors, which likewise have no theme
+    variable: they may appear only inside a `.pal-*` palette definition
+    rule, as a light/dark pair feeding the --pal-* role variables.
   - An element filled with a neutral surface color must carry a border
     in --hatch-widget-border (or --hatch-widget-accent) in the same
     declaration block, so its outline survives both themes.
@@ -82,6 +85,24 @@ ALLOWED_HEX = {
     "0072b2", "56b4e9", "d55e00", "e69f00", "009e73",
     "35c48d", "cc79a7", "e39ac2", "1a1a1a",
 }
+# Folded-card palette colors (see catalog/components.md). These may be
+# used only inside a `.pal-*` rule, where they define the --pal-* role
+# variables as a light/dark pair; anywhere else they are hard-coded
+# colors like any other literal.
+PALETTE_HEX = {
+    # pal-gray
+    "e4e4e4", "ffffff", "9a9a9a", "5a5a5a", "161616", "2c2c2c", "f2f2f2", "b8b8b8",
+    # pal-soft
+    "eff3f6", "4b9cb1", "1d314c", "5b7183", "0f222b", "eff6f8", "a9c4ce",
+    # pal-dads
+    "e3eaf7", "0017c1", "14204a", "4a5a8a", "0e1730", "1e2c52", "7a9bff", "eef2ff", "aebce8",
+    # pal-warm
+    "efe4d0", "f7f2e9", "9a3412", "3a2415", "7a5c44", "241b13", "3b2d20", "d08a4e", "f7efe3", "cbb79e",
+    # pal-pop
+    "f6ecd2", "fff8e1", "2a1e0a", "7a6238", "171717",
+    # pal-note
+    "efe9c3", "fff7ae", "c9a227", "33300f", "6e662e", "26230f", "4a4419", "e5c84b", "fbf6d8", "d8ce96",
+}
 HEX_RE = re.compile(r"#([0-9a-fA-F]{3,8})\b")
 FUNC_COLOR_RE = re.compile(r"\b(?:rgba?|hsla?)\([^)]*\)", re.IGNORECASE)
 COLOR_PROPS = {
@@ -133,7 +154,18 @@ def hardcoded_color_errors(text: str) -> list[str]:
             seen.add(message)
             errors.append(message)
 
-    for source in style_sources(text):
+    # Style blocks are checked rule by rule so a `.pal-*` palette
+    # definition can use its palette literals; inline styles and any
+    # other rule get only the category-color allowance.
+    units: list[tuple[str, str]] = []
+    for block in re.findall(r"<style[^>]*>(.*?)</style>", text,
+                            flags=re.IGNORECASE | re.DOTALL):
+        units.extend(RULE_RE.findall(block))
+    units += [("(inline style)", a or b)
+              for a, b in INLINE_STYLE_RE.findall(text)]
+
+    for selector, source in units:
+        palette_rule = ".pal-" in selector
         for match in HEX_RE.finditer(source):
             raw = match.group(1).lower()
             norm = raw
@@ -141,7 +173,8 @@ def hardcoded_color_errors(text: str) -> list[str]:
                 norm = "".join(c * 2 for c in norm)
             elif len(norm) == 8:
                 norm = norm[:6]
-            if len(norm) == 6 and norm not in ALLOWED_HEX:
+            if len(norm) == 6 and norm not in ALLOWED_HEX \
+                    and not (palette_rule and norm in PALETTE_HEX):
                 add(f"hard-coded color #{raw}; use a --hatch-widget-* "
                     f"theme variable so the widget works in both themes")
         for match in FUNC_COLOR_RE.finditer(source):

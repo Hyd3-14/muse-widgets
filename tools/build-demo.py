@@ -39,6 +39,7 @@ DESCRIPTIONS = {
     "comparison-grid": "Two to four options side by side.",
     "conditional-comparison": "A fixed table whose recommendation follows the reader's condition.",
     "editable-checklist": "Items the reader ticks off; state the agent can read back.",
+    "folded-card": "Nested mini-cards separated by palette color difference, with a cut corner and a fold.",
     "input-form": "Up to five short fields, recorded as widget state.",
     "interactive-chart": "One chart, switchable metric, data embedded.",
     "progress-bar": "Segmented progress, always with counts in words.",
