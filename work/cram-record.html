@@ -1,0 +1,83 @@
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:24px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card p:last-child{margin-bottom:0}
+.cw-card ul{margin:0;padding-left:16px;font-size:13px;line-height:1.7;color:var(--hatch-widget-muted)}
+.cw-badge{display:inline-flex;align-items:center;gap:6px;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+.cw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.cw-grid .cw-card{margin-bottom:0;min-width:0}
+@media(max-width:560px){.cw-grid{grid-template-columns:1fr}}
+.cw{--cw-c1:#0072B2;--cw-c2:#D55E00;--cw-c3:#009E73;--cw-c4:#CC79A7}
+html[data-theme="dark"] .cw{--cw-c1:#56B4E9;--cw-c2:#E69F00;--cw-c3:#35C48D;--cw-c4:#E39AC2}
+.cw-card.c1{border-left:4px solid var(--cw-c1)}
+.cw-card.c2{border-left:4px solid var(--cw-c2)}
+.cw-card.c3{border-left:4px solid var(--cw-c3)}
+.cw-card.c4{border-left:4px solid var(--cw-c4)}
+.cw-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+.cw-big{font-size:15px;font-weight:700;color:var(--hatch-widget-text)}
+</style>
+<div class="cw">
+  <div class="cw-card">
+    <div class="cw-row"><span class="cw-badge">リポジトリの実数</span><span class="cw-badge mut">2026-11-21 確認</span></div>
+    <h3>記録は十分すぎるほど残っている</h3>
+    <p><span class="cw-big">PR 227件（マージ済み216件）／ Issue 329件 ／ main へのコミット 221件で最多</span></p>
+    <p>リポジトリ全体では PR 337件・Issue 375件。2026年4月の開始から、お前さんの分が大半を占める。弱点は記録の量ではなく、private でアクセス権に依存することと、外に出してよい範囲が未定なこと。</p>
+  </div>
+  <div class="cw-row"><span class="cw-badge mut">決めるべきこと</span></div>
+  <div class="cw-grid">
+    <div class="cw-card c1">
+      <div class="cw-row"><span class="cw-badge mut">1</span></div>
+      <h3>対価と分け前</h3>
+      <ul>
+        <li>分け前は何の何割か、誰がいつ払うか</li>
+        <li>「採用された」の定義と、判断の期限</li>
+        <li>採用されなかった場合、それまでの労働の扱い</li>
+        <li>自宅作業は作業給の対象外のままか</li>
+      </ul>
+    </div>
+    <div class="cw-card c2">
+      <div class="cw-row"><span class="cw-badge mut">2</span></div>
+      <h3>権利と帰属</h3>
+      <ul>
+        <li>コードの権利は誰のものか</li>
+        <li>不採用の場合、他所への再利用や販売はできるか</li>
+        <li>お前さんが離れた後、塾は使い続けられるか</li>
+      </ul>
+    </div>
+    <div class="cw-card c3">
+      <div class="cw-row"><span class="cw-badge mut">3</span></div>
+      <h3>役割と責任</h3>
+      <ul>
+        <li>名目は手伝い、実態は開発責任者。このズレをどうするか</li>
+        <li>本番運用後の障害対応と保守は誰がいつまで担うか</li>
+        <li>修士と就活で時間を減らすときの引き継ぎ</li>
+      </ul>
+    </div>
+    <div class="cw-card c4">
+      <div class="cw-row"><span class="cw-badge mut">4</span></div>
+      <h3>実績の利用</h3>
+      <ul>
+        <li>就活で語ってよい範囲（名称・規模・技術・数字）</li>
+        <li>名乗ってよい肩書き</li>
+        <li>塾長に実績の証明や推薦を頼めるか</li>
+      </ul>
+    </div>
+  </div>
+  <div class="cw-row"><span class="cw-badge">実績の残し方</span><span class="cw-badge mut">3層</span></div>
+  <div class="cw-card">
+    <h3>第1層 リポジトリ内の正本（済み）</h3>
+    <p>PR・Issue・Decisions・コミット履歴。今のままで十分。ただし private で、アクセスを失うと証拠ごと消える。</p>
+  </div>
+  <div class="cw-card">
+    <h3>第2層 個人側の実績ログ（今から作る）</h3>
+    <p>アクセスがあるうちに、月1回ペースで Life 側へ「時期・役割・課題・やったこと・結果」を抽象化して写す。固有名詞と顧客情報は落とす、お前さん自身の境界ルールどおりの形。就活の直前に思い出して再構成するのとは精度が違う。</p>
+  </div>
+  <div class="cw-card">
+    <h3>第3層 就活で見せる1枚（使うときに作る）</h3>
+    <p>教育現場向け業務システムの開発リード、という形のプロジェクトシート。概要・役割・技術・課題と設計・成果を1枚にし、数字は第4分類で確認した範囲だけ載せる。ダミーデータの画面や塾長の推薦が添えられると、private リポジトリの弱点を補える。</p>
+  </div>
+</div>

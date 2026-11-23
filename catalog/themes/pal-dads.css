@@ -1,0 +1,10 @@
+/* Theme: pal-dads — DADS blue
+   Status: available
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-dads{--pal-outer:#E3EAF7;--pal-inner:#FFFFFF;--pal-fold:#0017C1;--pal-on-fold:#FFFFFF;--pal-text:#14204A;--pal-muted:#4A5A8A}
+html[data-theme="dark"] .pal-dads{--pal-outer:#0E1730;--pal-inner:#1E2C52;--pal-fold:#7A9BFF;--pal-on-fold:#0E1730;--pal-text:#EEF2FF;--pal-muted:#AEBCE8}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-dads{--pal-outer:#0E1730;--pal-inner:#1E2C52;--pal-fold:#7A9BFF;--pal-on-fold:#0E1730;--pal-text:#EEF2FF;--pal-muted:#AEBCE8}}

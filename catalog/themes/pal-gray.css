@@ -1,0 +1,10 @@
+/* Theme: pal-gray — Gray (monochrome)
+   Status: available
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-gray{--pal-outer:#E4E4E4;--pal-inner:#FFFFFF;--pal-fold:#9A9A9A;--pal-on-fold:#1A1A1A;--pal-text:#1A1A1A;--pal-muted:#5A5A5A}
+html[data-theme="dark"] .pal-gray{--pal-outer:#161616;--pal-inner:#2C2C2C;--pal-fold:#5A5A5A;--pal-on-fold:#FFFFFF;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-gray{--pal-outer:#161616;--pal-inner:#2C2C2C;--pal-fold:#5A5A5A;--pal-on-fold:#FFFFFF;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}}

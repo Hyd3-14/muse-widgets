@@ -19,7 +19,7 @@ But there is no public catalog for them. Agents improvise the markup every time,
 | Part | Path | What it does |
 | --- | --- | --- |
 | Agent skill | `skills/chat-intelligent-ui/` | Decides when an answer should include a widget, which component fits, and the rules for building it |
-| Component catalog | `catalog/` | The 15 components with their state shapes, plus the design tokens (`tokens.css`) |
+| Component catalog | `catalog/` | The 16 components with their state shapes, the design tokens (`tokens.css`), and the themes (`themes.md` + `themes/`) |
 | Templates | `templates/` | One self-contained HTML fragment per component, ready to fill in |
 | Examples | `examples/` | Finished pieces built from the templates |
 | Validator | `tools/validate-widget.py and tools/layout_check.py` | Checks fragments against the widget contract (Python standard library only) |
@@ -50,7 +50,7 @@ Validate the whole repository: `python3 tools/validate-widget.py` (defaults to `
 
 - A widget is an HTML fragment, not a full document, at most 1 MB.
 - State lives only in `window.hatchWidget`: seed with `getState(defaults)`, replace in full with `setState(nextState)`, re-render on the `hatch-widget-state` event.
-- No `localStorage`, no `<form>`, no hard-coded light-only colors. Style with the `--hatch-widget-*` theme variables so both light and dark themes work.
+- No `localStorage`, no `<form>`, no hard-coded light-only colors. Style with a theme's `--pal-*` role variables (one theme block inlined per widget; see `catalog/themes.md`) so both light and dark themes work.
 
 Full version: [docs/state-bridge.md](docs/state-bridge.md).
 

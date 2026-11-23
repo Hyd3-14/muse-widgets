@@ -1,0 +1,10 @@
+/* Theme: pal-warm — Warm paper
+   Status: available
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-warm{--pal-outer:#EFE4D0;--pal-inner:#F7F2E9;--pal-fold:#9A3412;--pal-on-fold:#FFFFFF;--pal-text:#3A2415;--pal-muted:#7A5C44}
+html[data-theme="dark"] .pal-warm{--pal-outer:#241B13;--pal-inner:#3B2D20;--pal-fold:#D08A4E;--pal-on-fold:#241B13;--pal-text:#F7EFE3;--pal-muted:#CBB79E}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-warm{--pal-outer:#241B13;--pal-inner:#3B2D20;--pal-fold:#D08A4E;--pal-on-fold:#241B13;--pal-text:#F7EFE3;--pal-muted:#CBB79E}}

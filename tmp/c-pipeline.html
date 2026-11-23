@@ -1,0 +1,39 @@
+<div style="box-sizing:border-box;padding:16px;font-family:inherit;color:var(--hatch-widget-text);">
+  <div style="font-weight:700;font-size:15px;margin-bottom:4px;">C 87件を流せる側へ移すパイプライン</div>
+  <div style="font-size:12px;color:var(--hatch-widget-muted);margin-bottom:12px;">C の理由ごとに、変換の仕掛けが違う</div>
+
+  <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.5;">
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;">
+      <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;"><b>決定待ち</b>（needs-discussion）</div>
+      <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;">未決定点を抜き出し、選択肢＋推奨＋期限＋既定値の<b>確認シート</b>で決める → 決まったらブリーフへ固定</div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;">
+      <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;"><b>他人待ち・依存ブロック</b>（blocked）</div>
+      <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;">待ち相手と理由を台帳化し、解除されたら自動で再分類する</div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;">
+      <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;"><b>Hosted 操作・Staging 人手確認</b></div>
+      <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;">repo 内で完結する部分だけを対象に切り分け、人手分はチェックリストとして人へ出す</div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;">
+      <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;"><b>親・計画だけの Issue</b></div>
+      <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;">子 Issue への分解案を Agent が下書きし、確認シートで承認してから流す</div>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);gap:8px;">
+      <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;"><b>範囲の大きい再設計</b></div>
+      <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px 10px;min-width:0;">段階に割って、最初の一片だけを流せる形にする</div>
+    </div>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:6px;margin-top:14px;font-size:12px;flex-wrap:wrap;">
+    <span style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:6px 10px;font-weight:700;">C 87件</span>
+    <span style="color:var(--hatch-widget-muted);">→</span>
+    <span style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:6px 10px;">理由別の変換</span>
+    <span style="color:var(--hatch-widget-muted);">→</span>
+    <span style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:6px 10px;">B 決定を固定</span>
+    <span style="color:var(--hatch-widget-muted);">→</span>
+    <span style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:6px 10px;">A ブリーフ化</span>
+    <span style="color:var(--hatch-widget-muted);">→</span>
+    <span style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:6px 10px;font-weight:700;">自動実装 → PR</span>
+  </div>
+</div>

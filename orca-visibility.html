@@ -1,0 +1,48 @@
+<div style="box-sizing:border-box;padding:16px;font-family:inherit;color:var(--hatch-widget-text);">
+  <div style="font-weight:700;font-size:15px;margin-bottom:4px;">「何してるか見える化」4ルートの比較</div>
+  <div style="color:var(--hatch-widget-muted);font-size:12px;margin-bottom:12px;">スクショの Chat UI（Gemini 4 Neon / agy）前提。公式プラグインに進捗系は無いのが出発点</div>
+
+  <div style="display:flex;flex-direction:column;gap:10px;">
+
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700;font-size:11px;border-radius:999px;padding:2px 8px;">推し 1</span>
+        <span style="font-weight:700;">Orca 標準機能で開く</span>
+        <span style="color:var(--hatch-widget-muted);font-size:12px;">設定だけ・即効</span>
+      </div>
+      <div style="font-size:13px;line-height:1.6;">Agent ダッシュボード（Needs You／Working／Done）＋ Agent 状態フック ON ＋ 実行中行の展開 ＋ ワークスペースカード Experimental</div>
+      <div style="font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;">見える：誰が作業中／要対応／完了、経過時間、ツール実行の中身　／　見えない：プランの何％か</div>
+    </div>
+
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700;font-size:11px;border-radius:999px;padding:2px 8px;">推し 2</span>
+        <span style="font-weight:700;">プランをファイルに書かせる</span>
+        <span style="color:var(--hatch-widget-muted);font-size:12px;">agy でも効く・確実</span>
+      </div>
+      <div style="font-size:13px;line-height:1.6;">着手時にチェックボックス付き計画ファイルを作らせ、ステップごとに更新させる。Orca のファイル表示で横に開けば進捗＝チェック済み／全体</div>
+      <div style="font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;">見える：手順と進捗％そのもの　／　コスト：brief に1行足すだけ</div>
+    </div>
+
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="border:1px solid var(--hatch-widget-border);color:var(--hatch-widget-muted);font-weight:700;font-size:11px;border-radius:999px;padding:2px 8px;">条件付き</span>
+        <span style="font-weight:700;">Requests プラグイン</span>
+        <span style="color:var(--hatch-widget-muted);font-size:12px;">Claude Code 専用</span>
+      </div>
+      <div style="font-size:13px;line-height:1.6;">依頼をスレッド単位に割って右サイドバーにボード表示（Needs you／In progress／Queued／Done）＋ステータスバーに要対応カウンタ</div>
+      <div style="font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;">スクショの agy セッションには効かない。Claude Code を回す worktree 用</div>
+    </div>
+
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+        <span style="border:1px solid var(--hatch-widget-border);color:var(--hatch-widget-muted);font-weight:700;font-size:11px;border-radius:999px;padding:2px 8px;">大掛かり</span>
+        <span style="font-weight:700;">OSA（Orca-superagent）プラグイン</span>
+        <span style="color:var(--hatch-widget-muted);font-size:12px;">並列運用向け</span>
+      </div>
+      <div style="font-size:13px;line-height:1.6;">Router が依頼を Executor に配り、タスクパネルに Needs you／Ready／Waiting／In progress／History で並ぶ</div>
+      <div style="font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;">導入は Skill＋executor-rules＋plugin の3点セット。ライセンスは PolyForm Noncommercial</div>
+    </div>
+
+  </div>
+</div>

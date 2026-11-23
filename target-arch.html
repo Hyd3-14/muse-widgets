@@ -1,0 +1,47 @@
+<div class="cw">
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw h3{margin:0 0 8px;font-size:15px}
+.cw p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:24px}
+.cw-card:last-child{margin-bottom:0}
+.cw-layer{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;margin-bottom:8px;background:var(--hatch-widget-surface)}
+.cw-layer b{font-size:13.5px}
+.cw-layer span{font-size:12.5px;color:var(--hatch-widget-muted)}
+.cw-tag{display:inline-block;font-size:11.5px;font-weight:700;border:1px solid var(--hatch-widget-border);border-radius:4px;padding:1px 8px;margin-right:8px;background:var(--hatch-widget-surface-muted)}
+.cw-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cw-row:last-child{margin-bottom:0}
+.cw-lab{width:150px;flex:none;font-size:13px}
+.cw-track{flex:1;height:14px;border:1px solid var(--hatch-widget-border);border-radius:999px;overflow:hidden;background:var(--hatch-widget-surface);min-width:0}
+.cw-fill{height:100%;background:var(--hatch-widget-accent)}
+.cw-pct{width:44px;flex:none;font-size:13px;font-weight:700;text-align:right}
+.cw-note{font-size:12.5px;color:var(--hatch-widget-muted)}
+@media(max-width:560px){.cw-lab{width:104px}}
+</style>
+
+<div class="cw-card">
+<h3>目標の形 — 層ごとに置き場所と予算を固定する</h3>
+<div class="cw-layer"><span class="cw-tag">L0 全体</span><b>df の全体 AGENTS.md 1枚（正本）</b><br><span>原則とポインタだけ。各ハーネスの入口ファイル（CLAUDE.md／GEMINI.md 等）はここへの参照だけにし、df が配布する。目安は約1,200トークン</span></div>
+<div class="cw-layer"><span class="cw-tag">L1 入口</span><b>home repo（案Cで作成中）</b><br><span>セッションの開始点。repo へのポインタとルーターだけを持ち、内容は持たない</span></div>
+<div class="cw-layer"><span class="cw-tag">L2 repo</span><b>各 repo の AGENTS.md＋GLOSSARY.md＋repo 固有 Skill</b><br><span>AGENTS.md は navigation だけ。固有の Skill と hook はその repo の中に閉じる</span></div>
+<div class="cw-layer"><span class="cw-tag">L3 作業</span><b>spec と tickets（Issue）</b><br><span>セッションが読むのは対象 ticket と frontier だけ。終わったら成果と決定は repo と vault へ戻す</span></div>
+<p style="margin-top:8px">横断の決めごと：制約（守らせるもの）は文章ではなく repo の lint／CI／hook コードに置く。知識と決定の正本は vault。Skills は正本1か所から全ハーネスへ配布し、入口は resident（常駐・少数）と routed（ルーター経由）の2段にする。</p>
+</div>
+
+<div class="cw-card">
+<h3>現在地の見積もり（僕の採点）</h3>
+<div class="cw-row"><div class="cw-lab">L0 全体指示</div><div class="cw-track"><div class="cw-fill" style="width:70%"></div></div><div class="cw-pct">70%</div></div>
+<p class="cw-note" style="margin-bottom:12px">df に正本があり大きさも適正。ただし参照チェーンの切れと、Muse 側が別系統で二重管理</p>
+<div class="cw-row"><div class="cw-lab">L1 入口</div><div class="cw-track"><div class="cw-fill" style="width:40%"></div></div><div class="cw-pct">40%</div></div>
+<p class="cw-note" style="margin-bottom:12px">home repo が無く、開始点が repo ごとにばらけている。brief は作成済み</p>
+<div class="cw-row"><div class="cw-lab">Skills 配布と選択</div><div class="cw-track"><div class="cw-fill" style="width:50%"></div></div><div class="cw-pct">50%</div></div>
+<p class="cw-note" style="margin-bottom:12px">lock と registry はあるが router 化（[dotfiles #668](https://github.com/Hyd3-14/dotfiles/issues/668)）が未完で、体系が2つある</p>
+<div class="cw-row"><div class="cw-lab">制約（hook／lint／CI）</div><div class="cw-track"><div class="cw-fill" style="width:55%"></div></div><div class="cw-pct">55%</div></div>
+<p class="cw-note" style="margin-bottom:12px">ガードと CI はあるが repo 横断で揃っておらず、コメント規約の lint 化が残件</p>
+<div class="cw-row"><div class="cw-lab">記録の導線</div><div class="cw-track"><div class="cw-fill" style="width:60%"></div></div><div class="cw-pct">60%</div></div>
+<p class="cw-note" style="margin-bottom:12px">置き場所（repo／vault／Issue）は決まっているが、retro の定型が無く徹底が弱い</p>
+<div class="cw-row"><div class="cw-lab">測定と prune</div><div class="cw-track"><div class="cw-fill" style="width:25%"></div></div><div class="cw-pct">25%</div></div>
+<p class="cw-note">実測は今回がほぼ初回。live の肥大（正本の約8.2倍）も手作業で見るまで分からなかった</p>
+</div>
+</div>

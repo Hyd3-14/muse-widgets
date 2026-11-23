@@ -1,12 +1,16 @@
-<div class="mw-ca-root" style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="mw-ca-root pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
   <style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-ca-root, .mw-ca-root *, .mw-ca-root *::before, .mw-ca-root *::after { box-sizing: border-box; }
-    .mw-ca-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
-    .mw-ca-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+    .mw-ca-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border-radius:8px;background:var(--pal-outer);color:var(--pal-text);font:inherit; }
+    .mw-ca-input:focus-visible { outline:2px solid var(--pal-fold);outline-offset:1px; }
   </style>
-  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
     <div style="font-weight:700;margin-bottom:4px;">Weekend trip: cost per person</div>
-    <div style="color:var(--hatch-widget-muted);font-size:13px;margin-bottom:12px;">Premises: hotel is shared by the whole group; transport is per person.</div>
+    <div style="color:var(--pal-muted);font-size:13px;margin-bottom:12px;">Premises: hotel is shared by the whole group; transport is per person.</div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       <label style="font-size:13px;">People
         <input id="mw-ca-people" class="mw-ca-input" type="number" min="1" max="20" step="1" style="margin-top:4px;">
@@ -21,11 +25,11 @@
         <input id="mw-ca-food" class="mw-ca-input" type="number" min="0" step="5" style="margin-top:4px;">
       </label>
     </div>
-    <div style="margin-top:14px;border-top:1px solid var(--hatch-widget-border);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;">
-      <span style="color:var(--hatch-widget-muted);">Per person</span>
+    <div style="margin-top:14px;border-top:1px solid var(--pal-outer);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;">
+      <span style="color:var(--pal-muted);">Per person</span>
       <span id="mw-ca-result" style="font-size:24px;font-weight:700;">$0</span>
     </div>
-    <div style="color:var(--hatch-widget-muted);font-size:12px;">Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.</div>
+    <div style="color:var(--pal-muted);font-size:12px;">Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.</div>
   </div>
   <script>
   (function () {

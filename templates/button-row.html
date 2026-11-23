@@ -1,16 +1,20 @@
-<div class="mw-tpl-root" style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="mw-tpl-root pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
   <style>
+    .pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
     .mw-tpl-root, .mw-tpl-root *, .mw-tpl-root *::before, .mw-tpl-root *::after { box-sizing: border-box; }
-    .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
-    .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
-    .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-tpl-btn { appearance:none;border:none;background:var(--pal-inner);color:var(--pal-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:opacity 120ms ease; }
+    .mw-tpl-btn:hover { opacity:.85; }
+    .mw-tpl-btn:active { opacity:.7; }
+    .mw-tpl-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
     @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
   </style>
   <div style="display:flex;flex-wrap:wrap;gap:8px;">
     <button type="button" class="mw-tpl-btn" data-action="first">First action</button>
     <button type="button" class="mw-tpl-btn" data-action="second">Second action</button>
   </div>
-  <div id="mw-tpl-status" style="margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;">Buttons record the last action in widget state, so the agent can read back what was tapped.</div>
+  <div id="mw-tpl-status" style="margin-top:8px;color:var(--pal-muted);font-size:13px;">Buttons record the last action in widget state, so the agent can read back what was tapped.</div>
   <script>
   (function () {
     var DEFAULTS = { lastAction: '' };

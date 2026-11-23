@@ -1,20 +1,9 @@
-<div class="fc-root pal-soft" style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;">
+<div class="fc-root pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);">
 <style>
-.fc-root.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-text:#1D314C;--pal-muted:#5B7183;color:var(--pal-text)}
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
 .fc-root *{box-sizing:border-box}
-html[data-theme="dark"] .fc-root.pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
-@media (prefers-color-scheme: dark){html:not([data-theme]) .fc-root.pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
-.fc-root.pal-gray{--pal-outer:#E4E4E4;--pal-inner:#FFFFFF;--pal-fold:#9A9A9A;--pal-text:#1A1A1A;--pal-muted:#5A5A5A}
-html[data-theme="dark"] .fc-root.pal-gray{--pal-outer:#161616;--pal-inner:#2C2C2C;--pal-fold:#5A5A5A;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
-.fc-root.pal-dads{--pal-outer:#E3EAF7;--pal-inner:#FFFFFF;--pal-fold:#0017C1;--pal-text:#14204A;--pal-muted:#4A5A8A}
-html[data-theme="dark"] .fc-root.pal-dads{--pal-outer:#0E1730;--pal-inner:#1E2C52;--pal-fold:#7A9BFF;--pal-text:#EEF2FF;--pal-muted:#AEBCE8}
-.fc-root.pal-warm{--pal-outer:#EFE4D0;--pal-inner:#F7F2E9;--pal-fold:#9A3412;--pal-text:#3A2415;--pal-muted:#7A5C44}
-html[data-theme="dark"] .fc-root.pal-warm{--pal-outer:#241B13;--pal-inner:#3B2D20;--pal-fold:#D08A4E;--pal-text:#F7EFE3;--pal-muted:#CBB79E}
-.fc-root.pal-pop{--pal-outer:#F6ECD2;--pal-inner:#FFF8E1;--pal-fold:#D55E00;--pal-text:#2A1E0A;--pal-muted:#7A6238}
-html[data-theme="dark"] .fc-root.pal-pop{--pal-outer:#171717;--pal-inner:#2C2C2C;--pal-fold:#E69F00;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
-.fc-root.pal-note{--pal-outer:#EFE9C3;--pal-inner:#FFF7AE;--pal-fold:#C9A227;--pal-text:#33300F;--pal-muted:#6E662E}
-html[data-theme="dark"] .fc-root.pal-note{--pal-outer:#26230F;--pal-inner:#4A4419;--pal-fold:#E5C84B;--pal-text:#FBF6D8;--pal-muted:#D8CE96}
-.fc-panel{background:var(--pal-outer);border-radius:8px;padding:16px}
 .fc-title{font-size:15px;font-weight:700;margin:0 0 6px}
 .fc-lead{color:var(--pal-muted);font-size:13px;line-height:1.55;margin:0}
 .fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
@@ -25,20 +14,18 @@ html[data-theme="dark"] .fc-root.pal-note{--pal-outer:#26230F;--pal-inner:#4A441
 .fc-ct p{margin:0;font-size:12px;line-height:1.55;color:var(--pal-muted)}
 .fc-flap{position:absolute;right:0;bottom:0;width:20px;height:20px;background:var(--pal-fold);clip-path:polygon(0 0,100% 0,0 100%)}
 </style>
-  <div class="fc-panel">
-    <div class="fc-title">Folded cards</div>
-    <p class="fc-lead">Nested cards separated by palette color difference, not borders. The bottom-right corner is cut away and the fold falls inside. Default palette is pal-soft; swap the pal-* class on the root for pal-gray, pal-dads, pal-warm, pal-pop, or pal-note.</p>
-    <div class="fc-grid">
-      <div class="fc-card">
-        <span class="fc-bg"></span>
-        <div class="fc-ct"><h4>First point</h4><p>One or two short lines the reader compares at a glance.</p></div>
-        <span class="fc-flap"></span>
-      </div>
-      <div class="fc-card">
-        <span class="fc-bg"></span>
-        <div class="fc-ct"><h4>Second point</h4><p>One or two short lines the reader compares at a glance.</p></div>
-        <span class="fc-flap"></span>
-      </div>
+  <div class="fc-title">Folded cards</div>
+  <p class="fc-lead">Nested cards separated by palette color difference, not borders. The bottom-right corner is cut away and the fold falls inside. This template inlines the in-use theme (pal-soft); to use another theme from catalog/themes/, swap the theme block and the root class.</p>
+  <div class="fc-grid">
+    <div class="fc-card">
+      <span class="fc-bg"></span>
+      <div class="fc-ct"><h4>First point</h4><p>One or two short lines the reader compares at a glance.</p></div>
+      <span class="fc-flap"></span>
+    </div>
+    <div class="fc-card">
+      <span class="fc-bg"></span>
+      <div class="fc-ct"><h4>Second point</h4><p>One or two short lines the reader compares at a glance.</p></div>
+      <span class="fc-flap"></span>
     </div>
   </div>
 </div>

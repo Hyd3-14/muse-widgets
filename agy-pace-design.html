@@ -1,0 +1,42 @@
+<div class="cw" style="box-sizing:border-box;font-family:'Noto Sans JP',sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%">
+<style>
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-row{display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px}
+.cw-row:last-child{margin-bottom:0}
+.cw-lab{width:52px;flex:none;color:var(--hatch-widget-muted);font-size:12px}
+.cw-track{flex:1;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:4px;height:18px;overflow:hidden}
+.cw-fill{height:100%;background:var(--hatch-widget-accent)}
+.cw-num{width:64px;flex:none;text-align:right;font-weight:700}
+.cw-badge{display:inline-flex;align-items:center;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.cw-flow{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;background:var(--hatch-widget-surface);margin-bottom:8px}
+.cw-flow b{font-size:14px}
+.cw-flow span{display:block;font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;line-height:1.5}
+.cw-arrow{text-align:center;color:var(--hatch-widget-muted);font-size:14px;margin-bottom:8px}
+</style>
+<div class="cw-card">
+<span class="cw-badge">訂正 · 実測できていた</span>
+<h3>2026-11-22 Gemini 5h 使用率の推移（rate-collector 履歴より）</h3>
+<div class="cw-row"><span class="cw-lab">13:01</span><div class="cw-track"><div class="cw-fill" style="width:1%"></div></div><span class="cw-num">0%</span></div>
+<div class="cw-row"><span class="cw-lab">15:00</span><div class="cw-track"><div class="cw-fill" style="width:9%"></div></div><span class="cw-num">8.6%</span></div>
+<div class="cw-row"><span class="cw-lab">15:34</span><div class="cw-track"><div class="cw-fill" style="width:25%"></div></div><span class="cw-num">24.9%</span></div>
+<div class="cw-row"><span class="cw-lab">15:51</span><div class="cw-track"><div class="cw-fill" style="width:59%"></div></div><span class="cw-num">58.5%</span></div>
+<div class="cw-row"><span class="cw-lab">16:42</span><div class="cw-track"><div class="cw-fill" style="width:88%"></div></div><span class="cw-num">88.2%</span></div>
+<div class="cw-row"><span class="cw-lab">17:33</span><div class="cw-track"><div class="cw-fill" style="width:100%"></div></div><span class="cw-num">99.8%</span></div>
+<div class="cw-row"><span class="cw-lab">19:07</span><div class="cw-track"><div class="cw-fill" style="width:1%"></div></div><span class="cw-num">0% (リセット)</span></div>
+<div class="cw-row"><span class="cw-lab">23:54</span><div class="cw-track"><div class="cw-fill" style="width:53%"></div></div><span class="cw-num">53.0%</span></div>
+<p>15時台に 17分で +33.6pt の急騰があり、5h 枠は約2時間でほぼ枯渇した。Claude/GPT 5h も 16:42 に 100% 到達（21:13 にリセット確認）。</p>
+</div>
+<div class="cw-card">
+<h3>B＋C の構成（新規ポーラーは作らない）</h3>
+<div class="cw-flow"><b>既存 rate-collector（15分タイマー）</b><span>agy を起動せず OAuth 経路で quota を取得し gemini-history.json へ追記済み。ここは無改造で正本にする</span></div>
+<div class="cw-arrow">↓ 連鎖で起動</div>
+<div class="cw-flow"><b>新規 pace 生成スクリプト</b><span>入力は3つ — ① gemini-history（5h と Claude/GPT の推移）② quota-latest（Gemini 週間枠、鮮度つきで補完）③ 会話 DB 集計（C：呼び出し回数・モデル別・step）。ペース（pt/時）と枯渇予測を計算する</span></div>
+<div class="cw-arrow">↓ 書き出し</div>
+<div class="cw-flow"><b>self/pace.md ＋ pace.json</b><span>~/.gemini/antigravity-cli/self/ に置く。残量・直近1hのペース・5h枠の枯渇予測・今日の主犯モデル・データの鮮度を1枚に</span></div>
+<div class="cw-arrow">↓ read_file（承認なしで読める方式）</div>
+<div class="cw-flow"><b>Neon が読むタイミングを GEMINI.md で規定</b><span>タスク開始時／新規タスクを増やす前／完了メールに pace を1行添える。警告ライン（例：5h 残り20%未満）では新規タスク前に本人へ確認</span></div>
+</div>
+</div>

@@ -1,0 +1,10 @@
+/* Theme: pal-pop — Gray + orange fold
+   Status: available
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-pop{--pal-outer:#F6ECD2;--pal-inner:#FFF8E1;--pal-fold:#D55E00;--pal-on-fold:#FFFFFF;--pal-text:#2A1E0A;--pal-muted:#7A6238}
+html[data-theme="dark"] .pal-pop{--pal-outer:#171717;--pal-inner:#2C2C2C;--pal-fold:#E69F00;--pal-on-fold:#1A1A1A;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-pop{--pal-outer:#171717;--pal-inner:#2C2C2C;--pal-fold:#E69F00;--pal-on-fold:#1A1A1A;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}}

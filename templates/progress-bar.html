@@ -1,14 +1,19 @@
-<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
   <div style="display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;">
     <span style="font-weight:700;">Progress</span>
-    <span style="color:var(--hatch-widget-muted);">3 of 5 done</span>
+    <span style="color:var(--pal-muted);">3 of 5 done</span>
   </div>
   <div style="display:flex;gap:4px;" role="img" aria-label="3 of 5 done">
-    <span style="flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);"></span>
-    <span style="flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);"></span>
-    <span style="flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);"></span>
-    <span style="flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);"></span>
-    <span style="flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);"></span>
+    <span style="flex:1;height:8px;border-radius:4px;background:var(--pal-fold);"></span>
+    <span style="flex:1;height:8px;border-radius:4px;background:var(--pal-fold);"></span>
+    <span style="flex:1;height:8px;border-radius:4px;background:var(--pal-fold);"></span>
+    <span style="flex:1;height:8px;border-radius:4px;background:var(--pal-inner);"></span>
+    <span style="flex:1;height:8px;border-radius:4px;background:var(--pal-inner);"></span>
   </div>
-  <div style="margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;">Segmented bars read faster than percentages. Always pair the bar with the counts in words.</div>
+  <div style="margin-top:8px;color:var(--pal-muted);font-size:13px;">Segmented bars read faster than percentages. Always pair the bar with the counts in words.</div>
 </div>

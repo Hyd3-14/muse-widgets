@@ -1,0 +1,72 @@
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:24px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card p:last-child{margin-bottom:0}
+.cw-card ul{margin:0;padding-left:16px;font-size:13px;line-height:1.7;color:var(--hatch-widget-muted)}
+.cw-badge{display:inline-flex;align-items:center;gap:6px;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+.cw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.cw-grid .cw-card{margin-bottom:0;min-width:0}
+@media(max-width:560px){.cw-grid{grid-template-columns:1fr}}
+.cw{--cw-c1:#0072B2;--cw-c2:#D55E00;--cw-c3:#009E73;--cw-c4:#CC79A7}
+html[data-theme="dark"] .cw{--cw-c1:#56B4E9;--cw-c2:#E69F00;--cw-c3:#35C48D;--cw-c4:#E39AC2}
+.cw-card.c1{border-left:4px solid var(--cw-c1)}
+.cw-card.c2{border-left:4px solid var(--cw-c2)}
+.cw-card.c3{border-left:4px solid var(--cw-c3)}
+.cw-card.c4{border-left:4px solid var(--cw-c4)}
+.cw-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+</style>
+<div class="cw">
+  <div class="cw-card">
+    <div class="cw-row"><span class="cw-badge">推薦の推し</span><span class="cw-badge mut">3点セット</span></div>
+    <h3>推薦状を本体にして、軽い2つを添える</h3>
+    <p>下書きはお前さんが用意し、塾長は確認と署名だけにする。返信が短く滞りがちな相手ほど、相手の作業を減らす形が通る。</p>
+  </div>
+  <div class="cw-grid">
+    <div class="cw-card c1">
+      <div class="cw-row"><span class="cw-badge mut">本体</span></div>
+      <h3>署名付き推薦状 PDF</h3>
+      <ul>
+        <li>発行日、関係と期間、役割</li>
+        <li>具体的な実績 3〜4件と技術・姿勢</li>
+        <li>塾長の署名、肩書き、連絡先</li>
+        <li>宛先は汎用の「ご担当者様」で使い回す</li>
+      </ul>
+    </div>
+    <div class="cw-card c2">
+      <div class="cw-row"><span class="cw-badge mut">添え物 1</span></div>
+      <h3>短い推薦コメント</h3>
+      <p>2〜3行の引用を、プロジェクトシートや ES に載せる許可をもらう。本体より先にこれだけでも取れると、就活の材料がすぐ使える。</p>
+    </div>
+    <div class="cw-card c3">
+      <div class="cw-row"><span class="cw-badge mut">添え物 2</span></div>
+      <h3>照会先としての同意</h3>
+      <p>企業からリファレンスチェックが来たときに連絡先を出してよいか。出すのは最終選考の会社だけ、都度お前さんから一報を入れる、まで決めておく。</p>
+    </div>
+    <div class="cw-card c4">
+      <div class="cw-row"><span class="cw-badge mut">タコ分</span></div>
+      <h3>同期からの証言</h3>
+      <p>担当境界の確認が本体。時間割アルゴリズムはタコ、基盤と全体の開発はお前さん、と線を引いておくと実績の主張が重ならず、かえって信用が上がる。短い証言コメントももらえると強い。</p>
+    </div>
+  </div>
+  <div class="cw-row"><span class="cw-badge">聞き方と記録</span><span class="cw-badge mut">4手順</span></div>
+  <div class="cw-card">
+    <h3>1 対面で話す</h3>
+    <p>塾にいる日に、授業の前後で。Discord の長文は止まりがちなのが実測済みで、対面で動いてきた件が多い。話題は2つに分ける。軽い方（実績の利用と推薦）が先、重い方（対価と分け前）は別枠。</p>
+  </div>
+  <div class="cw-card">
+    <h3>2 決まったことだけメモに書く</h3>
+    <p>その日のうちに、合意した項目だけを箇条書きにする。決まらなかった項目は「未定」と明記して残す。全部を一度に決めようとしない。</p>
+  </div>
+  <div class="cw-card">
+    <h3>3 記録は2系統に分ける</h3>
+    <p>みんなで共有してよい内容（役割分担、担当境界、実績の利用範囲）はリポジトリの Decisions に記録し、Discord で事後報告する。今の開発フローと同じ形。当事者だけの内容（対価、分け前）は塾長との個別メモにし、文章で送って「この理解で合っていますか」に OK の返信をもらう。</p>
+  </div>
+  <div class="cw-card">
+    <h3>4 金額が具体化したら格上げする</h3>
+    <p>分け前が金額や割合として具体化する段階で、個別メモを1枚の覚書にして双方で持つ。今すぐ署名と押印の書面を持ち出すと、informal な関係では重く響く。</p>
+  </div>
+</div>

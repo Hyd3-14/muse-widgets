@@ -13,8 +13,9 @@ The contract (see docs/state-bridge.md):
   - No localStorage, sessionStorage, IndexedDB, or document.cookie.
   - No <form> elements; interactions use explicit event handlers.
   - A fragment must not exceed 1 MB.
-  - Colors come from the --hatch-widget-* theme variables, never from
-    hard-coded literals. A literal that happens to look right in one
+  - Colors come from a theme's --pal-* role variables (one theme block
+    inlined per fragment, from catalog/themes/), never from hard-coded
+    literals. A literal that happens to look right in one
     theme is invisible in the other: a near-black border on a dark
     surface was the failure that prompted this rule. The only allowed
     literals are the Okabe-Ito category colors (plus their paired ink),

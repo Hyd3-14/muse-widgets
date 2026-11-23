@@ -1,27 +1,28 @@
 /* Design tokens for Muse chat widgets.
  *
- * Muse supplies the --hatch-widget-* variables in both light and dark
- * themes. The fallbacks after each comma only apply when a fragment is
- * rendered outside Muse (for example in the demo page), so templates
- * stay readable everywhere.
+ * Color lives in themes (see themes.md and the themes/ directory):
+ * each theme is a light/dark pair of six role variables, and every
+ * template inlines exactly one theme block — the one flagged "In use"
+ * in the registry — and puts its class on the root element.
  *
  * Semantic roles (do not swap them):
- *   --hatch-widget-bg            outer background, may be transparent
- *   --hatch-widget-surface       card and control backgrounds
- *   --hatch-widget-surface-muted lower-emphasis backgrounds
- *   --hatch-widget-text          primary text and icons
- *   --hatch-widget-muted         secondary text and icons
- *   --hatch-widget-border        borders and dividers
- *   --hatch-widget-accent        accent text, icons, borders, indicators
- *   --hatch-widget-on-accent     foreground on a filled accent surface
- *   --hatch-widget-focus         focus rings
- *   --hatch-widget-shadow        box shadows
+ *   --pal-outer    panel background (the widget's own backdrop)
+ *   --pal-inner    card and control surfaces on the panel
+ *   --pal-fold     accent: filled badges, selected states, chart bars
+ *   --pal-on-fold  foreground on a filled accent surface
+ *   --pal-text     primary text and icons
+ *   --pal-muted    secondary text and icons
+ *
+ * Separation between nested surfaces is carried by the outer/inner
+ * color difference, not by borders.
  */
 
 .mw-root {
   box-sizing: border-box;
   padding: 16px;
-  color: var(--hatch-widget-text);
+  border-radius: 8px;
+  background: var(--pal-outer);
+  color: var(--pal-text);
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 14px;
   line-height: 1.55;
@@ -34,8 +35,7 @@
 }
 
 .mw-card {
-  background: var(--hatch-widget-surface);
-  border: 1px solid var(--hatch-widget-border);
+  background: var(--pal-inner);
   border-radius: 8px;
   padding: 16px;
 }
@@ -47,7 +47,7 @@
 }
 
 .mw-muted {
-  color: var(--hatch-widget-muted);
+  color: var(--pal-muted);
 }
 
 .mw-badge {
@@ -56,8 +56,8 @@
   border-radius: 999px;
   font-size: 12px;
   font-weight: 700;
-  background: var(--hatch-widget-accent);
-  color: var(--hatch-widget-on-accent);
+  background: var(--pal-fold);
+  color: var(--pal-on-fold);
 }
 
 .mw-chip {
@@ -65,48 +65,43 @@
   padding: 2px 10px;
   border-radius: 999px;
   font-size: 12px;
-  border: 1px solid var(--hatch-widget-border);
-  background: var(--hatch-widget-surface-muted);
-  color: var(--hatch-widget-text);
+  background: var(--pal-inner);
+  color: var(--pal-text);
 }
 
 .mw-btn {
   appearance: none;
-  border: 1px solid var(--hatch-widget-border);
-  background: var(--hatch-widget-surface);
-  color: var(--hatch-widget-text);
+  border: none;
+  background: var(--pal-inner);
+  color: var(--pal-text);
   border-radius: 8px;
   padding: 8px 14px;
   font: inherit;
   cursor: pointer;
-  transition: background-color 120ms ease, border-color 120ms ease;
+  transition: opacity 120ms ease;
 }
 
 .mw-btn:hover {
-  background: var(--hatch-widget-surface-muted);
+  opacity: .85;
 }
 
 .mw-btn:active {
-  transform: translateY(1px);
+  opacity: .7;
 }
 
 .mw-btn:focus-visible {
-  outline: 2px solid var(--hatch-widget-focus);
+  outline: 2px solid var(--pal-fold);
   outline-offset: 2px;
 }
 
 .mw-btn[aria-selected="true"],
 .mw-btn[aria-pressed="true"] {
-  background: var(--hatch-widget-accent);
-  border-color: var(--hatch-widget-accent);
-  color: var(--hatch-widget-on-accent);
+  background: var(--pal-fold);
+  color: var(--pal-on-fold);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .mw-btn {
     transition: none;
-  }
-  .mw-btn:active {
-    transform: none;
   }
 }

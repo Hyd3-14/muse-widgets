@@ -1,14 +1,18 @@
-<div class="mw-seg-root" style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="mw-seg-root pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
   <style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-seg-root, .mw-seg-root *, .mw-seg-root *::before, .mw-seg-root *::after { box-sizing: border-box; }
-    .mw-seg-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
-    .mw-seg-btn:hover { background:var(--hatch-widget-surface-muted); }
-    .mw-seg-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
-    .mw-seg-btn[aria-selected="true"] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    .mw-seg-btn { appearance:none;background:var(--pal-inner);color:var(--pal-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:opacity 120ms ease; }
+    .mw-seg-btn:hover { opacity:.85; }
+    .mw-seg-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-seg-btn[aria-selected="true"] { background:var(--pal-fold);color:var(--pal-on-fold);font-weight:700; }
     @media (prefers-reduced-motion: reduce) { .mw-seg-btn { transition:none; } }
   </style>
   <div role="tablist" aria-label="Plan" id="mw-seg-list" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
-  <div id="mw-seg-detail" style="margin-top:10px;color:var(--hatch-widget-muted);font-size:13px;"></div>
+  <div id="mw-seg-detail" style="margin-top:10px;color:var(--pal-muted);font-size:13px;"></div>
   <script>
   (function () {
     var OPTIONS = [

@@ -1,0 +1,21 @@
+<div class="cw" style="box-sizing:border-box;font-family:'Noto Sans JP',sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%">
+<style>
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-flow{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;background:var(--hatch-widget-surface);margin-bottom:8px}
+.cw-flow b{font-size:14px}
+.cw-flow span{display:block;font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;line-height:1.5}
+.cw-rec{display:inline-flex;align-items:center;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-right:8px}
+</style>
+<div class="cw-card">
+<h3>実測したズレ（repo-template と agent-lens の現物比較）</h3>
+<p>CONTRIBUTING は repo-template に正本が存在せず、agent-lens のものは今夜の場当たり作。SECURITY はテンプレ側が「生成先で更新してください」のプレースホルダ状態で、agent-lens にはファイル自体が無い。ラベルは labels.yml（29件・6軸）が正本と sync の仕組みがあるのに、agent-lens は未同期で review ラベルだけを直接作った。Issue テンプレは正本が YAML フォーム7種なのに、agent-lens には簡易 md が2種だけ。PR テンプレは default.md と pull_request_template.md が併存している。</p>
+</div>
+<div class="cw-flow"><b>Q13. CONTRIBUTING の正本化</b><span><span class="cw-rec">推奨</span>基底に CONTRIBUTING.md を追加し、共通部（コミット形式、PR の作法、レビューラベルの意味）と種別差分（go-cli の開発手順）の2層にする。各 repo のアドリブ作をやめる</span></div>
+<div class="cw-flow"><b>Q14. SECURITY の実効化</b><span><span class="cw-rec">推奨</span>生成・適用のときに報告窓口（Private vulnerability reporting の有効化か、連絡先の記入）を必須確認にし、baseline チェックに「SECURITY.md の存在とプレースホルダの残り」を含める</span></div>
+<div class="cw-flow"><b>Q15. ラベルの扱い</b><span><span class="cw-rec">推奨</span>labels.yml を唯一の正本とし、場当たりの直接作成を baseline で禁止する。チェック側で repo のラベル実態と labels.yml の一致を検査する</span></div>
+<div class="cw-flow"><b>Q16. テンプレ類の改変境界</b><span><span class="cw-rec">推奨</span>基底ファイルは copier 管理下として repo 側で直さない。repo 固有の追加は、追加の Issue フォームや用途別 PR テンプレのような「足す」形だけを許可し、その線引きを baseline 文書に書く。PR テンプレの併存もこの機会に正本を1つへ寄せる</span></div>
+<div class="cw-flow"><b>Q17. agent-lens のズレの是正</b><span><span class="cw-rec">推奨</span>取り込み検証（Round 1 の Q6）のときに、CONTRIBUTING の差し替え、SECURITY の追加、labels の同期、Issue フォームの適用を一括で行い、是正の実例として記録する</span></div>
+</div>

@@ -1,0 +1,33 @@
+<div style="box-sizing:border-box;padding:16px;font-family:inherit;color:var(--hatch-widget-text);display:flex;flex-direction:column;gap:10px;">
+  <div style="font-weight:700;font-size:14px;">df の規則を VM に当てるとどうなるか</div>
+  <div style="display:grid;grid-template-columns:76px 1fr 1fr;gap:6px;font-size:12px;">
+    <div></div>
+    <div style="font-weight:700;font-size:13px;">今の VM</div>
+    <div style="font-weight:700;font-size:13px;">df 流儀を当てた姿</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">リポの clone</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">workspace 直下に散在。dotfiles 自身が5つある（dotfiles-vm、df-297-work、agent-launch、registry-work、skills-check）</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;"><b>ghq の root（~/repo）に github.com/owner/repo の形で一元化</b>。1つの repo は1か所だけ</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">並列の作業場</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">タスクごとに full clone を切って捨て忘れる（cram 系 32件・9.0GB）</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;"><b>gwq の worktree で ~/worktrees/host/owner/repo/branch に配置</b>。ブランチ名も type/Issue番号-概要 の形で規則化</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">一時作業</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">置き場の決めがなく、workspace 直下に残り続ける</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;"><b>~/agent-tmp に寄せ、MANIFEST に expires を書く</b>。期限切れと7日無更新は .trash へ移り、さらに7日で消える（毎日 prune）</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">終了処理</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">なし。終わったかどうかは記憶頼み</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;"><b>gprune-merged が merge 済みを安全条件つきで一括整理</b>。週1回、削除なしの棚卸しレポート（worktree-report）も回る</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">ツール</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">実体がツールごとにバラバラで、.bin へ symlink を手で集約。版の管理も個別</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;"><b>mise で一元管理し、版は lock で固定</b>。gwq も ghq も mise 管理で、他の手段と重複させない原則まである</div>
+
+    <div style="font-weight:700;color:var(--hatch-widget-muted);">Muse 固有の層</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">goals、your_files、ts-spaces、MEMORY など</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:8px;">df の対象外なので残る。ただし expires と .trash の考え方は、この層の作業フォルダにも流用できる</div>
+  </div>
+  <div style="font-size:12px;color:var(--hatch-widget-muted);line-height:1.7;">根拠は df の docs/gwq-worktrees.md と docs/agent-tmp.md。df 側の仕組みは WSL2 と lab-arch の端末前提で組まれていて、VM が df の配置対象に入っているかは未確認。</div>
+</div>

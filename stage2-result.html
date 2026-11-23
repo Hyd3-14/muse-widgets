@@ -1,0 +1,30 @@
+<div class="cw">
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw h3{margin:0 0 8px;font-size:15px}
+.cw p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:24px}
+.cw-card:last-child{margin-bottom:0}
+.cw-row{display:flex;gap:12px;align-items:flex-start;border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;margin-bottom:8px;background:var(--hatch-widget-surface)}
+.cw-row:last-child{margin-bottom:0}
+.cw-badge{flex:none;display:inline-flex;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-top:1px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+.cw-row b{font-size:13.5px}
+.cw-row span{display:block;font-size:12.5px;color:var(--hatch-widget-muted);line-height:1.55}
+</style>
+
+<div class="cw-card">
+<h3>段階2の実行結果</h3>
+<div class="cw-row"><span class="cw-badge">完了</span><div><b>SSOT の確定を記録</b><span>全体指示の正本は df の home/.agents/AGENTS.md。vault の決定記録に残した</span></div></div>
+<div class="cw-row"><span class="cw-badge">PR 作成済み</span><div><b>GEMINI のレート節を df へ</b><span>テンプレートと live の diff が無いことまで確認済み。merge はお前さんの番</span></div></div>
+<div class="cw-row"><span class="cw-badge">完了</span><div><b>hooks の重複を解消</b><span>31件から26件へ。消した5件は全部、自作ガードの重複登録。バックアップも取ってある</span></div></div>
+<div class="cw-row"><span class="cw-badge">完了</span><div><b>drift チェックを作成し実行</b><span>Orca 分16件を除外して判定。残る DRIFT は GEMINI の1件だけで、PR の merge と apply で消える</span></div></div>
+<div class="cw-row"><span class="cw-badge">完了</span><div><b>home repo を作成</b><span>Hyd3-14/home（private）。AGENTS.md、repos.md、GLOSSARY.md、試験記録の TRIAL.md まで入れて push 済み</span></div></div>
+</div>
+
+<div class="cw-card">
+<h3>残っていること</h3>
+<p>PR の merge と、その後の df apply はお前さんの操作。試験運用の開始（agy のセッションを home から始める）も agy 側の操作になる。それ以外の段階2の作業は全部終わっている。</p>
+</div>
+</div>

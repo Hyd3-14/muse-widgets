@@ -1,0 +1,10 @@
+/* Theme: pal-soft — Soft (teal)
+   Status: in-use (default)
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}

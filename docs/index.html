@@ -90,10 +90,15 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
-  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);&quot;&gt;Recommended&lt;/span&gt;
-  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);margin-left:6px;&quot;&gt;Optional&lt;/span&gt;
-  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;A filled badge carries the one status that matters. Pair color with words, never color alone.&lt;/div&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
+  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);&quot;&gt;Recommended&lt;/span&gt;
+  &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--pal-inner);color:var(--pal-text);margin-left:6px;&quot;&gt;Optional&lt;/span&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--pal-muted);font-size:13px;&quot;&gt;A filled badge carries the one status that matters. Pair color with words, never color alone.&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -158,19 +163,23 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tpl-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tpl-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+    .pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
     .mw-tpl-root, .mw-tpl-root *, .mw-tpl-root *::before, .mw-tpl-root *::after { box-sizing: border-box; }
-    .mw-tpl-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
-    .mw-tpl-btn:hover { background:var(--hatch-widget-surface-muted); }
-    .mw-tpl-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-tpl-btn { appearance:none;border:none;background:var(--pal-inner);color:var(--pal-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:opacity 120ms ease; }
+    .mw-tpl-btn:hover { opacity:.85; }
+    .mw-tpl-btn:active { opacity:.7; }
+    .mw-tpl-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
     @media (prefers-reduced-motion: reduce) { .mw-tpl-btn { transition:none; } }
   &lt;/style&gt;
   &lt;div style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;
     &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot; data-action=&quot;first&quot;&gt;First action&lt;/button&gt;
     &lt;button type=&quot;button&quot; class=&quot;mw-tpl-btn&quot; data-action=&quot;second&quot;&gt;Second action&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div id=&quot;mw-tpl-status&quot; style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Buttons record the last action in widget state, so the agent can read back what was tapped.&lt;/div&gt;
+  &lt;div id=&quot;mw-tpl-status&quot; style=&quot;margin-top:8px;color:var(--pal-muted);font-size:13px;&quot;&gt;Buttons record the last action in widget state, so the agent can read back what was tapped.&lt;/div&gt;
   &lt;script&gt;
   (function () {
     var DEFAULTS = { lastAction: &#x27;&#x27; };
@@ -256,15 +265,19 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ca-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ca-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-ca-root, .mw-ca-root *, .mw-ca-root *::before, .mw-ca-root *::after { box-sizing: border-box; }
-    .mw-ca-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
-    .mw-ca-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
+    .mw-ca-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border-radius:8px;background:var(--pal-outer);color:var(--pal-text);font:inherit; }
+    .mw-ca-input:focus-visible { outline:2px solid var(--pal-fold);outline-offset:1px; }
   &lt;/style&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Trip cost per person&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;margin-bottom:12px;&quot;&gt;Premises: hotel is shared by the whole group; transport is per person.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:13px;margin-bottom:12px;&quot;&gt;Premises: hotel is shared by the whole group; transport is per person.&lt;/div&gt;
     &lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr;gap:10px;&quot;&gt;
       &lt;label style=&quot;font-size:13px;&quot;&gt;People
         &lt;input id=&quot;mw-ca-people&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;1&quot; max=&quot;20&quot; step=&quot;1&quot; style=&quot;margin-top:4px;&quot;&gt;
@@ -279,11 +292,11 @@
         &lt;input id=&quot;mw-ca-food&quot; class=&quot;mw-ca-input&quot; type=&quot;number&quot; min=&quot;0&quot; step=&quot;5&quot; style=&quot;margin-top:4px;&quot;&gt;
       &lt;/label&gt;
     &lt;/div&gt;
-    &lt;div style=&quot;margin-top:14px;border-top:1px solid var(--hatch-widget-border);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;&quot;&gt;
-      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;Per person&lt;/span&gt;
+    &lt;div style=&quot;margin-top:14px;border-top:1px solid var(--pal-outer);padding-top:12px;display:flex;justify-content:space-between;align-items:baseline;&quot;&gt;
+      &lt;span style=&quot;color:var(--pal-muted);&quot;&gt;Per person&lt;/span&gt;
       &lt;span id=&quot;mw-ca-result&quot; style=&quot;font-size:24px;font-weight:700;&quot;&gt;$0&lt;/span&gt;
     &lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;&quot;&gt;Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;&quot;&gt;Formula: hotel / people + transport + food, rounded to the nearest dollar. Inputs are stored; the result is derived at render time.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -380,15 +393,20 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);&quot;&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;font-size:15px;font-weight:700;margin:0 0 6px;&quot;&gt;Card title&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;line-height:1.55;&quot;&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:13px;line-height:1.55;&quot;&gt;
       One short paragraph that states the point of this card. Keep it to what the reader needs to decide or understand.
     &lt;/div&gt;
     &lt;div style=&quot;margin-top:12px;font-size:13px;&quot;&gt;
       &lt;span style=&quot;font-weight:700;&quot;&gt;Key value&lt;/span&gt;
-      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt; — supporting detail&lt;/span&gt;
+      &lt;span style=&quot;color:var(--pal-muted);&quot;&gt; — supporting detail&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -455,13 +473,18 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
   &lt;div style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;
-    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label one&lt;/span&gt;
-    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label two&lt;/span&gt;
-    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface-muted);&quot;&gt;Label three&lt;/span&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;background:var(--pal-inner);&quot;&gt;Label one&lt;/span&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;background:var(--pal-inner);&quot;&gt;Label two&lt;/span&gt;
+    &lt;span style=&quot;display:inline-block;padding:2px 10px;border-radius:999px;font-size:12px;background:var(--pal-inner);&quot;&gt;Label three&lt;/span&gt;
   &lt;/div&gt;
-  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Chips summarize attributes at a glance. They are not buttons; use segmented control for choices.&lt;/div&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--pal-muted);font-size:13px;&quot;&gt;Chips summarize attributes at a glance. They are not buttons; use segmented control for choices.&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -526,22 +549,27 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
   &lt;div style=&quot;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;&quot;&gt;
-    &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;&quot;&gt;
+    &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;&quot;&gt;
       &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option A&lt;/div&gt;
       &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$120&lt;/div&gt;
-      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+      &lt;div style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
     &lt;/div&gt;
-    &lt;div style=&quot;background:var(--hatch-widget-surface);border:2px solid var(--hatch-widget-accent);border-radius:8px;padding:12px;&quot;&gt;
-      &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option B &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);vertical-align:2px;&quot;&gt;Recommended&lt;/span&gt;&lt;/div&gt;
+    &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;box-shadow:inset 0 0 0 2px var(--pal-fold);&quot;&gt;
+      &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option B &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);vertical-align:2px;&quot;&gt;Recommended&lt;/span&gt;&lt;/div&gt;
       &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$150&lt;/div&gt;
-      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+      &lt;div style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
     &lt;/div&gt;
-    &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;&quot;&gt;
+    &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;&quot;&gt;
       &lt;div style=&quot;font-weight:700;margin-bottom:4px;&quot;&gt;Option C&lt;/div&gt;
       &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;$210&lt;/div&gt;
-      &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
+      &lt;div style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;One line on who it fits.&lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -608,20 +636,24 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-cc-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-cc-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-cc-root, .mw-cc-root *, .mw-cc-root *::before, .mw-cc-root *::after { box-sizing: border-box; }
-    .mw-cc-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
-    .mw-cc-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
-    .mw-cc-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    .mw-cc-btn { appearance:none;background:var(--pal-outer);color:var(--pal-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-cc-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-cc-btn[aria-selected=&quot;true&quot;] { background:var(--pal-fold);color:var(--pal-on-fold);font-weight:700; }
   &lt;/style&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;&quot;&gt;
       &lt;span style=&quot;font-weight:700;&quot;&gt;Which plan fits?&lt;/span&gt;
       &lt;span role=&quot;tablist&quot; aria-label=&quot;Usage&quot; id=&quot;mw-cc-list&quot; style=&quot;display:flex;gap:6px;&quot;&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div id=&quot;mw-cc-body&quot; style=&quot;margin-top:12px;&quot;&gt;&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Switching the condition only moves the recommendation mark and its reason. The numbers in the table never change.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:8px;&quot;&gt;Switching the condition only moves the recommendation mark and its reason. The numbers in the table never change.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -658,14 +690,14 @@
       var cond = CONDITIONS.filter(function (c) { return c.id === state.condition; })[0];
       var rows = PLANS.map(function (p) {
         var picked = cond &amp;&amp; p.id === cond.pick;
-        return &#x27;&lt;tr style=&quot;border-top:1px solid var(--hatch-widget-border);&quot;&gt;&#x27;
+        return &#x27;&lt;tr style=&quot;border-top:1px solid var(--pal-outer);&quot;&gt;&#x27;
           + &#x27;&lt;td style=&quot;padding:8px 6px;font-weight:&#x27; + (picked ? &#x27;700&#x27; : &#x27;400&#x27;) + &#x27;;&quot;&gt;&#x27; + p.name
-          + (picked ? &#x27; &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);&quot;&gt;Recommended&lt;/span&gt;&#x27; : &#x27;&#x27;)
-          + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;&quot;&gt;&#x27; + p.price + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;color:var(--hatch-widget-muted);&quot;&gt;&#x27; + p.limit + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
+          + (picked ? &#x27; &lt;span style=&quot;display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);&quot;&gt;Recommended&lt;/span&gt;&#x27; : &#x27;&#x27;)
+          + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;&quot;&gt;&#x27; + p.price + &#x27;&lt;/td&gt;&lt;td style=&quot;padding:8px 6px;color:var(--pal-muted);&quot;&gt;&#x27; + p.limit + &#x27;&lt;/td&gt;&lt;/tr&gt;&#x27;;
       }).join(&#x27;&#x27;);
       document.getElementById(&#x27;mw-cc-body&#x27;).innerHTML =
         &#x27;&lt;table style=&quot;width:100%;border-collapse:collapse;font-size:13px;&quot;&gt;&#x27;
-        + &#x27;&lt;tr style=&quot;color:var(--hatch-widget-muted);text-align:left;&quot;&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Plan&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Price&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Limit&lt;/th&gt;&lt;/tr&gt;&#x27;
+        + &#x27;&lt;tr style=&quot;color:var(--pal-muted);text-align:left;&quot;&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Plan&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Price&lt;/th&gt;&lt;th style=&quot;padding:0 6px;&quot;&gt;Limit&lt;/th&gt;&lt;/tr&gt;&#x27;
         + rows + &#x27;&lt;/table&gt;&#x27;
         + &#x27;&lt;div style=&quot;margin-top:10px;font-size:13px;&quot;&gt;&#x27; + (cond ? cond.reason : &#x27;&#x27;) + &#x27;&lt;/div&gt;&#x27;;
     }
@@ -737,14 +769,19 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;display:flex;justify-content:space-between;align-items:baseline;&quot;&gt;
       &lt;span style=&quot;font-weight:700;&quot;&gt;Checklist&lt;/span&gt;
-      &lt;span id=&quot;mw-cl-count&quot; style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;&lt;/span&gt;
+      &lt;span id=&quot;mw-cl-count&quot; style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div id=&quot;mw-cl-list&quot; style=&quot;margin-top:8px;display:flex;flex-direction:column;&quot;&gt;&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Checked items persist in widget state, so the agent can read back what is left.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:8px;&quot;&gt;Checked items persist in widget state, so the agent can read back what is left.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -764,11 +801,11 @@
       ITEMS.forEach(function (item) {
         var done = state.checked.indexOf(item.id) !== -1;
         var row = document.createElement(&#x27;label&#x27;);
-        row.style.cssText = &#x27;display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--hatch-widget-border);cursor:pointer;&#x27;;
+        row.style.cssText = &#x27;display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid var(--pal-outer);cursor:pointer;&#x27;;
         var box = document.createElement(&#x27;input&#x27;);
         box.type = &#x27;checkbox&#x27;;
         box.checked = done;
-        box.style.accentColor = &#x27;var(--hatch-widget-accent)&#x27;;
+        box.style.accentColor = &#x27;var(--pal-fold)&#x27;;
         box.addEventListener(&#x27;change&#x27;, function () {
           var next = state.checked.filter(function (id) { return id !== item.id; });
           if (box.checked) next.push(item.id);
@@ -778,7 +815,7 @@
         });
         var text = document.createElement(&#x27;span&#x27;);
         text.textContent = item.label;
-        if (done) { text.style.textDecoration = &#x27;line-through&#x27;; text.style.color = &#x27;var(--hatch-widget-muted)&#x27;; }
+        if (done) { text.style.textDecoration = &#x27;line-through&#x27;; text.style.color = &#x27;var(--pal-muted)&#x27;; }
         row.appendChild(box);
         row.appendChild(text);
         list.appendChild(row);
@@ -853,23 +890,12 @@
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;fc-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;fc-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);&quot;&gt;
 &lt;style&gt;
-.fc-root.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-text:#1D314C;--pal-muted:#5B7183;color:var(--pal-text)}
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
 .fc-root *{box-sizing:border-box}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
-@media (prefers-color-scheme: dark){html:not([data-theme]) .fc-root.pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
-.fc-root.pal-gray{--pal-outer:#E4E4E4;--pal-inner:#FFFFFF;--pal-fold:#9A9A9A;--pal-text:#1A1A1A;--pal-muted:#5A5A5A}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-gray{--pal-outer:#161616;--pal-inner:#2C2C2C;--pal-fold:#5A5A5A;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
-.fc-root.pal-dads{--pal-outer:#E3EAF7;--pal-inner:#FFFFFF;--pal-fold:#0017C1;--pal-text:#14204A;--pal-muted:#4A5A8A}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-dads{--pal-outer:#0E1730;--pal-inner:#1E2C52;--pal-fold:#7A9BFF;--pal-text:#EEF2FF;--pal-muted:#AEBCE8}
-.fc-root.pal-warm{--pal-outer:#EFE4D0;--pal-inner:#F7F2E9;--pal-fold:#9A3412;--pal-text:#3A2415;--pal-muted:#7A5C44}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-warm{--pal-outer:#241B13;--pal-inner:#3B2D20;--pal-fold:#D08A4E;--pal-text:#F7EFE3;--pal-muted:#CBB79E}
-.fc-root.pal-pop{--pal-outer:#F6ECD2;--pal-inner:#FFF8E1;--pal-fold:#D55E00;--pal-text:#2A1E0A;--pal-muted:#7A6238}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-pop{--pal-outer:#171717;--pal-inner:#2C2C2C;--pal-fold:#E69F00;--pal-text:#F2F2F2;--pal-muted:#B8B8B8}
-.fc-root.pal-note{--pal-outer:#EFE9C3;--pal-inner:#FFF7AE;--pal-fold:#C9A227;--pal-text:#33300F;--pal-muted:#6E662E}
-html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-inner:#4A4419;--pal-fold:#E5C84B;--pal-text:#FBF6D8;--pal-muted:#D8CE96}
-.fc-panel{background:var(--pal-outer);border-radius:8px;padding:16px}
 .fc-title{font-size:15px;font-weight:700;margin:0 0 6px}
 .fc-lead{color:var(--pal-muted);font-size:13px;line-height:1.55;margin:0}
 .fc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
@@ -880,20 +906,18 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
 .fc-ct p{margin:0;font-size:12px;line-height:1.55;color:var(--pal-muted)}
 .fc-flap{position:absolute;right:0;bottom:0;width:20px;height:20px;background:var(--pal-fold);clip-path:polygon(0 0,100% 0,0 100%)}
 &lt;/style&gt;
-  &lt;div class=&quot;fc-panel&quot;&gt;
-    &lt;div class=&quot;fc-title&quot;&gt;Folded cards&lt;/div&gt;
-    &lt;p class=&quot;fc-lead&quot;&gt;Nested cards separated by palette color difference, not borders. The bottom-right corner is cut away and the fold falls inside. Default palette is pal-soft; swap the pal-* class on the root for pal-gray, pal-dads, pal-warm, pal-pop, or pal-note.&lt;/p&gt;
-    &lt;div class=&quot;fc-grid&quot;&gt;
-      &lt;div class=&quot;fc-card&quot;&gt;
-        &lt;span class=&quot;fc-bg&quot;&gt;&lt;/span&gt;
-        &lt;div class=&quot;fc-ct&quot;&gt;&lt;h4&gt;First point&lt;/h4&gt;&lt;p&gt;One or two short lines the reader compares at a glance.&lt;/p&gt;&lt;/div&gt;
-        &lt;span class=&quot;fc-flap&quot;&gt;&lt;/span&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;fc-card&quot;&gt;
-        &lt;span class=&quot;fc-bg&quot;&gt;&lt;/span&gt;
-        &lt;div class=&quot;fc-ct&quot;&gt;&lt;h4&gt;Second point&lt;/h4&gt;&lt;p&gt;One or two short lines the reader compares at a glance.&lt;/p&gt;&lt;/div&gt;
-        &lt;span class=&quot;fc-flap&quot;&gt;&lt;/span&gt;
-      &lt;/div&gt;
+  &lt;div class=&quot;fc-title&quot;&gt;Folded cards&lt;/div&gt;
+  &lt;p class=&quot;fc-lead&quot;&gt;Nested cards separated by palette color difference, not borders. The bottom-right corner is cut away and the fold falls inside. This template inlines the in-use theme (pal-soft); to use another theme from catalog/themes/, swap the theme block and the root class.&lt;/p&gt;
+  &lt;div class=&quot;fc-grid&quot;&gt;
+    &lt;div class=&quot;fc-card&quot;&gt;
+      &lt;span class=&quot;fc-bg&quot;&gt;&lt;/span&gt;
+      &lt;div class=&quot;fc-ct&quot;&gt;&lt;h4&gt;First point&lt;/h4&gt;&lt;p&gt;One or two short lines the reader compares at a glance.&lt;/p&gt;&lt;/div&gt;
+      &lt;span class=&quot;fc-flap&quot;&gt;&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;fc-card&quot;&gt;
+      &lt;span class=&quot;fc-bg&quot;&gt;&lt;/span&gt;
+      &lt;div class=&quot;fc-ct&quot;&gt;&lt;h4&gt;Second point&lt;/h4&gt;&lt;p&gt;One or two short lines the reader compares at a glance.&lt;/p&gt;&lt;/div&gt;
+      &lt;span class=&quot;fc-flap&quot;&gt;&lt;/span&gt;
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/div&gt;
@@ -960,15 +984,19 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-fm-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-fm-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-fm-root, .mw-fm-root *, .mw-fm-root *::before, .mw-fm-root *::after { box-sizing: border-box; }
-    .mw-fm-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border:1px solid var(--hatch-widget-border);border-radius:8px;background:var(--hatch-widget-surface);color:var(--hatch-widget-text);font:inherit; }
-    .mw-fm-input:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:1px; }
-    .mw-fm-btn { appearance:none;border:1px solid var(--hatch-widget-accent);background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer; }
-    .mw-fm-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
+    .mw-fm-input { width:100%;min-width:0;max-width:100%;padding:8px 10px;border-radius:8px;background:var(--pal-outer);color:var(--pal-text);font:inherit; }
+    .mw-fm-input:focus-visible { outline:2px solid var(--pal-fold);outline-offset:1px; }
+    .mw-fm-btn { appearance:none;border:none;background:var(--pal-fold);color:var(--pal-on-fold);border-radius:8px;padding:8px 16px;font:inherit;font-weight:700;cursor:pointer; }
+    .mw-fm-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
   &lt;/style&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;font-weight:700;margin-bottom:10px;&quot;&gt;Quick survey&lt;/div&gt;
     &lt;label style=&quot;display:block;font-size:13px;margin-bottom:10px;&quot;&gt;Name
       &lt;input id=&quot;mw-fm-name&quot; class=&quot;mw-fm-input&quot; type=&quot;text&quot; autocomplete=&quot;off&quot; style=&quot;margin-top:4px;&quot;&gt;
@@ -977,8 +1005,8 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
       &lt;input id=&quot;mw-fm-date&quot; class=&quot;mw-fm-input&quot; type=&quot;date&quot; style=&quot;margin-top:4px;&quot;&gt;
     &lt;/label&gt;
     &lt;button type=&quot;button&quot; class=&quot;mw-fm-btn&quot; id=&quot;mw-fm-submit&quot;&gt;Save answers&lt;/button&gt;
-    &lt;div id=&quot;mw-fm-status&quot; style=&quot;margin-top:8px;font-size:13px;color:var(--hatch-widget-muted);&quot;&gt;&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:8px;&quot;&gt;Never collect passwords, payment details, or government IDs in a widget. Submission here only records state; the agent reads it back and acts with the user&#x27;s approval.&lt;/div&gt;
+    &lt;div id=&quot;mw-fm-status&quot; style=&quot;margin-top:8px;font-size:13px;color:var(--pal-muted);&quot;&gt;&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:8px;&quot;&gt;Never collect passwords, payment details, or government IDs in a widget. Submission here only records state; the agent reads it back and acts with the user&#x27;s approval.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -1065,20 +1093,24 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ch-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-ch-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-ch-root, .mw-ch-root *, .mw-ch-root *::before, .mw-ch-root *::after { box-sizing: border-box; }
-    .mw-ch-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
-    .mw-ch-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
-    .mw-ch-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    .mw-ch-btn { appearance:none;background:var(--pal-outer);color:var(--pal-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-ch-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-ch-btn[aria-selected=&quot;true&quot;] { background:var(--pal-fold);color:var(--pal-on-fold);font-weight:700; }
   &lt;/style&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;div style=&quot;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;&quot;&gt;
       &lt;span style=&quot;font-weight:700;&quot;&gt;Monthly totals&lt;/span&gt;
       &lt;span role=&quot;tablist&quot; aria-label=&quot;Metric&quot; id=&quot;mw-ch-list&quot; style=&quot;display:flex;gap:6px;&quot;&gt;&lt;/span&gt;
     &lt;/div&gt;
     &lt;div id=&quot;mw-ch-chart&quot; style=&quot;margin-top:12px;&quot;&gt;&lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:6px;&quot;&gt;Unit: dollars per month. Period: Jun – Nov. Data is embedded in the fragment, separate from the drawing code.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:6px;&quot;&gt;Unit: dollars per month. Period: Jun – Nov. Data is embedded in the fragment, separate from the drawing code.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -1118,9 +1150,9 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
       var bars = values.map(function (v, i) {
         var h = Math.round((v / max) * 72);
         return &#x27;&lt;div style=&quot;flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;&quot;&gt;&#x27;
-          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--hatch-widget-muted);&quot;&gt;$&#x27; + v + &#x27;&lt;/span&gt;&#x27;
-          + &#x27;&lt;div style=&quot;width:100%;max-width:36px;height:&#x27; + h + &#x27;px;background:var(--hatch-widget-accent);border-radius:4px 4px 0 0;&quot;&gt;&lt;/div&gt;&#x27;
-          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--hatch-widget-muted);&quot;&gt;&#x27; + DATA.labels[i] + &#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
+          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--pal-muted);&quot;&gt;$&#x27; + v + &#x27;&lt;/span&gt;&#x27;
+          + &#x27;&lt;div style=&quot;width:100%;max-width:36px;height:&#x27; + h + &#x27;px;background:var(--pal-fold);border-radius:4px 4px 0 0;&quot;&gt;&lt;/div&gt;&#x27;
+          + &#x27;&lt;span style=&quot;font-size:11px;color:var(--pal-muted);&quot;&gt;&#x27; + DATA.labels[i] + &#x27;&lt;/span&gt;&lt;/div&gt;&#x27;;
       }).join(&#x27;&#x27;);
       document.getElementById(&#x27;mw-ch-chart&#x27;).innerHTML =
         &#x27;&lt;div style=&quot;display:flex;align-items:flex-end;gap:8px;&quot;&gt;&#x27; + bars + &#x27;&lt;/div&gt;&#x27;;
@@ -1193,19 +1225,24 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
   &lt;div style=&quot;display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px;&quot;&gt;
     &lt;span style=&quot;font-weight:700;&quot;&gt;Progress&lt;/span&gt;
-    &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;3 of 5 done&lt;/span&gt;
+    &lt;span style=&quot;color:var(--pal-muted);&quot;&gt;3 of 5 done&lt;/span&gt;
   &lt;/div&gt;
   &lt;div style=&quot;display:flex;gap:4px;&quot; role=&quot;img&quot; aria-label=&quot;3 of 5 done&quot;&gt;
-    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
-    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
-    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-accent);&quot;&gt;&lt;/span&gt;
-    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
-    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--pal-fold);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--pal-fold);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--pal-fold);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--pal-inner);&quot;&gt;&lt;/span&gt;
+    &lt;span style=&quot;flex:1;height:8px;border-radius:4px;background:var(--pal-inner);&quot;&gt;&lt;/span&gt;
   &lt;/div&gt;
-  &lt;div style=&quot;margin-top:8px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;Segmented bars read faster than percentages. Always pair the bar with the counts in words.&lt;/div&gt;
+  &lt;div style=&quot;margin-top:8px;color:var(--pal-muted);font-size:13px;&quot;&gt;Segmented bars read faster than percentages. Always pair the bar with the counts in words.&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script&gt;
@@ -1270,17 +1307,21 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-seg-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-seg-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-seg-root, .mw-seg-root *, .mw-seg-root *::before, .mw-seg-root *::after { box-sizing: border-box; }
-    .mw-seg-btn { appearance:none;border:1px solid var(--hatch-widget-border);background:var(--hatch-widget-surface);color:var(--hatch-widget-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:background-color 120ms ease; }
-    .mw-seg-btn:hover { background:var(--hatch-widget-surface-muted); }
-    .mw-seg-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
-    .mw-seg-btn[aria-selected=&quot;true&quot;] { background:var(--hatch-widget-accent);border-color:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-weight:700; }
+    .mw-seg-btn { appearance:none;background:var(--pal-inner);color:var(--pal-text);border-radius:8px;padding:8px 14px;font:inherit;cursor:pointer;transition:opacity 120ms ease; }
+    .mw-seg-btn:hover { opacity:.85; }
+    .mw-seg-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-seg-btn[aria-selected=&quot;true&quot;] { background:var(--pal-fold);color:var(--pal-on-fold);font-weight:700; }
     @media (prefers-reduced-motion: reduce) { .mw-seg-btn { transition:none; } }
   &lt;/style&gt;
   &lt;div role=&quot;tablist&quot; aria-label=&quot;Plan&quot; id=&quot;mw-seg-list&quot; style=&quot;display:flex;flex-wrap:wrap;gap:8px;&quot;&gt;&lt;/div&gt;
-  &lt;div id=&quot;mw-seg-detail&quot; style=&quot;margin-top:10px;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;&lt;/div&gt;
+  &lt;div id=&quot;mw-seg-detail&quot; style=&quot;margin-top:10px;color:var(--pal-muted);font-size:13px;&quot;&gt;&lt;/div&gt;
   &lt;script&gt;
   (function () {
     var OPTIONS = [
@@ -1379,15 +1420,20 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
-  &lt;div style=&quot;background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
     &lt;label for=&quot;mw-sl-input&quot; style=&quot;font-weight:700;display:block;margin-bottom:8px;&quot;&gt;People&lt;/label&gt;
-    &lt;input id=&quot;mw-sl-input&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;10&quot; step=&quot;1&quot; style=&quot;box-sizing:border-box;width:100%;accent-color:var(--hatch-widget-accent);&quot;&gt;
+    &lt;input id=&quot;mw-sl-input&quot; type=&quot;range&quot; min=&quot;1&quot; max=&quot;10&quot; step=&quot;1&quot; style=&quot;box-sizing:border-box;width:100%;accent-color:var(--pal-fold);&quot;&gt;
     &lt;div style=&quot;display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;&quot;&gt;
-      &lt;span style=&quot;color:var(--hatch-widget-muted);&quot;&gt;&lt;span id=&quot;mw-sl-count&quot;&gt;4&lt;/span&gt; people × $25&lt;/span&gt;
+      &lt;span style=&quot;color:var(--pal-muted);&quot;&gt;&lt;span id=&quot;mw-sl-count&quot;&gt;4&lt;/span&gt; people × $25&lt;/span&gt;
       &lt;span id=&quot;mw-sl-total&quot; style=&quot;font-size:22px;font-weight:700;&quot;&gt;$100&lt;/span&gt;
     &lt;/div&gt;
-    &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:12px;margin-top:4px;&quot;&gt;The total is derived at render time and is never stored in state.&lt;/div&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:4px;&quot;&gt;The total is derived at render time and is never stored in state.&lt;/div&gt;
   &lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -1474,14 +1520,18 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tab-root&quot; style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;mw-tab-root pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
   &lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
     .mw-tab-root, .mw-tab-root *, .mw-tab-root *::before, .mw-tab-root *::after { box-sizing: border-box; }
-    .mw-tab-btn { appearance:none;border:none;border-bottom:2px solid transparent;background:none;color:var(--hatch-widget-muted);padding:8px 10px;font:inherit;cursor:pointer; }
-    .mw-tab-btn:focus-visible { outline:2px solid var(--hatch-widget-focus);outline-offset:2px; }
-    .mw-tab-btn[aria-selected=&quot;true&quot;] { color:var(--hatch-widget-text);border-bottom-color:var(--hatch-widget-accent);font-weight:700; }
+    .mw-tab-btn { appearance:none;border:none;border-bottom:2px solid transparent;background:none;color:var(--pal-muted);padding:8px 10px;font:inherit;cursor:pointer; }
+    .mw-tab-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-tab-btn[aria-selected=&quot;true&quot;] { color:var(--pal-text);border-bottom-color:var(--pal-fold);font-weight:700; }
   &lt;/style&gt;
-  &lt;div role=&quot;tablist&quot; aria-label=&quot;Sections&quot; id=&quot;mw-tab-list&quot; style=&quot;display:flex;gap:4px;border-bottom:1px solid var(--hatch-widget-border);&quot;&gt;&lt;/div&gt;
+  &lt;div role=&quot;tablist&quot; aria-label=&quot;Sections&quot; id=&quot;mw-tab-list&quot; style=&quot;display:flex;gap:4px;border-bottom:1px solid var(--pal-inner);&quot;&gt;&lt;/div&gt;
   &lt;div id=&quot;mw-tab-panel&quot; style=&quot;padding-top:12px;line-height:1.55;&quot;&gt;&lt;/div&gt;
   &lt;script&gt;
   (function () {
@@ -1583,25 +1633,30 @@ html[data-theme=&quot;dark&quot;] .fc-root.pal-note{--pal-outer:#26230F;--pal-in
     };
   })();
 &lt;/script&gt;
-&lt;/head&gt;&lt;body&gt;&lt;div style=&quot;box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--hatch-widget-text);font-size:14px;&quot;&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
   &lt;div style=&quot;display:flex;flex-direction:column;&quot;&gt;
     &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
       &lt;div style=&quot;width:12px;flex:none;display:flex;flex-direction:column;align-items:center;&quot;&gt;
-        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--hatch-widget-accent);border:2px solid var(--hatch-widget-accent);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
-        &lt;span style=&quot;width:2px;flex:1;background:var(--hatch-widget-border);&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--pal-fold);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;width:2px;flex:1;background:var(--pal-muted);&quot;&gt;&lt;/span&gt;
       &lt;/div&gt;
       &lt;div style=&quot;padding-bottom:16px;min-width:0;&quot;&gt;
-        &lt;div style=&quot;font-weight:700;&quot;&gt;Step one &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;09:00&lt;/span&gt;&lt;/div&gt;
-        &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened, in one line.&lt;/div&gt;
+        &lt;div style=&quot;font-weight:700;&quot;&gt;Step one &lt;span style=&quot;color:var(--pal-muted);font-weight:400;font-size:12px;&quot;&gt;09:00&lt;/span&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;What happened, in one line.&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
     &lt;div style=&quot;display:flex;gap:12px;&quot;&gt;
       &lt;div style=&quot;width:12px;flex:none;display:flex;flex-direction:column;align-items:center;&quot;&gt;
-        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:transparent;border:2px solid var(--hatch-widget-border);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
+        &lt;span style=&quot;box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--pal-inner);flex:none;margin-top:3px;&quot;&gt;&lt;/span&gt;
       &lt;/div&gt;
       &lt;div style=&quot;min-width:0;&quot;&gt;
-        &lt;div style=&quot;font-weight:700;&quot;&gt;Step two &lt;span style=&quot;color:var(--hatch-widget-muted);font-weight:400;font-size:12px;&quot;&gt;10:30&lt;/span&gt;&lt;/div&gt;
-        &lt;div style=&quot;color:var(--hatch-widget-muted);font-size:13px;&quot;&gt;What happened next, in one line.&lt;/div&gt;
+        &lt;div style=&quot;font-weight:700;&quot;&gt;Step two &lt;span style=&quot;color:var(--pal-muted);font-weight:400;font-size:12px;&quot;&gt;10:30&lt;/span&gt;&lt;/div&gt;
+        &lt;div style=&quot;color:var(--pal-muted);font-size:13px;&quot;&gt;What happened next, in one line.&lt;/div&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   &lt;/div&gt;

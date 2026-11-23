@@ -1,0 +1,24 @@
+<div class="cw" style="box-sizing:border-box;font-family:'Noto Sans JP',sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%">
+<style>
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-flow{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;background:var(--hatch-widget-surface);margin-bottom:8px}
+.cw-flow b{font-size:14px}
+.cw-flow span{display:block;font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;line-height:1.5}
+.cw-badge{display:inline-flex;align-items:center;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+</style>
+<div class="cw-card">
+<h3>既存 OSS の地図（2026-11-23 実測、スター数は GitHub API）</h3>
+<div class="cw-flow"><b>層1 · 集計 CLI — 覇権が決まっている</b><span>ccusage（19,543 stars、npm 月100万DL）が Claude Code／Codex／OpenCode／Gemini CLI など20種に対応し、2026-07 には Antigravity adapter も入った。日次・セッション別・キャッシュ内訳まで出す。正面から作り直す余地はほぼ無い</span></div>
+<div class="cw-flow"><b>層2 · 常駐 quota 表示 — 混戦だが大手あり</b><span>CodexBar（23,275 stars、メニューバー＋CLI）が多プロバイダの残量とリセットを表示。Antigravity 専用では antigravity-panel（877 stars、IDE拡張、推移グラフと枯渇予測つき）が最有力。Windows トレイにも複数ある</span></div>
+<div class="cw-flow"><b>層3 · 診断レポート — ここだけ薄い</b><span>agent-audit（1 star、2026-11-09 公開で更新は 11-14 止まり）が agy＋Codex 向けにキャッシュ効率・コンテキスト肥大・ポーリングループ検出の5部構成レポート＋Agent Skill を出したばかり。agent-cost（1 star）は文脈肥大の分析が濃いが agy 非対応。CodeBurn は waste 検出を謳うが stars 0。大手2つは「見せるだけ」で診断はしない</span></div>
+</div>
+<div class="cw-card">
+<span class="cw-badge">空白地帯</span>
+<h3>誰もやっていない組み合わせ</h3>
+<p>① 定額プランの quota 履歴 × セッションログのトークン診断の突き合わせ（「5h 枠の何%をどのセッションが食ったか」「枯渇の原因セッションの特定」）。ccusage はトークンだけ、CodexBar は残量だけで、結合したものが無い。② 複数 bot の編成運用の異常検知（タイマー暴走、ポーリングループ、キューの詰まりといった運用事故の検出）。③ エージェント自身がタスク前に読むペースファイル＋Skill 化まで含めた「自己認識」の仕組み。</p>
+</div>
+</div>

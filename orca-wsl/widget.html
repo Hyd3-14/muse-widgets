@@ -1,0 +1,48 @@
+<div class="cw">
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card p:last-child{margin-bottom:0}
+.cw-badge{display:inline-flex;align-items:center;gap:6px;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+.cw-badge.run{background:#E69F00;color:#1A1A1A}
+.cw-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cw-chip{font-size:12px;border:1px solid var(--hatch-widget-border);border-radius:999px;padding:4px 12px;background:var(--hatch-widget-surface)}
+.cw-flow{display:flex;flex-direction:column;gap:8px;margin-bottom:16px}
+.cw-step{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px}
+.cw-step p{margin:4px 0 0;font-size:12.5px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-arrow{text-align:center;color:var(--hatch-widget-muted);font-size:13px;line-height:1}
+</style>
+
+<div class="cw-card">
+<h3>orcad更新が止まる流れ — 実機で裏が取れた</h3>
+<p><span class="cw-badge">原因確定</span> <span class="cw-badge mut">2026-11-21 15:37 実測</span></p>
+<p>未確認だった「daemonが応答しない理由」は、daemon自体が死んでいることだった。ターミナルは生きているのに、数える相手がいない。</p>
+</div>
+
+<div class="cw-flow">
+<div class="cw-step"><strong>Windows Orca 1.4.267</strong><p>exeの版を確認。報告書の1.4.268ではなく1.4.267で、「CLI update failed」と符合する</p></div>
+<div class="cw-arrow">↓ SSH</div>
+<div class="cw-step"><strong>wsl-ubuntu orcad 0.1.0+e2c8eab1（Orca 1.4.241）</strong><p>稼働中 pid 22275。新版 0.1.0+8cc9da34（11/21 13:41 取得済み）は ~/.orca-remote/ にあるが未有効化。activeは10/26から変わっていない</p></div>
+<div class="cw-arrow">↓ census： session数を daemon へ問い合わせ</div>
+<div class="cw-step"><strong>terminal daemon — 死んでいる</strong><p>daemon-v52.sock へ接続拒否（111）。daemonプロセスなし、pidファイルは0バイト（10/26）。daemon.log は 2026-11-17 23:26 JST の起動試行を最後に停止し、ready が無い</p></div>
+<div class="cw-arrow">↓ そのため</div>
+<div class="cw-step"><strong>unverifiable → 更新延期 / --force も拒否</strong><p>GUIにもCLIにも出口がない、という報告書の結論はそのまま。ローカルで terminal list は通る（4件 connected）ので、ターミナルが無いわけではない</p></div>
+</div>
+
+<div class="cw-card">
+<h3>いま閉じると消えるもの</h3>
+<p><span class="cw-badge run"><strong>実行中</strong></span></p>
+<div class="cw-chips" style="margin-top:8px">
+<span class="cw-chip">Claude Code — govulncheck-bounds</span>
+<span class="cw-chip">agy — dotfiles</span>
+<span class="cw-chip">cram-core ターミナル</span>
+<span class="cw-chip">govulncheck-bounds ターミナル</span>
+<span class="cw-chip">native chat — Claude Opus（15:17開始）</span>
+</div>
+<p style="margin-top:8px">手順1（全ターミナルを閉じて再起動）も手順2（wsl --shutdown）も、この全てを落とす。区切りが付いてからでないと進めない。</p>
+</div>
+</div>

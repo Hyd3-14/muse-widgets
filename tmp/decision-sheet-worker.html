@@ -1,0 +1,26 @@
+<div style="box-sizing:border-box;padding:16px;font-family:inherit;color:var(--hatch-widget-text);">
+  <div style="font-weight:700;font-size:15px;margin-bottom:4px;">メンバー別シート配布ページの構成</div>
+  <div style="font-size:12px;color:var(--hatch-widget-muted);margin-bottom:12px;">正本は GitHub Issue のまま、ページは表示と回答の窓口だけを担う</div>
+
+  <div style="display:flex;flex-direction:column;gap:6px;font-size:12px;line-height:1.5;">
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:10px;min-width:0;">
+      <b>メンバー</b>：tantan／tomo／kaito／塾長。それぞれ自分の分のシートだけを見る
+    </div>
+    <div style="text-align:center;color:var(--hatch-widget-muted);">↓</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:10px;min-width:0;">
+      <b>Cloudflare Access</b>：本人確認。メールアドレスのワンタイム PIN で入れるため、GitHub アカウントを持たない塾長でも使える。無料枠は50人まで
+    </div>
+    <div style="text-align:center;color:var(--hatch-widget-muted);">↓</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:10px;min-width:0;">
+      <b>Worker（シートのページ）</b>：ログインした人のメールから、その人が決める分だけを表示。回答を受けたら GitHub へ書き戻す。アプリ本体とは別の小さな Worker にする
+    </div>
+    <div style="text-align:center;color:var(--hatch-widget-muted);">↓</div>
+    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:10px;min-width:0;">
+      <b>GitHub Issues（正本）</b>：Issue 本文に決定メタデータ（決める人・選択肢・推奨・既定値・期限）を機械可読な形で埋め、回答は決定記録コメント＋ラベル変更として残る
+    </div>
+  </div>
+
+  <div style="background:var(--hatch-widget-surface-muted);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:10px;margin-top:10px;font-size:12px;line-height:1.5;min-width:0;">
+    脇の2本：未決定点の抽出とメタデータ付けは Agent が行う。期限を過ぎた無回答は、定期実行が既定値を確定してラベルを進める
+  </div>
+</div>

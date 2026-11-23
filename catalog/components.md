@@ -7,12 +7,17 @@ state shape it keeps in the `window.hatchWidget` bridge.
 Rules that apply to all components:
 
 - Outer container always has 16px padding; headings never touch the edge.
-- Colors come only from the `--hatch-widget-*` theme variables (see
-  [tokens.css](tokens.css)). Color is used when it carries meaning, and
-  status is always paired with words, never color alone.
-- Corner radius is 8px. Spacing is a multiple of 4, with 16 and 24 as the
-  defaults. The folded card is the exception: square corners, because a
-  rounded corner surviving next to a fold reads as a mistake.
+- Colors come only from a theme's role variables (`--pal-*`, see
+  [themes.md](themes.md)). Every template inlines exactly one theme
+  block — the one flagged **In use** in the theme registry — and puts
+  its class on the root element. Color is used when it carries meaning,
+  and status is always paired with words, never color alone.
+- Separation between surfaces is carried by the theme's outer/inner
+  color difference. Components have no borders, except hairline
+  dividers drawn in the opposite surface's color inside a card.
+- Corner radius is 8px. Spacing is a multiple of 4, with 16 and 24 as
+  the defaults. The folded card is the exception: square corners,
+  because a rounded corner surviving next to a fold reads as a mistake.
 - Derived values (totals, percentages) are computed at render time and are
   never stored in state.
 
@@ -31,26 +36,9 @@ Rules that apply to all components:
 
 ### Folded card palettes
 
-The folded card is the one component that does not separate nested
-surfaces with the theme border: in the dark theme the border token sits
-too close to the surface, and nested cards outlined by it blend into
-the background (found on a real device, 2026-11-23). It carries its own
-palettes instead, defined as light/dark pairs of five roles — outer
-(panel), inner (card), fold, text, muted — exposed as `--pal-*`
-variables. One palette per widget; the default is `pal-soft`.
-
-| Palette class | Use it for |
-| --- | --- |
-| `pal-soft` | Default for ordinary diagrams (teal on soft gray / deep navy) |
-| `pal-gray` | Neutral, businesslike diagrams that should stay monochrome |
-| `pal-dads` | Formal or official material (DADS blue family) |
-| `pal-warm` | Reading matter and summaries (paper and rust) |
-| `pal-pop` | Gray surfaces where only the fold should stand out (orange) |
-| `pal-note` | Small memo-like notes (sticky-note yellow) |
-
-The validator allows the palette hex values only inside a `.pal-*`
-definition rule; anywhere else they are hard-coded color errors like
-any other literal.
+The folded card uses the same theme system as every other component;
+its palettes are the catalog's themes. See [themes.md](themes.md) for
+the registry, the role variables, and how to add a variation.
 
 ## Interactive components
 

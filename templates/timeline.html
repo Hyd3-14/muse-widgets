@@ -1,22 +1,27 @@
-<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
   <div style="display:flex;flex-direction:column;">
     <div style="display:flex;gap:12px;">
       <div style="width:12px;flex:none;display:flex;flex-direction:column;align-items:center;">
-        <span style="box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--hatch-widget-accent);border:2px solid var(--hatch-widget-accent);flex:none;margin-top:3px;"></span>
-        <span style="width:2px;flex:1;background:var(--hatch-widget-border);"></span>
+        <span style="box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--pal-fold);flex:none;margin-top:3px;"></span>
+        <span style="width:2px;flex:1;background:var(--pal-muted);"></span>
       </div>
       <div style="padding-bottom:16px;min-width:0;">
-        <div style="font-weight:700;">Step one <span style="color:var(--hatch-widget-muted);font-weight:400;font-size:12px;">09:00</span></div>
-        <div style="color:var(--hatch-widget-muted);font-size:13px;">What happened, in one line.</div>
+        <div style="font-weight:700;">Step one <span style="color:var(--pal-muted);font-weight:400;font-size:12px;">09:00</span></div>
+        <div style="color:var(--pal-muted);font-size:13px;">What happened, in one line.</div>
       </div>
     </div>
     <div style="display:flex;gap:12px;">
       <div style="width:12px;flex:none;display:flex;flex-direction:column;align-items:center;">
-        <span style="box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:transparent;border:2px solid var(--hatch-widget-border);flex:none;margin-top:3px;"></span>
+        <span style="box-sizing:border-box;width:12px;height:12px;border-radius:50%;background:var(--pal-inner);flex:none;margin-top:3px;"></span>
       </div>
       <div style="min-width:0;">
-        <div style="font-weight:700;">Step two <span style="color:var(--hatch-widget-muted);font-weight:400;font-size:12px;">10:30</span></div>
-        <div style="color:var(--hatch-widget-muted);font-size:13px;">What happened next, in one line.</div>
+        <div style="font-weight:700;">Step two <span style="color:var(--pal-muted);font-weight:400;font-size:12px;">10:30</span></div>
+        <div style="color:var(--pal-muted);font-size:13px;">What happened next, in one line.</div>
       </div>
     </div>
   </div>

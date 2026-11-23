@@ -1,12 +1,17 @@
-<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
-  <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;">
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
     <label for="mw-sl-input" style="font-weight:700;display:block;margin-bottom:8px;">People</label>
-    <input id="mw-sl-input" type="range" min="1" max="10" step="1" style="box-sizing:border-box;width:100%;accent-color:var(--hatch-widget-accent);">
+    <input id="mw-sl-input" type="range" min="1" max="10" step="1" style="box-sizing:border-box;width:100%;accent-color:var(--pal-fold);">
     <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:10px;">
-      <span style="color:var(--hatch-widget-muted);"><span id="mw-sl-count">4</span> people × $25</span>
+      <span style="color:var(--pal-muted);"><span id="mw-sl-count">4</span> people × $25</span>
       <span id="mw-sl-total" style="font-size:22px;font-weight:700;">$100</span>
     </div>
-    <div style="color:var(--hatch-widget-muted);font-size:12px;margin-top:4px;">The total is derived at render time and is never stored in state.</div>
+    <div style="color:var(--pal-muted);font-size:12px;margin-top:4px;">The total is derived at render time and is never stored in state.</div>
   </div>
   <script>
   (function () {

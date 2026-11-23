@@ -47,20 +47,21 @@ light question: a one-line factual answer stays text no matter what.
    `window.hatchWidget.getState(defaults)`, replace in full with
    `setState(nextState)` after every change, re-render on the
    `hatch-widget-state` event. No `localStorage`, no `<form>`.
-3. Style only with the `--hatch-widget-*` variables, 16px outer padding,
-   8px radius, spacing in multiples of 4. Status is words plus color,
-   never color alone. The folded card is the exception: square corners,
-   no border, and its own `--pal-*` palette variables (default
-   `pal-soft`) instead of the theme surface and border, because nested
-   theme surfaces outlined by the theme border blend together in the
-   dark theme.
+3. Style only with a theme's `--pal-*` role variables, 16px outer
+   padding, 8px radius, spacing in multiples of 4. Inline exactly one
+   theme block — the one flagged In use in `catalog/themes.md`
+   (currently `pal-soft`) — and put its class on the root element.
+   Separation between surfaces is the theme's outer/inner color
+   difference; components have no borders. Status is words plus color,
+   never color alone. The folded card is the exception on shape only:
+   square corners, because a rounded corner next to a fold reads as a
+   mistake.
 4. Embed data in the fragment, separate from the drawing code. State the
    unit, period, and source of every number.
 5. Write the fragment to a file, run `tools/validate-widget.py` on it,
-   and fix every error before sending it. Hard-coded colors and a
-   neutral surface without a `--hatch-widget-border` border are errors,
-   not warnings: they are how a card becomes invisible in the dark
-   theme.
+   and fix every error before sending it. Hard-coded colors outside a `.pal-*`
+   theme definition are errors, not warnings: they are how a card
+   becomes invisible in the other theme.
 
 ## After the widget
 

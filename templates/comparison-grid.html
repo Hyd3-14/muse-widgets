@@ -1,19 +1,24 @@
-<div style="box-sizing:border-box;padding:16px;font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--hatch-widget-text);font-size:14px;">
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;">
-    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+    <div style="background:var(--pal-inner);border-radius:8px;padding:12px;">
       <div style="font-weight:700;margin-bottom:4px;">Option A</div>
       <div style="font-size:20px;font-weight:700;">$120</div>
-      <div style="color:var(--hatch-widget-muted);font-size:13px;">One line on who it fits.</div>
+      <div style="color:var(--pal-muted);font-size:13px;">One line on who it fits.</div>
     </div>
-    <div style="background:var(--hatch-widget-surface);border:2px solid var(--hatch-widget-accent);border-radius:8px;padding:12px;">
-      <div style="font-weight:700;margin-bottom:4px;">Option B <span style="display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);vertical-align:2px;">Recommended</span></div>
+    <div style="background:var(--pal-inner);border-radius:8px;padding:12px;box-shadow:inset 0 0 0 2px var(--pal-fold);">
+      <div style="font-weight:700;margin-bottom:4px;">Option B <span style="display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);vertical-align:2px;">Recommended</span></div>
       <div style="font-size:20px;font-weight:700;">$150</div>
-      <div style="color:var(--hatch-widget-muted);font-size:13px;">One line on who it fits.</div>
+      <div style="color:var(--pal-muted);font-size:13px;">One line on who it fits.</div>
     </div>
-    <div style="background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px;">
+    <div style="background:var(--pal-inner);border-radius:8px;padding:12px;">
       <div style="font-weight:700;margin-bottom:4px;">Option C</div>
       <div style="font-size:20px;font-weight:700;">$210</div>
-      <div style="color:var(--hatch-widget-muted);font-size:13px;">One line on who it fits.</div>
+      <div style="color:var(--pal-muted);font-size:13px;">One line on who it fits.</div>
     </div>
   </div>
 </div>

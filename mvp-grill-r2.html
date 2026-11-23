@@ -1,0 +1,63 @@
+<div class="cw" style="box-sizing:border-box;font-family:'Noto Sans JP',sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%">
+<style>
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-q{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;background:var(--hatch-widget-surface);margin-bottom:8px}
+.cw-q b{font-size:14px}
+.cw-q ul{margin:8px 0 0;padding-left:20px;font-size:13px;line-height:1.7;color:var(--hatch-widget-text)}
+.cw-q span{display:block;font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;line-height:1.5}
+.cw-badge{display:inline-flex;align-items:center;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-left:8px;vertical-align:middle}
+</style>
+<div class="cw-card">
+<h3>MVP 範囲グリル · ラウンド2（中身の6問）</h3>
+<p>ラウンド1は全て推奨どおりで確定し、決定ログに記録済み。ラウンド2は診断の中身と結合の方式。</p>
+</div>
+<div class="cw-q"><b>Q7. 診断レンズの取捨</b>
+<ul>
+<li>実証済み3レンズ（キャッシュ破壊／全文読み＋重複読み／サブエージェント散らかり）＋急騰区間の犯人特定<span class="cw-badge">推奨</span></li>
+<li>キャッシュ破壊だけに絞る</li>
+<li>3レンズ＋フェーズ分解（探索 vs 実装）まで全部入り</li>
+</ul>
+<span>理由：3レンズは agent-audit の実データで全部実際に引っかかった。フェーズ分解は面白いが判定が主観寄りで、MVP の説明コストが高い</span></div>
+<div class="cw-q"><b>Q8. quota とセッションの突き合わせ方式</b>
+<ul>
+<li>時間窓で按分：quota が増えた区間に活動していたセッションへ、uncached 量の比でポイントを配り「推定」と明記する<span class="cw-badge">推奨</span></li>
+<li>按分せず、急騰区間のセッション一覧を候補として出すだけ</li>
+<li>並列表示のみ（結合しない）</li>
+</ul>
+<span>理由：按分は推定だが「枠の何%を誰が食ったか」という一番欲しい数字が出る。推定であることを数字の横に必ず書く</span></div>
+<div class="cw-q"><b>Q9. bot・タスクの識別</b>
+<ul>
+<li>ワークスペースとブランチ名から引く（例：feat/414-… → Issue #414）。決定的に取れる信号を主キーにする<span class="cw-badge">推奨</span></li>
+<li>Orca の bot 一覧と突き合わせて bot 名まで出す</li>
+<li>MVP ではセッション単位まで（bot・タスク単位はやらない）</li>
+</ul>
+<span>理由：ブランチ名は昨日のログでも安定して取れた。bot 名の対応表は Orca 側の状態に依存して壊れやすいので次段に回す</span></div>
+<div class="cw-q"><b>Q10. 異常検知の閾値</b>
+<ul>
+<li>固定閾値：15分で +20pt 以上を急騰とする（昨日の +33.6pt/17分 が拾える水準）<span class="cw-badge">推奨</span></li>
+<li>移動平均からの乖離で判定する（統計方式）</li>
+<li>検知はせず、急騰区間のランキング表示だけ</li>
+</ul>
+<span>理由：固定なら「なぜフラグが立ったか」を1行で説明できる。統計方式はデータが貯まってからでも足せる</span></div>
+<div class="cw-q"><b>Q11. pace（B＋C）との統合</b>
+<ul>
+<li>この OSS の JSON 出力を pace 生成が使う。pace は別プロジェクトのまま、OSS はその入力部品になる<span class="cw-badge">推奨</span></li>
+<li>OSS に pace 出力まで内蔵する</li>
+<li>統合しない（別々に作る）</li>
+</ul>
+<span>理由：pace は自分の環境専用の配線で、OSS は汎用品。JSON で疎結合にすると両方壊れにくい</span></div>
+<div class="cw-q"><b>Q12. 名前と配布</b>
+<ul>
+<li>名前は仮名で開発し、公開前に決める。配布は GitHub Releases の単一バイナリのみ<span class="cw-badge">推奨</span></li>
+<li>名前を今決める（候補を別途出す）</li>
+<li>配布に Homebrew tap まで最初から含める</li>
+</ul>
+<span>理由：名前で止まるのが一番もったいない。brew は公開後の反応を見てからで間に合う</span></div>
+<div class="cw-card">
+<h3>このラウンドで MVP が閉じる</h3>
+<p>確定したら、決定ログを完成させて MVP の仕様書（入力形式・レポート構成・按分の計算式）に落とす。実装着手はその次の判断。</p>
+</div>
+</div>

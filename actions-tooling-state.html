@@ -1,0 +1,14 @@
+<div class="cw" style="box-sizing:border-box;font-family:'Noto Sans JP',sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%">
+<style>
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:16px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-flow{border:1px solid var(--hatch-widget-border);border-radius:8px;padding:12px 16px;background:var(--hatch-widget-surface);margin-bottom:8px}
+.cw-flow b{font-size:14px}
+.cw-flow span{display:block;font-size:12px;color:var(--hatch-widget-muted);margin-top:4px;line-height:1.5}
+</style>
+<div class="cw-flow"><b>jactionlint：決定済みだが repo-template へ未展開</b><span>df の tool-radar では採用決定済みで、dotfiles では actionlint と ghalint を jactionlint へ置き換え済み。ただし「repo-template と cram-core への展開は別の PR で行う」と記録されたまま止まっていて、repo-template の静的チェックは今も旧構成（actionlint の Docker 実行＋ghalint）で動いている</span></div>
+<div class="cw-flow"><b>action-lock（gh actions-lock／workflow lockfile）：未採用ではなく見送りの正式決定</b><span>2026-11-01 に見送りが決まっている。理由は、pinact の SHA 書き換えと lockfile が両立しないことと、CLI が 1.0 前なこと。再検討の条件は pinact の Issue 1828 が閉じるか gh-actions-lock が 1.0 になること。ただしこの条件を監視する仕組みが無い</span></div>
+<div class="cw-flow"><b>静的チェックの生成先への伝播：切れている</b><span>repo-template 本体では静的チェックが実際に回って success している（2026-11-17 の実行で確認）。一方、生成先の muse-widgets には validate.yml しか無く、agent-lens にも無い。「テンプレにある」と「各 repo で回っている」の間に落差がある</span></div>
+</div>

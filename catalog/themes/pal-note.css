@@ -1,0 +1,10 @@
+/* Theme: pal-note — Sticky-note yellow
+   Status: available
+   Roles: --pal-outer panel background / --pal-inner card & control surface /
+          --pal-fold accent & fold / --pal-on-fold text on the accent /
+          --pal-text primary text / --pal-muted secondary text.
+   A widget inlines exactly one theme block (this file's rules) and puts
+   the theme class on its root element. */
+.pal-note{--pal-outer:#EFE9C3;--pal-inner:#FFF7AE;--pal-fold:#C9A227;--pal-on-fold:#33300F;--pal-text:#33300F;--pal-muted:#6E662E}
+html[data-theme="dark"] .pal-note{--pal-outer:#26230F;--pal-inner:#4A4419;--pal-fold:#E5C84B;--pal-on-fold:#26230F;--pal-text:#FBF6D8;--pal-muted:#D8CE96}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-note{--pal-outer:#26230F;--pal-inner:#4A4419;--pal-fold:#E5C84B;--pal-on-fold:#26230F;--pal-text:#FBF6D8;--pal-muted:#D8CE96}}

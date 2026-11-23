@@ -1,0 +1,65 @@
+<style>
+.cw{box-sizing:border-box;font-family:"Noto Sans JP",sans-serif;color:var(--hatch-widget-text);padding:16px;max-width:100%}
+.cw *{box-sizing:border-box}
+.cw-card{background:var(--hatch-widget-surface);border:1px solid var(--hatch-widget-border);border-radius:8px;padding:16px;margin-bottom:24px}
+.cw-card h3{margin:0 0 8px;font-size:15px}
+.cw-card p{margin:0 0 8px;font-size:13px;line-height:1.6;color:var(--hatch-widget-muted)}
+.cw-card p:last-child{margin-bottom:0}
+.cw-badge{display:inline-flex;align-items:center;gap:6px;background:var(--hatch-widget-accent);color:var(--hatch-widget-on-accent);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px}
+.cw-badge.mut{background:var(--hatch-widget-surface-muted);color:var(--hatch-widget-text);border:1px solid var(--hatch-widget-border)}
+.cw-chips{display:flex;flex-wrap:wrap;gap:8px}
+.cw-chip{font-size:12px;border:1px solid var(--hatch-widget-border);border-radius:999px;padding:4px 12px;background:var(--hatch-widget-surface)}
+.cw-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.cw-grid .cw-card{margin-bottom:0;min-width:0}
+@media(max-width:560px){.cw-grid{grid-template-columns:1fr}}
+.cw button{transition:background .15s ease,color .15s ease,border-color .15s ease,opacity .15s ease}
+.cw button:hover{opacity:.85}
+.cw button:active{opacity:.7}
+.cw button:focus-visible{outline:2px solid var(--hatch-widget-focus);outline-offset:2px}
+@media (prefers-reduced-motion: reduce){.cw button{transition:none}}
+.cw{--cw-c1:#0072B2;--cw-c2:#D55E00;--cw-c3:#009E73;--cw-c4:#CC79A7}
+html[data-theme="dark"] .cw{--cw-c1:#56B4E9;--cw-c2:#E69F00;--cw-c3:#35C48D;--cw-c4:#E39AC2}
+.cw-card.c1{border-left:4px solid var(--cw-c1)}
+.cw-card.c2{border-left:4px solid var(--cw-c2)}
+.cw-card.c3{border-left:4px solid var(--cw-c3)}
+.cw-card.c4{border-left:4px solid var(--cw-c4)}
+.cw-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:8px}
+</style>
+<div class="cw">
+  <div class="cw-card">
+    <div class="cw-row"><span class="cw-badge">僕の推し</span><span class="cw-badge mut">二段構え</span></div>
+    <h3>短期は今いる場所で増やし、中期は単価の高い場所へ移る</h3>
+    <p>今月の赤字に効くのは下の A だけ。B は数か月後の単価と就活の実績を同時に上げる。D は理想だけど、今の収入源に数えるのは危ない。</p>
+  </div>
+  <div class="cw-grid">
+    <div class="cw-card c1">
+      <div class="cw-row"><span class="cw-badge mut">A</span><span class="cw-badge mut">即効性 高</span><span class="cw-badge mut">確実さ 高</span></div>
+      <h3>今いる場所で増やす</h3>
+      <p>シフトを週2から週3へ。あわせて開発分の対価が給与にどう入っているかを確認し、入っていないなら授業とは別枠で交渉する。</p>
+      <p>資産にはならない。開発分の有償化だけは、今すでに生んでいる価値を回収する話なので別格。</p>
+    </div>
+    <div class="cw-card c2">
+      <div class="cw-row"><span class="cw-badge mut">B</span><span class="cw-badge mut">即効性 中</span><span class="cw-badge mut">資産性 高</span></div>
+      <h3>エンジニア長期インターン</h3>
+      <p>プラットフォームや開発基盤の長期インターン。塾より時給が高く、就活の実績とポートフォリオにもなる。</p>
+      <p>壁は応募とコーディングテストの気力。春に就業型1社と決めた計画とは、時期と目的を分けて考える必要がある。</p>
+    </div>
+    <div class="cw-card c3">
+      <div class="cw-row"><span class="cw-badge mut">C</span><span class="cw-badge mut">即効性 中</span><span class="cw-badge mut">確実さ 低</span></div>
+      <h3>小さな受託・フロー案件</h3>
+      <p>小さい事業者向けの業務アプリや AI 自動化を1件だけ受ける。塾アプリの経験がそのまま売り物になる。</p>
+      <p>作る力より営業と需要探しが壁。SNS 発信の気力がない現状では、知人と既存の繋がり経由が現実的。</p>
+    </div>
+    <div class="cw-card c4">
+      <div class="cw-row"><span class="cw-badge mut">D</span><span class="cw-badge mut">即効性 低</span><span class="cw-badge mut">資産性 最高</span></div>
+      <h3>自分のプロダクト・OSS</h3>
+      <p>課金や広告、スポンサー、代表作としての価値。理想の形そのもの。</p>
+      <p>収益は一番遅くて不確実で、見つけてもらう配布の壁がある。小さく1個を賭け先に絞るなら並行の余力枠で。</p>
+    </div>
+  </div>
+  <div class="cw-card">
+    <div class="cw-row"><span class="cw-badge mut">E</span><span class="cw-badge mut">補助枠</span></div>
+    <h3>有料の技術記事・デジタル素材</h3>
+    <p>エージェント運用や開発基盤の知見を売る形。金額は小さい見込みで、AI Slop との折り合いの悩みも直撃する。本命の収入源ではなく、D の配布経路としてなら意味がある。</p>
+  </div>
+</div>
