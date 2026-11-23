@@ -11,7 +11,6 @@ updates:
     cooldown:
       default-days: 7
     labels:
-      - "type: chore"
       - "area: dependency"
       - "area: ci"
     groups:
@@ -22,4 +21,3 @@ updates:
     commit-message:
       prefix: chore
       include: scope
-
