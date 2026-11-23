@@ -1,0 +1,30 @@
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
+  <div style="font-weight:700;font-size:15px;margin-bottom:4px;">システムの名前</div>
+  <div style="color:var(--pal-muted);font-size:13px;margin-bottom:16px;">全体が何をするかを1行で。</div>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
+    <span style="display:inline-flex;background:var(--pal-fold);color:var(--pal-on-fold);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;">一番上の層</span>
+    <div style="font-weight:700;">判断レイヤー</div>
+    <div style="color:var(--pal-muted);font-size:13px;margin-bottom:8px;">何を作るかを決める。</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <span style="font-size:12px;border-radius:999px;padding:4px 12px;background:var(--pal-outer);">部品A</span>
+      <span style="font-size:12px;border-radius:999px;padding:4px 12px;background:var(--pal-outer);">部品B</span>
+    </div>
+  </div>
+  <div style="text-align:center;color:var(--pal-fold);font-size:16px;line-height:1;padding:4px 0;" aria-hidden="true">↓</div>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
+    <span style="display:inline-flex;background:var(--pal-outer);color:var(--pal-text);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;">真ん中の層</span>
+    <div style="font-weight:700;">部品カタログ</div>
+    <div style="color:var(--pal-muted);font-size:13px;">上の層が選ぶ先の部品一式。</div>
+  </div>
+  <div style="text-align:center;color:var(--pal-fold);font-size:16px;line-height:1;padding:4px 0;" aria-hidden="true">↓</div>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
+    <span style="display:inline-flex;background:var(--pal-outer);color:var(--pal-text);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;">土台の層</span>
+    <div style="font-weight:700;">検証ツール</div>
+    <div style="color:var(--pal-muted);font-size:13px;">出す前にすべての成果物を検査する。</div>
+  </div>
+</div>

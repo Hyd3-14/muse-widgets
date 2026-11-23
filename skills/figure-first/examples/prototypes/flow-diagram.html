@@ -1,0 +1,41 @@
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
+  <div style="font-weight:700;font-size:15px;margin-bottom:16px;">手順の名前</div>
+  <div style="display:flex;gap:12px;">
+    <div style="width:24px;flex:none;display:flex;flex-direction:column;align-items:center;">
+      <span style="box-sizing:border-box;width:24px;height:24px;border-radius:50%;background:var(--pal-fold);color:var(--pal-on-fold);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">1</span>
+      <span style="width:2px;flex:1;background:var(--pal-muted);"></span>
+    </div>
+    <div style="padding-bottom:16px;min-width:0;">
+      <div style="font-weight:700;">資料を要点に分ける</div>
+      <div style="color:var(--pal-muted);font-size:13px;">要点1つにつき主張は1つ。</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px;">
+    <div style="width:24px;flex:none;display:flex;flex-direction:column;align-items:center;">
+      <span style="box-sizing:border-box;width:24px;height:24px;border-radius:50%;background:var(--pal-inner);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">2</span>
+      <span style="width:2px;flex:1;background:var(--pal-muted);"></span>
+    </div>
+    <div style="padding-bottom:16px;min-width:0;flex:1;">
+      <div style="font-weight:700;">要点に「形」があるか</div>
+      <div style="color:var(--pal-muted);font-size:13px;margin-bottom:8px;">順序、対比、構造、流れ、量のどれか。</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+        <div style="background:var(--pal-inner);border-radius:8px;padding:8px 12px;font-size:13px;"><span style="font-weight:700;">ある</span> — 図を作る</div>
+        <div style="background:var(--pal-inner);border-radius:8px;padding:8px 12px;font-size:13px;"><span style="font-weight:700;">ない</span> — 文章で答える</div>
+      </div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px;">
+    <div style="width:24px;flex:none;display:flex;flex-direction:column;align-items:center;">
+      <span style="box-sizing:border-box;width:24px;height:24px;border-radius:50%;background:var(--pal-inner);font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none;">3</span>
+    </div>
+    <div style="min-width:0;">
+      <div style="font-weight:700;">自己点検してから出す</div>
+      <div style="color:var(--pal-muted);font-size:13px;">文章を消しても図だけで伝わるか。</div>
+    </div>
+  </div>
+</div>

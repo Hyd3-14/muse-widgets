@@ -1,0 +1,70 @@
+<div class="mw-cc-root pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+  <style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+
+    .mw-cc-root, .mw-cc-root *, .mw-cc-root *::before, .mw-cc-root *::after { box-sizing: border-box; }
+    .mw-cc-btn { appearance:none;background:var(--pal-outer);color:var(--pal-text);border-radius:999px;padding:4px 12px;font:inherit;font-size:13px;cursor:pointer; }
+    .mw-cc-btn:focus-visible { outline:2px solid var(--pal-fold);outline-offset:2px; }
+    .mw-cc-btn[aria-selected="true"] { background:var(--pal-fold);color:var(--pal-on-fold);font-weight:700; }
+  </style>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+      <span style="font-weight:700;">どのプランが合うか</span>
+      <span role="tablist" aria-label="使い方" id="mw-cc-list" style="display:flex;gap:6px;"></span>
+    </div>
+    <div id="mw-cc-body" style="margin-top:12px;"></div>
+    <div style="color:var(--pal-muted);font-size:12px;margin-top:8px;">条件を切り替えても動くのはおすすめの印とその理由だけで、表の数字は変わらない。</div>
+  </div>
+  <script>
+  (function () {
+    var CONDITIONS = [
+      { id: 'light', label: 'たまに使う', pick: 'basic', reason: 'たまに使う程度なら、ベーシックの上限に十分収まる。' },
+      { id: 'daily', label: '毎日使う', pick: 'standard', reason: '毎日使うなら、スタンダードの上限までの余裕が要る。' },
+      { id: 'heavy', label: 'へビーに使う', pick: 'pro', reason: 'スタンダードの上限を日常的に超えるため、プロの方が総額は安い。' }
+    ];
+    var PLANS = [
+      { id: 'basic', name: 'ベーシック', price: '0円', limit: '1日10タスクまで' },
+      { id: 'standard', name: 'スタンダード', price: '月2,000円', limit: '1日200タスクまで' },
+      { id: 'pro', name: 'プロ', price: '月10,000円', limit: '無制限' }
+    ];
+    var DEFAULTS = { condition: 'daily' };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    function render() {
+      var list = document.getElementById('mw-cc-list');
+      list.innerHTML = '';
+      CONDITIONS.forEach(function (c) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'mw-cc-btn';
+        b.textContent = c.label;
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-selected', String(state.condition === c.id));
+        b.addEventListener('click', function () {
+          state = { condition: c.id };
+          if (bridge) bridge.setState(state);
+          render();
+        });
+        list.appendChild(b);
+      });
+      var cond = CONDITIONS.filter(function (c) { return c.id === state.condition; })[0];
+      var rows = PLANS.map(function (p) {
+        var picked = cond && p.id === cond.pick;
+        return '<tr style="border-top:1px solid var(--pal-outer);">'
+          + '<td style="padding:8px 6px;font-weight:' + (picked ? '700' : '400') + ';">' + p.name
+          + (picked ? ' <span style="display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);">おすすめ</span>' : '')
+          + '</td><td style="padding:8px 6px;">' + p.price + '</td><td style="padding:8px 6px;color:var(--pal-muted);">' + p.limit + '</td></tr>';
+      }).join('');
+      document.getElementById('mw-cc-body').innerHTML =
+        '<table style="width:100%;border-collapse:collapse;font-size:13px;">'
+        + '<tr style="color:var(--pal-muted);text-align:left;"><th style="padding:0 6px;">プラン</th><th style="padding:0 6px;">料金</th><th style="padding:0 6px;">上限</th></tr>'
+        + rows + '</table>'
+        + '<div style="margin-top:10px;font-size:13px;">' + (cond ? cond.reason : '') + '</div>';
+    }
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>
