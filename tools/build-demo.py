@@ -32,6 +32,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 DESCRIPTIONS = {
     "badge": "A single status word that matters, filled or outlined.",
+    "before-after-slider": "Two forms of the same material, revealed by dragging.",
     "button-row": "Shared button styling and interaction states.",
     "calculator": "Several inputs, premises up front, one hero result.",
     "card": "One self-contained point: a summary, a result, a notice.",

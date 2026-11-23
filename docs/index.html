@@ -25,6 +25,7 @@
   <p class="note">Unofficial project. See the <a href="https://github.com/Hyd3-14/muse-widgets">repository</a> for the catalog, the agent skill, and the validator.</p>
   <nav>
     <a href="#badge">badge</a>
+    <a href="#before-after-slider">before-after-slider</a>
     <a href="#button-row">button-row</a>
     <a href="#calculator">calculator</a>
     <a href="#card">card</a>
@@ -99,6 +100,133 @@ html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D3
   &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--pal-fold);color:var(--pal-on-fold);&quot;&gt;Recommended&lt;/span&gt;
   &lt;span style=&quot;display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--pal-inner);color:var(--pal-text);margin-left:6px;&quot;&gt;Optional&lt;/span&gt;
   &lt;div style=&quot;margin-top:8px;color:var(--pal-muted);font-size:13px;&quot;&gt;A filled badge carries the one status that matters. Pair color with words, never color alone.&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  (function () {
+    function report() {
+      var h = document.documentElement.scrollHeight;
+      parent.postMessage({ mwHeight: h }, &#x27;*&#x27;);
+    }
+    window.addEventListener(&#x27;load&#x27;, report);
+    new ResizeObserver(report).observe(document.body);
+  })();
+&lt;/script&gt;
+&lt;/body&gt;&lt;/html&gt;"></iframe>
+  </section>
+
+  <section id="before-after-slider">
+    <h2>before-after-slider</h2>
+    <p class="note">Two forms of the same material, revealed by dragging. <code>templates/before-after-slider.html</code></p>
+    <iframe title="before-after-slider" height="160" srcdoc="&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;&lt;meta charset=&#x27;utf-8&#x27;&gt;
+&lt;style&gt;
+  :root {
+    color-scheme: light dark;
+    --hatch-widget-bg: transparent;
+    --hatch-widget-surface: #ffffff;
+    --hatch-widget-surface-muted: #eef1f5;
+    --hatch-widget-text: #1c2430;
+    --hatch-widget-muted: #5b6572;
+    --hatch-widget-border: #d3d9e1;
+    --hatch-widget-accent: #0017c1;
+    --hatch-widget-on-accent: #ffffff;
+    --hatch-widget-focus: #0017c1;
+    --hatch-widget-shadow: 0 1px 4px rgba(16, 24, 40, 0.12);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --hatch-widget-surface: #1f2530;
+      --hatch-widget-surface-muted: #272f3d;
+      --hatch-widget-text: #f2f4f7;
+      --hatch-widget-muted: #a7b0be;
+      --hatch-widget-border: #3a4356;
+      --hatch-widget-accent: #7ea2ff;
+      --hatch-widget-on-accent: #0a0f1e;
+      --hatch-widget-focus: #7ea2ff;
+      --hatch-widget-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    }
+  }
+  body { margin: 0; }
+&lt;/style&gt;
+
+&lt;script&gt;
+  window.hatchWidget = (function () {
+    var state = null;
+    return {
+      getState: function (defaults) {
+        if (state === null) state = JSON.parse(JSON.stringify(defaults));
+        return state;
+      },
+      setState: function (next) {
+        state = next;
+        window.dispatchEvent(new CustomEvent(&#x27;hatch-widget-state&#x27;, { detail: { state: state } }));
+      }
+    };
+  })();
+&lt;/script&gt;
+&lt;/head&gt;&lt;body&gt;&lt;div class=&quot;pal-soft&quot; style=&quot;box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,&#x27;Segoe UI&#x27;,sans-serif;color:var(--pal-text);font-size:14px;&quot;&gt;
+&lt;style&gt;
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme=&quot;dark&quot;] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+&lt;/style&gt;
+  &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:16px;&quot;&gt;
+    &lt;div style=&quot;font-weight:700;margin-bottom:12px;&quot;&gt;同じ題材、2つの形&lt;/div&gt;
+    &lt;div style=&quot;display:grid;&quot;&gt;
+      &lt;div style=&quot;grid-area:1/1;background:var(--pal-outer);border-radius:8px;padding:16px;&quot;&gt;
+        &lt;span style=&quot;display:inline-flex;background:var(--pal-inner);color:var(--pal-text);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;&quot;&gt;Before — 文章&lt;/span&gt;
+        &lt;p style=&quot;margin:0;font-size:13px;line-height:1.7;color:var(--pal-muted);&quot;&gt;ベーシックプランは無料で、1日に10タスクまで使えるため、たまに使うだけなら十分です。スタンダードプランは月2,000円で1日に200タスクまで使え、日常的な作業のほとんどをまかなえます。プロプランは月10,000円で無制限ですが、割に合うのはスタンダードの上限を日常的に超える場合だけで、その場合はスタンダードの超過料金を払うより総額が安くなります。&lt;/p&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;mw-ba-after&quot; style=&quot;grid-area:1/1;background:var(--pal-outer);border-radius:8px;padding:16px;&quot;&gt;
+        &lt;span style=&quot;display:inline-flex;background:var(--pal-fold);color:var(--pal-on-fold);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;&quot;&gt;After — 図&lt;/span&gt;
+        &lt;div style=&quot;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;&quot;&gt;
+          &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;&quot;&gt;
+            &lt;div style=&quot;font-weight:700;font-size:13px;&quot;&gt;ベーシック&lt;/div&gt;
+            &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;0円&lt;/div&gt;
+            &lt;div style=&quot;color:var(--pal-muted);font-size:12px;&quot;&gt;1日10タスクまで&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;&quot;&gt;
+            &lt;div style=&quot;font-weight:700;font-size:13px;&quot;&gt;スタンダード&lt;/div&gt;
+            &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;2,000円&lt;/div&gt;
+            &lt;div style=&quot;color:var(--pal-muted);font-size:12px;&quot;&gt;1日200タスクまで&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div style=&quot;background:var(--pal-inner);border-radius:8px;padding:12px;&quot;&gt;
+            &lt;div style=&quot;font-weight:700;font-size:13px;&quot;&gt;プロ&lt;/div&gt;
+            &lt;div style=&quot;font-size:20px;font-weight:700;&quot;&gt;10,000円&lt;/div&gt;
+            &lt;div style=&quot;color:var(--pal-muted);font-size:12px;&quot;&gt;無制限&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div style=&quot;font-size:13px;margin-top:8px;&quot;&gt;スタンダードの上限を日常的に超えるなら、プロの方が総額は安い。&lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id=&quot;mw-ba-divider&quot; style=&quot;grid-area:1/1;justify-self:start;width:2px;background:var(--pal-fold);pointer-events:none;&quot; aria-hidden=&quot;true&quot;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;label for=&quot;mw-ba-input&quot; style=&quot;display:block;font-size:13px;color:var(--pal-muted);margin-top:12px;&quot;&gt;ドラッグで図の版を表示: &lt;span id=&quot;mw-ba-pct&quot;&gt;50%&lt;/span&gt;&lt;/label&gt;
+    &lt;input id=&quot;mw-ba-input&quot; type=&quot;range&quot; min=&quot;0&quot; max=&quot;100&quot; step=&quot;1&quot; style=&quot;box-sizing:border-box;width:100%;accent-color:var(--pal-fold);&quot;&gt;
+    &lt;div style=&quot;color:var(--pal-muted);font-size:12px;margin-top:4px;&quot;&gt;両方の層が運んでいる事実は同じ。スライダーは図の層が見える割合だけを変え、位置は状態として保存されてエージェントが読み戻せる。&lt;/div&gt;
+  &lt;/div&gt;
+  &lt;script&gt;
+  (function () {
+    var DEFAULTS = { pos: 50 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var input = document.getElementById(&#x27;mw-ba-input&#x27;);
+    var after = document.getElementById(&#x27;mw-ba-after&#x27;);
+    var divider = document.getElementById(&#x27;mw-ba-divider&#x27;);
+    function render() {
+      input.value = state.pos;
+      after.style.clipPath = &#x27;inset(0 &#x27; + (100 - state.pos) + &#x27;% 0 0)&#x27;;
+      divider.style.marginLeft = &#x27;calc(&#x27; + state.pos + &#x27;% - 1px)&#x27;;
+      document.getElementById(&#x27;mw-ba-pct&#x27;).textContent = state.pos + &#x27;%&#x27;;
+    }
+    input.addEventListener(&#x27;input&#x27;, function () {
+      state = { pos: Number(input.value) };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener(&#x27;hatch-widget-state&#x27;, function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  &lt;/script&gt;
 &lt;/div&gt;
 
 &lt;script&gt;

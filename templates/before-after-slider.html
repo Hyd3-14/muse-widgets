@@ -1,0 +1,64 @@
+<div class="pal-soft" style="box-sizing:border-box;padding:16px;border-radius:8px;background:var(--pal-outer);font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--pal-text);font-size:14px;">
+<style>
+.pal-soft{--pal-outer:#EFF3F6;--pal-inner:#FFFFFF;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#1D314C;--pal-muted:#5B7183}
+html[data-theme="dark"] .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}
+@media (prefers-color-scheme: dark){html:not([data-theme]) .pal-soft{--pal-outer:#0F222B;--pal-inner:#1D314C;--pal-fold:#4B9CB1;--pal-on-fold:#FFFFFF;--pal-text:#EFF6F8;--pal-muted:#A9C4CE}}
+</style>
+  <div style="background:var(--pal-inner);border-radius:8px;padding:16px;">
+    <div style="font-weight:700;margin-bottom:12px;">同じ題材、2つの形</div>
+    <div style="display:grid;">
+      <div style="grid-area:1/1;background:var(--pal-outer);border-radius:8px;padding:16px;">
+        <span style="display:inline-flex;background:var(--pal-inner);color:var(--pal-text);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;">Before — 文章</span>
+        <p style="margin:0;font-size:13px;line-height:1.7;color:var(--pal-muted);">ベーシックプランは無料で、1日に10タスクまで使えるため、たまに使うだけなら十分です。スタンダードプランは月2,000円で1日に200タスクまで使え、日常的な作業のほとんどをまかなえます。プロプランは月10,000円で無制限ですが、割に合うのはスタンダードの上限を日常的に超える場合だけで、その場合はスタンダードの超過料金を払うより総額が安くなります。</p>
+      </div>
+      <div id="mw-ba-after" style="grid-area:1/1;background:var(--pal-outer);border-radius:8px;padding:16px;">
+        <span style="display:inline-flex;background:var(--pal-fold);color:var(--pal-on-fold);font-size:12px;font-weight:700;border-radius:4px;padding:2px 8px;margin-bottom:8px;">After — 図</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+          <div style="background:var(--pal-inner);border-radius:8px;padding:12px;">
+            <div style="font-weight:700;font-size:13px;">ベーシック</div>
+            <div style="font-size:20px;font-weight:700;">0円</div>
+            <div style="color:var(--pal-muted);font-size:12px;">1日10タスクまで</div>
+          </div>
+          <div style="background:var(--pal-inner);border-radius:8px;padding:12px;">
+            <div style="font-weight:700;font-size:13px;">スタンダード</div>
+            <div style="font-size:20px;font-weight:700;">2,000円</div>
+            <div style="color:var(--pal-muted);font-size:12px;">1日200タスクまで</div>
+          </div>
+          <div style="background:var(--pal-inner);border-radius:8px;padding:12px;">
+            <div style="font-weight:700;font-size:13px;">プロ</div>
+            <div style="font-size:20px;font-weight:700;">10,000円</div>
+            <div style="color:var(--pal-muted);font-size:12px;">無制限</div>
+          </div>
+        </div>
+        <div style="font-size:13px;margin-top:8px;">スタンダードの上限を日常的に超えるなら、プロの方が総額は安い。</div>
+      </div>
+      <div id="mw-ba-divider" style="grid-area:1/1;justify-self:start;width:2px;background:var(--pal-fold);pointer-events:none;" aria-hidden="true"></div>
+    </div>
+    <label for="mw-ba-input" style="display:block;font-size:13px;color:var(--pal-muted);margin-top:12px;">ドラッグで図の版を表示: <span id="mw-ba-pct">50%</span></label>
+    <input id="mw-ba-input" type="range" min="0" max="100" step="1" style="box-sizing:border-box;width:100%;accent-color:var(--pal-fold);">
+    <div style="color:var(--pal-muted);font-size:12px;margin-top:4px;">両方の層が運んでいる事実は同じ。スライダーは図の層が見える割合だけを変え、位置は状態として保存されてエージェントが読み戻せる。</div>
+  </div>
+  <script>
+  (function () {
+    var DEFAULTS = { pos: 50 };
+    var bridge = window.hatchWidget;
+    var state = bridge ? bridge.getState(DEFAULTS) : Object.assign({}, DEFAULTS);
+    var input = document.getElementById('mw-ba-input');
+    var after = document.getElementById('mw-ba-after');
+    var divider = document.getElementById('mw-ba-divider');
+    function render() {
+      input.value = state.pos;
+      after.style.clipPath = 'inset(0 ' + (100 - state.pos) + '% 0 0)';
+      divider.style.marginLeft = 'calc(' + state.pos + '% - 1px)';
+      document.getElementById('mw-ba-pct').textContent = state.pos + '%';
+    }
+    input.addEventListener('input', function () {
+      state = { pos: Number(input.value) };
+      if (bridge) bridge.setState(state);
+      render();
+    });
+    window.addEventListener('hatch-widget-state', function (e) { state = e.detail.state; render(); });
+    render();
+  })();
+  </script>
+</div>
